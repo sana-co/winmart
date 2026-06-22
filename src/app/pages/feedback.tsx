@@ -1,0 +1,34 @@
+import { WinmartCommunity } from "../components/winmart-community";
+
+export function FeedbackPage() {
+  return (
+    <div className="bg-[#f7f7f7]">
+      <section
+        className="w-full py-16 px-6"
+        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+      >
+        <div className="max-w-[700px] mx-auto text-center">
+          <span
+            className="text-[#D9043D] uppercase tracking-widest"
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px" }}
+          >
+            Your Voice Matters
+          </span>
+          <h1
+            className="text-white mt-3 mb-4"
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(32px, 5vw, 56px)", lineHeight: "1.1", letterSpacing: "-0.5px" }}
+          >
+            Share Your Feedback
+          </h1>
+          <p
+            className="text-white/75"
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 400, fontSize: "clamp(15px, 1.6vw, 18px)" }}
+          >
+            Help us improve your Winmart Fashion experience — every message is read by our team.
+          </p>
+        </div>
+      </section>
+      <WinmartCommunity />
+    </div>
+  );
+}
