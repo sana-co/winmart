@@ -4,11 +4,11 @@ import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7
 import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
 
 const milestones = [
-  { year: "2010", title: "The Beginning", desc: "Founded in Lagos with a single market stall and a dream — that great style should never be out of reach." },
-  { year: "2014", title: "First Flagship Store", desc: "We opened our first physical store, growing from 5 to over 80 styles in just four years." },
-  { year: "2018", title: "Going Digital", desc: "Launched our online platform, making Winmart Fashion accessible to customers across West Africa." },
-  { year: "2021", title: "10,000 Happy Customers", desc: "Reached a milestone of 10,000 satisfied customers and expanded our catalogue to 500+ collections." },
-  { year: "2024", title: "Global Shipping", desc: "We now ship worldwide, bringing the best of African fashion to the global stage." },
+  { year: "2021", title: "Grand Opening", desc: "Officially opened as the region's newest shopping destination." },
+  { year: "2024", title: "First Escalators", desc: "Installed two escalators—the first shopping mall in the region to do so." },
+  { year: "2025", title: "Major Expansion", desc: "Relaunched with extensive upgrades, becoming the largest retail mall in the region." },
+  { year: "2025", title: "Saree Corner", desc: "Opened a dedicated saree section with an extensive collection for every occasion." },
+  { year: "2026", title: "Website Launch", desc: "Launched our official website, making it easy for visitors to explore stores, services, events, and mall information online." },
 ];
 
 const team = [

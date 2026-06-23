@@ -4,10 +4,10 @@ import imgUnder40 from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429
 import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7932e7e0.png";
 
 const milestones = [
-  { year: "2010", label: "Founded in Lagos" },
-  { year: "2015", label: "500+ Collections" },
-  { year: "2019", label: "10K+ Customers" },
-  { year: "2024", label: "Global Shipping" },
+  { year: "2021", label: "Grand Opening" },
+  { year: "2024", label: "First Escalators" },
+  { year: "2025", label: "Major Expansion" },
+  { year: "2025", label: "Saree Corner" },
 ];
 
 const values = [
