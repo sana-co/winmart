@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, SlidersHorizontal } from "lucide-react";
+import { ProductQuickView } from "../components/product-quick-view";
 import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
 import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
@@ -31,6 +32,7 @@ const products = [
 
 export function HotPicsPage() {
   const [active, setActive] = useState("All");
+  const [selectedProduct, setSelectedProduct] = useState<(typeof products)[number] | null>(null);
 
   const visible = products.filter(p => p.cat.includes(active));
 
@@ -98,15 +100,20 @@ export function HotPicsPage() {
             {visible.map((p, i) => (
               <div
                 key={i}
-                className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer border border-gray-100"
+                className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100"
               >
-                <div className="relative h-[300px] overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setSelectedProduct(p)}
+                  className="relative block h-[300px] w-full overflow-hidden text-left"
+                  aria-label={`View ${p.name}`}
+                >
                   <img
                     src={p.img}
                     alt={p.name}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </div>
+                </button>
                 <div className="p-4">
                   <p className="text-[#191919] mb-1" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}>
                     {p.name}
@@ -122,6 +129,8 @@ export function HotPicsPage() {
                     )}
                   </div>
                   <button
+                    type="button"
+                    onClick={() => setSelectedProduct(p)}
                     className="w-full flex items-center justify-center gap-2 bg-[#f7f7f7] group-hover:bg-[#253A8F] group-hover:text-white text-[#253A8F] rounded-[8px] py-2.5 transition-all"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
                   >
@@ -133,6 +142,8 @@ export function HotPicsPage() {
           </div>
         </div>
       </section>
+
+      <ProductQuickView product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }

@@ -4,10 +4,10 @@ import { Link, useLocation } from "react-router";
 import imgLogo from "../../imports/image-5.png";
 
 const navLinks = [
+  { label: "NEW ARRIVALS", to: "/new-arrivals" },
+  { label: "TOP PICKS", to: "/hot-pics" },
   { label: "BECOME A SUPPLIER", to: "/become-a-supplier" },
-  { label: "NEW ARRIVALS",       to: "/new-arrivals" },
-  { label: "TOP PICKS",          to: "/hot-pics" },
-  { label: "OUR STORY",          to: "/our-story" },
+  { label: "OUR STORY", to: "/our-story" },
 ];
 
 export function WinmartNav() {
@@ -35,7 +35,7 @@ export function WinmartNav() {
               <Link
                 key={item.label}
                 to={item.to}
-                className="relative whitespace-nowrap transition-colors"
+                className="relative whitespace-nowrap transition-colors hover:text-[#D9043D]"
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 600,

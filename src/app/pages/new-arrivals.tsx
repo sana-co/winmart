@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { ProductQuickView } from "../components/product-quick-view";
 import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
 import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
@@ -19,6 +21,8 @@ const products = [
 ];
 
 export function NewArrivalsPage() {
+  const [selectedProduct, setSelectedProduct] = useState<(typeof products)[number] | null>(null);
+
   return (
     <div className="bg-[#f7f7f7]">
 
@@ -54,8 +58,13 @@ export function NewArrivalsPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((p, i) => (
-              <div key={i} className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer border border-gray-100">
-                <div className="relative h-[300px] overflow-hidden">
+              <div key={i} className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100">
+                <button
+                  type="button"
+                  onClick={() => setSelectedProduct(p)}
+                  className="relative block h-[300px] w-full overflow-hidden text-left"
+                  aria-label={`View ${p.name}`}
+                >
                   <img
                     src={p.img}
                     alt={p.name}
@@ -67,12 +76,16 @@ export function NewArrivalsPage() {
                   >
                     {p.tag}
                   </span>
-                </div>
+                </button>
                 <div className="p-4">
                   <p className="text-[#191919] mb-1" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}>{p.name}</p>
                   <span className="text-[#253A8F]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "16px" }}>{p.price}</span>
-                  <button className="mt-3 w-full flex items-center justify-center gap-2 bg-[#f7f7f7] group-hover:bg-[#253A8F] group-hover:text-white rounded-[8px] py-2.5 transition-all text-[#253A8F]"
-                    style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProduct(p)}
+                    className="mt-3 w-full flex items-center justify-center gap-2 bg-[#f7f7f7] group-hover:bg-[#253A8F] group-hover:text-white rounded-[8px] py-2.5 transition-all text-[#253A8F]"
+                    style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
+                  >
                     View Item <ArrowRight size={14} />
                   </button>
                 </div>
@@ -81,6 +94,8 @@ export function NewArrivalsPage() {
           </div>
         </div>
       </section>
+
+      <ProductQuickView product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }
