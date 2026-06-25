@@ -9,8 +9,8 @@ export function FeedbackPage() {
       >
         <div className="max-w-[700px] mx-auto text-center">
           <span
-            className="text-[#D9043D] uppercase tracking-widest"
-            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px" }}
+            className="text-[#F4C542] uppercase tracking-widest"
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             Your Voice Matters
           </span>

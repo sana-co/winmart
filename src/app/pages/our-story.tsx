@@ -246,17 +246,17 @@ export function OurStoryPage() {
         <div className="flex flex-wrap gap-4 justify-center">
           <a
             href="/new-arrivals"
-            className="bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[10px] px-8 py-3"
+            className="inline-flex h-[58px] w-full max-w-[220px] sm:w-[190px] items-center justify-center bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[10px] px-8"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             New Arrivals
           </a>
           <a
             href="/become-a-supplier"
-            className="bg-white/10 hover:bg-white/20 border border-white/30 transition-colors text-white rounded-[10px] px-8 py-3"
+            className="inline-flex h-[58px] w-full max-w-[220px] sm:w-[190px] items-center justify-center bg-white/10 hover:bg-white/20 border border-white/30 transition-colors text-white rounded-[10px] px-8"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
-            Become a Supplier
+            Supplier
           </a>
         </div>
       </section>

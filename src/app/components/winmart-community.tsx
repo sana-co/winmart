@@ -64,7 +64,7 @@ export function WinmartCommunity() {
         <div className="text-center mb-10">
           <span
             className="text-[#D9043D] uppercase tracking-widest"
-            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px" }}
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
           >
             We'd love to hear from you
           </span>
