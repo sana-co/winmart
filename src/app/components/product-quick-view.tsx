@@ -109,17 +109,10 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
               A customer-ready Winmart pick with easy everyday styling, clean finishing, and a polished fit.
             </p>
 
-            <div className="mt-7 grid grid-cols-2 gap-3">
+            <div className="mt-7">
               <button
                 type="button"
-                className="rounded-[8px] bg-[#253A8F] px-5 py-3 text-white transition-colors hover:bg-[#1B2A6B]"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
-              >
-                Add to Bag
-              </button>
-              <button
-                type="button"
-                className="rounded-[8px] border border-[#D9043D] px-5 py-3 text-[#D9043D] transition-colors hover:bg-[#D9043D] hover:text-white"
+                className="w-full rounded-[8px] border border-[#D9043D] px-5 py-3 text-[#D9043D] transition-colors hover:bg-[#D9043D] hover:text-white"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
               >
                 Save Item
