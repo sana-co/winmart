@@ -6,6 +6,7 @@ import { NewArrivalsPage } from "./pages/new-arrivals";
 import { HotPicsPage } from "./pages/hot-pics";
 import { OurStoryPage } from "./pages/our-story";
 import { FeedbackPage } from "./pages/feedback";
+import { LoyaltyCardPage } from "./pages/loyalty-card";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: "become-a-supplier", Component: BecomeASupplierPage },
+      { path: "loyalty-card", Component: LoyaltyCardPage },
       { path: "new-arrivals", Component: NewArrivalsPage },
       { path: "hot-pics", Component: HotPicsPage },
       { path: "our-story", Component: OurStoryPage },

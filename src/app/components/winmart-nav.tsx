@@ -6,6 +6,7 @@ import imgLogo from "../../imports/image-5.png";
 const navLinks = [
   { label: "NEW ARRIVALS", to: "/new-arrivals" },
   { label: "TOP PICKS", to: "/hot-pics" },
+  { label: "LOYALTY CARD", to: "/loyalty-card" },
   { label: "BECOME A SUPPLIER", to: "/become-a-supplier" },
   { label: "OUR STORY", to: "/our-story" },
 ];
