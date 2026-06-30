@@ -36,7 +36,7 @@ export function WinmartNav() {
               <Link
                 key={item.label}
                 to={item.to}
-                className="relative whitespace-nowrap transition-colors hover:text-[#D9043D]"
+                className="relative whitespace-nowrap rounded-[8px] px-3 py-2 transition-all duration-200 hover:text-[#D9043D] hover:bg-[#f7f7f7] hover:shadow-sm"
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontWeight: 600,

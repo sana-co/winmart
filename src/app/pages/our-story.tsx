@@ -59,36 +59,9 @@ export function OurStoryPage() {
             <img
               src={imgHero}
               alt="Winmart Fashion"
-              className="w-full h-[420px] object-cover object-top rounded-[24px] shadow-2xl"
+              className="w-full h-[470px] object-cover object-top rounded-[24px] shadow-2xl"
             />
           </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="w-full bg-[#253A8F] py-10 px-6">
-        <div className="max-w-[1000px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          {[
-            { val: "14+",   label: "Years in Fashion" },
-            { val: "500+",  label: "Collections" },
-            { val: "10K+",  label: "Happy Customers" },
-            { val: "50+",   label: "Countries Shipped" },
-          ].map(s => (
-            <div key={s.label}>
-              <p
-                className="text-[#D9043D]"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(32px, 4vw, 48px)" }}
-              >
-                {s.val}
-              </p>
-              <p
-                className="text-white/70"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "14px", letterSpacing: "0.5px" }}
-              >
-                {s.label}
-              </p>
-            </div>
-          ))}
         </div>
       </section>
 
