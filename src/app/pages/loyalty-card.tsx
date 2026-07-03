@@ -27,6 +27,8 @@ export function LoyaltyCardPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [emailWarning, setEmailWarning] = useState("");
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -89,22 +91,61 @@ export function LoyaltyCardPage() {
       return;
     }
 
+    setSubmitError("");
+    setEmailWarning("");
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        fullName: "",
-        address: "",
-        email: "",
-        contactNumber: "",
+    try {
+      const response = await fetch("/api/loyalty-card", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      setIsSubmitted(false);
-    }, 3000);
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Could not submit your loyalty card request.");
+      }
+
+      const data = await response.json();
+      const cardNumber = data?.cardNumber;
+
+      if (!cardNumber) {
+        throw new Error("Your loyalty card was saved, but the card number was not returned.");
+      }
+
+      const emailResponse = await fetch("/api/send-loyalty-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: formData.fullName,
+          email: formData.email,
+          cardNumber,
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        const emailData = await emailResponse.json().catch(() => null);
+        setEmailWarning(emailData?.error || "Your card was created, but we could not send the confirmation email.");
+      }
+
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setFormData({
+          fullName: "",
+          address: "",
+          email: "",
+          contactNumber: "",
+        });
+        setIsSubmitted(false);
+        setEmailWarning("");
+      }, 3000);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Could not submit your loyalty card request.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const benefits = [
@@ -364,11 +405,12 @@ export function LoyaltyCardPage() {
                 style={{
                   fontFamily: "Poppins, sans-serif",
                   fontSize: "16px",
-                  color: "#666",
+                  color: emailWarning ? "#b45309" : "#666",
                   lineHeight: 1.6,
                 }}
               >
-                Your loyalty card request has been submitted. We'll process it shortly and send you a confirmation email.
+                {emailWarning ||
+                  "Your loyalty card request has been submitted. We'll process it shortly and send you a confirmation email."}
               </p>
             </div>
           ) : (
@@ -554,6 +596,11 @@ export function LoyaltyCardPage() {
               </div>
 
               {/* Submit Button */}
+              {submitError && (
+                <p style={{ color: "#ef4444", fontSize: "13px", fontFamily: "Poppins" }}>
+                  {submitError}
+                </p>
+              )}
               <button
                 type="submit"
                 disabled={isSubmitting}

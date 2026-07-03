@@ -13,13 +13,35 @@ export function WinmartCommunity() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", topic: "", message: "", rating: 0 });
   const [hover, setHover] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const set = (k: string, v: string | number) => setForm(f => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
     if (!form.name || !form.email || !form.message) return;
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Could not send your feedback.");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Could not send your feedback.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -200,6 +222,11 @@ export function WinmartCommunity() {
           </div>
 
           {/* Submit row */}
+          {submitError && (
+            <p className="text-[#D9043D] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
+              {submitError}
+            </p>
+          )}
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <p
               className="text-gray-400"
@@ -209,8 +236,9 @@ export function WinmartCommunity() {
             </p>
             <button
               type="submit"
+              disabled={isSubmitting}
               className="bg-[#D9043D] hover:bg-[#b8032f] active:scale-95 transition-all duration-200 text-white rounded-[10px] px-10 py-3.5 shadow-md"
-              style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", letterSpacing: "0.3px" }}
+              style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", letterSpacing: "0.3px", opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
             >
               Send Feedback →
             </button>

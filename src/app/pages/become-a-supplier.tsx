@@ -24,12 +24,34 @@ const categories = ["Women's Wear", "Men's Wear", "Kids' Wear", "Accessories", "
 export function BecomeASupplierPage() {
   const [form, setForm] = useState<Form>({ business: "", contact: "", email: "", phone: "", category: "", website: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const set = (k: keyof Form, v: string) => setForm(f => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.business || !form.email || !form.contact) return;
-    setSubmitted(true);
+    setSubmitError("");
+    if (!form.business || !form.email || !form.contact || !form.category) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/supplier-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Could not submit your application.");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Could not submit your application.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -193,12 +215,18 @@ export function BecomeASupplierPage() {
                   style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                 />
               </div>
+              {submitError && (
+                <p className="text-[#D9043D] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
+                  {submitError}
+                </p>
+              )}
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <p className="text-gray-400" style={{ fontFamily: "Poppins, sans-serif", fontSize: "12px" }}>* Required fields</p>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="bg-[#253A8F] hover:bg-[#1B2A6B] active:scale-95 transition-all text-white rounded-[10px] px-10 py-3.5 shadow-md"
-                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
+                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
                 >
                   Submit Application →
                 </button>
