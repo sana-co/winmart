@@ -81,11 +81,9 @@ export function WinmartFooter() {
               <Link to="/our-story" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
                 About
               </Link>
-              {["Careers", "Support"].map(link => (
-                <a key={link} href="#" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
-                  {link}
-                </a>
-              ))}
+              <Link to="/careers" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
+                Careers
+              </Link>
               <Link to="/feedback" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
                 Contact Us
               </Link>
