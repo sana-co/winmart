@@ -30,8 +30,8 @@ const values = [
 
 export function WinmartYoungsFavourite() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-16">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section className="w-full bg-[#f7f7f7] py-10 sm:py-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 
         {/* Section heading */}
         <div className="relative mb-12 inline-block">
@@ -54,7 +54,7 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Hero banner — image left, text right */}
-        <div className="relative rounded-[24px] overflow-hidden mb-12 min-h-[380px] lg:min-h-[460px] flex">
+        <div className="relative rounded-[18px] overflow-hidden mb-10 min-h-[360px] flex sm:rounded-[24px] lg:min-h-[460px] lg:mb-12">
           {/* Background */}
           <div
             className="absolute inset-0"
@@ -72,7 +72,7 @@ export function WinmartYoungsFavourite() {
           </div>
 
           {/* Text */}
-          <div className="relative z-10 flex flex-col justify-center px-8 lg:px-16 py-12 max-w-[640px]">
+          <div className="relative z-10 flex flex-col justify-center px-5 py-9 sm:px-8 lg:px-16 lg:py-12 max-w-[640px]">
             <span
               className="text-[#D9043D] uppercase tracking-widest mb-3"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "13px" }}
@@ -110,11 +110,11 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Milestone timeline */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 lg:mb-12">
           {milestones.map((m) => (
             <div
               key={m.year}
-              className="bg-white rounded-[16px] p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              className="bg-white rounded-[14px] p-4 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow sm:rounded-[16px] sm:p-6"
             >
               <p
                 className="text-[#D9043D] mb-1"
@@ -162,15 +162,15 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Photo gallery strip */}
-        <div className="grid grid-cols-2 gap-5">
-          <div className="group relative rounded-[20px] overflow-hidden h-[280px] lg:h-[360px] cursor-pointer">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="group relative rounded-[18px] overflow-hidden h-[240px] sm:h-[280px] lg:h-[360px] cursor-pointer sm:rounded-[20px]">
             <img
               src={imgTrending}
               alt="Trending styles"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1B2A6B]/70 to-transparent" />
-            <div className="absolute bottom-5 left-6">
+            <div className="absolute bottom-5 left-5 sm:left-6">
               <p
                 className="text-white"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(16px, 2vw, 24px)" }}
@@ -182,14 +182,14 @@ export function WinmartYoungsFavourite() {
               </p>
             </div>
           </div>
-          <div className="group relative rounded-[20px] overflow-hidden h-[280px] lg:h-[360px] cursor-pointer">
+          <div className="group relative rounded-[18px] overflow-hidden h-[240px] sm:h-[280px] lg:h-[360px] cursor-pointer sm:rounded-[20px]">
             <img
               src={imgUnder40}
               alt="Budget picks"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1B2A6B]/70 to-transparent" />
-            <div className="absolute bottom-5 left-6">
+            <div className="absolute bottom-5 left-5 sm:left-6">
               <p
                 className="text-white"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "clamp(16px, 2vw, 24px)" }}

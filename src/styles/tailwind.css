@@ -3,6 +3,11 @@
 
 @import 'tw-animate-css';
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 @keyframes winmart-marquee {
   from {
     transform: translateX(0);

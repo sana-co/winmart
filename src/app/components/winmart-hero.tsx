@@ -56,7 +56,7 @@ export function WinmartHero() {
           {slides.map((slide, i) => (
             <div
               key={i}
-              className="relative w-full shrink-0 min-h-[560px] lg:min-h-[720px] flex items-center"
+              className="relative w-full shrink-0 min-h-[520px] sm:min-h-[600px] lg:min-h-[720px] flex items-center overflow-hidden"
               style={{ background: slide.bg }}
             >
               {/* Decorative stars */}
@@ -65,7 +65,7 @@ export function WinmartHero() {
               <div className="absolute top-1/3 left-[28%] opacity-10 text-white text-5xl select-none pointer-events-none">★</div>
 
               {/* Text block */}
-              <div className="relative z-10 max-w-[600px] px-8 lg:px-20 py-14">
+              <div className="relative z-10 max-w-[600px] px-5 py-10 sm:px-8 sm:py-14 lg:px-20">
                 <span
                   className="inline-block bg-[#D9043D] text-white rounded-full px-4 py-1 mb-5"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px", letterSpacing: "1.5px" }}
@@ -78,10 +78,10 @@ export function WinmartHero() {
                     className="absolute"
                     style={{
                       background: "#1B2A6B",
-                      height: "52px",
-                      width: "320px",
+                      height: "clamp(34px, 7vw, 52px)",
+                      width: "clamp(210px, 55vw, 320px)",
                       transform: "rotate(-1.5deg)",
-                      top: "52px",
+                      top: "clamp(44px, 8vw, 52px)",
                       left: "-4px",
                       borderRadius: "4px",
                     }}
@@ -91,7 +91,7 @@ export function WinmartHero() {
                     style={{
                       fontFamily: "Poppins, sans-serif",
                       fontWeight: 900,
-                      fontSize: "clamp(44px, 5.5vw, 80px)",
+                      fontSize: "clamp(38px, 13vw, 80px)",
                       lineHeight: "1.1",
                       color: "white",
                       letterSpacing: "-1px",
@@ -118,14 +118,14 @@ export function WinmartHero() {
                 <Link
                   to={slide.cta.to}
                   className="inline-block bg-[#D9043D] hover:bg-[#b8032f] transition-all duration-200 text-white rounded-[10px] px-10 py-4 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
-                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "20px", letterSpacing: "-0.5px" }}
+                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 4vw, 20px)", letterSpacing: "-0.5px" }}
                 >
                   {slide.cta.label}
                 </Link>
               </div>
 
               {/* Model image */}
-              <div className="absolute right-0 bottom-0 h-full w-[50%] lg:w-[55%] pointer-events-none">
+              <div className="absolute bottom-0 right-[-35%] h-[72%] w-[95%] opacity-35 pointer-events-none sm:right-[-15%] sm:h-[82%] sm:w-[70%] md:right-0 md:h-full md:w-[50%] md:opacity-100 lg:w-[55%]">
                 <img
                   src={slide.img}
                   alt={slide.tag}

@@ -12,8 +12,8 @@ const categories = [
 
 export function WinmartNewArrivals() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-16">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section className="w-full bg-[#f7f7f7] py-10 sm:py-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Section heading */}
         <div className="relative mb-10 inline-block">
           <div
@@ -35,14 +35,14 @@ export function WinmartNewArrivals() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {categories.map((cat) => (
             <Link
               key={cat.title}
               to={`/new-arrivals?category=${encodeURIComponent(cat.category)}`}
               className="group flex flex-col gap-5"
             >
-              <div className="relative rounded-[20px] overflow-hidden bg-gray-100 h-[420px] lg:h-[520px]">
+              <div className="relative rounded-[16px] sm:rounded-[20px] overflow-hidden bg-gray-100 h-[320px] sm:h-[420px] lg:h-[520px]">
                 <img
                   src={cat.img}
                   alt={cat.title}

@@ -83,11 +83,11 @@ export function WinmartVouchers() {
   }, [emblaApi]);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section className="w-full bg-[#f7f7f7] py-10 overflow-hidden sm:py-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 
         {/* Heading + controls */}
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between gap-4 mb-8">
           <div className="relative inline-block">
             <div
               className="absolute bottom-0 left-0 h-[10px] bg-[#253A8F] opacity-30 rounded"
@@ -132,8 +132,8 @@ export function WinmartVouchers() {
                   key={slide.title}
                   className="relative rounded-[22px] overflow-hidden shrink-0 transition-all duration-500"
                   style={{
-                    width: isActive ? "520px" : "300px",
-                    height: isActive ? "560px" : "440px",
+                    width: isActive ? "min(520px, calc(100vw - 32px))" : "min(300px, 76vw)",
+                    height: isActive ? "min(560px, 118vw)" : "min(440px, 104vw)",
                     alignSelf: "flex-end",
                     opacity: isActive ? 1 : 0.6,
                   }}

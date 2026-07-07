@@ -17,14 +17,14 @@ export function WinmartNav() {
 
   return (
     <nav className="w-full bg-white shadow-sm border-b border-gray-100">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-[84px] flex items-center justify-between gap-6">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-[70px] sm:h-[84px] flex items-center justify-between gap-4 sm:gap-6">
 
         {/* Logo */}
         <Link to="/" className="shrink-0">
           <img
             src={imgLogo}
             alt="Winmart Fashion"
-            style={{ height: "68px", width: "auto" }}
+            className="h-[54px] w-auto sm:h-[68px]"
           />
         </Link>
 
@@ -77,7 +77,7 @@ export function WinmartNav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-1">
+        <div className="lg:hidden bg-white border-t border-gray-100 px-4 py-4 flex max-h-[calc(100vh-94px)] flex-col gap-1 overflow-y-auto sm:px-6 sm:max-h-[calc(100vh-112px)]">
           {navLinks.map(item => {
             const active = pathname === item.to;
             return (
