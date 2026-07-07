@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useSearchParams } from "react-router";
 import { ProductQuickView } from "../components/product-quick-view";
 import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
@@ -9,19 +10,38 @@ import imgUnder40 from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429
 import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7932e7e0.png";
 import imgModel from "../../imports/ShoppingApp/116cf92ffce852e6dcfea7d382714f1c60578ad2.png";
 
+const filters = ["All", "Men", "Women", "Accessories"];
+
 const products = [
   { img: imgHoodies,  name: "Classic Hoodie Set",       price: "$45",  original: "$65",  tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Casual"] },
   { img: imgCoats,    name: "Premium Winter Coat",      price: "$120", original: "$160", tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Women", "Outerwear"] },
   { img: imgTees,     name: "Essential Tee Pack",       price: "$28",  original: null,   tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Men", "Essentials"] },
+  { img: imgHoodies,  name: "Everyday Accessory Set",   price: "$24",  original: null,   tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Accessories"] },
   { img: imgTrending, name: "Floral Wrap Dress",        price: "$52",  original: "$80",  tag: "SALE", badge: "bg-[#D9043D]", cat: ["All", "Women", "Sale"] },
   { img: imgUnder40,  name: "Summer Linen Set",         price: "$38",  original: null,   tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Women", "Casual"] },
   { img: imgHero,     name: "Luxury Faux Fur Coat",     price: "$95",  original: "$140", tag: "SALE", badge: "bg-[#D9043D]", cat: ["All", "Women", "Outerwear", "Sale"] },
   { img: imgModel,    name: "Streetwear Jumpsuit",      price: "$60",  original: null,   tag: "NEW",  badge: "bg-[#253A8F]", cat: ["All", "Women", "Casual"] },
   { img: imgHoodies,  name: "Oversized Crewneck",       price: "$42",  original: "$55",  tag: "SALE", badge: "bg-[#D9043D]", cat: ["All", "Men", "Casual", "Sale"] },
+  { img: imgTees,     name: "Minimal Cap & Tee Bundle", price: "$34",  original: "$48",  tag: "SALE", badge: "bg-[#D9043D]", cat: ["All", "Accessories", "Men"] },
 ];
 
 export function NewArrivalsPage() {
   const [selectedProduct, setSelectedProduct] = useState<(typeof products)[number] | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedCategory = searchParams.get("category") || "All";
+  const selectedCategory = filters.includes(requestedCategory) ? requestedCategory : "All";
+  const visibleProducts = selectedCategory === "All"
+    ? products
+    : products.filter(product => product.cat.includes(selectedCategory));
+
+  const selectCategory = (category: string) => {
+    if (category === "All") {
+      setSearchParams({});
+      return;
+    }
+
+    setSearchParams({ category });
+  };
 
   return (
     <div className="bg-[#f7f7f7]">
@@ -56,8 +76,29 @@ export function NewArrivalsPage() {
       {/* Products grid */}
       <section className="w-full py-12 px-6">
         <div className="max-w-[1200px] mx-auto">
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
+            {filters.map(filter => {
+              const active = selectedCategory === filter;
+
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => selectCategory(filter)}
+                  className={`rounded-[8px] px-5 py-2.5 transition-all ${
+                    active
+                      ? "bg-[#253A8F] text-white shadow-md"
+                      : "bg-white text-[#253A8F] hover:bg-[#eef1ff] border border-gray-100"
+                  }`}
+                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((p, i) => (
+            {visibleProducts.map((p, i) => (
               <div key={i} className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100">
                 <button
                   type="button"

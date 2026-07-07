@@ -1,12 +1,13 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
 import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
 import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
 
 const categories = [
-  { img: imgHoodies, title: "Hoodies & Sweatshirt", imgPos: "left-[-88%]" },
-  { img: imgCoats, title: "Coats & Parkas", imgPos: "left-[-38%]" },
-  { img: imgTees, title: "Tees & T-Shirt", imgPos: "left-[-44%]" },
+  { img: imgTees, title: "Men", category: "Men" },
+  { img: imgCoats, title: "Women", category: "Women" },
+  { img: imgHoodies, title: "Accessories", category: "Accessories" },
 ];
 
 export function WinmartNewArrivals() {
@@ -36,7 +37,11 @@ export function WinmartNewArrivals() {
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((cat) => (
-            <div key={cat.title} className="group flex flex-col gap-5 cursor-pointer">
+            <Link
+              key={cat.title}
+              to={`/new-arrivals?category=${encodeURIComponent(cat.category)}`}
+              className="group flex flex-col gap-5"
+            >
               <div className="relative rounded-[20px] overflow-hidden bg-gray-100 h-[420px] lg:h-[520px]">
                 <img
                   src={cat.img}
@@ -71,7 +76,7 @@ export function WinmartNewArrivals() {
                   <ArrowRight size={16} color="white" />
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
