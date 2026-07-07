@@ -25,6 +25,23 @@ function InstagramIcon() {
   );
 }
 
+function ThreadsIcon() {
+  return (
+    <a href="https://www.threads.net/@winmartfashion" target="_blank" rel="noopener noreferrer">
+      <svg width="44" height="44" fill="none" viewBox="0 0 44 44" aria-label="Threads">
+        <rect width="44" height="44" rx="12" fill="#D9043D" />
+        <path
+          d="M29.7 17.2c-1.1-4.2-4.2-6.2-8.1-6.2-5.6 0-9.6 4.1-9.6 11s3.8 11 9.7 11c5 0 8.6-2.6 8.6-6.4 0-3.1-2.4-5.2-6.7-5.5-4.1-.3-6.4 1.1-6.4 3.2 0 1.9 1.8 3 4.1 3 2.7 0 4.3-1.8 4.3-4.8 0-3.8-1.7-6-4.9-6-2 0-3.6.8-4.7 2.2"
+          stroke="white"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </a>
+  );
+}
+
 function TikTokIcon() {
     return (
       <a
@@ -69,11 +86,12 @@ export function WinmartFooter() {
             <div className="flex items-center gap-3">
               <button className="hover:opacity-80 transition-opacity"><FacebookIcon /></button>
               <button className="hover:opacity-80 transition-opacity"><InstagramIcon /></button>
+              <button className="hover:opacity-80 transition-opacity"><ThreadsIcon /></button>
               <button className="hover:opacity-80 transition-opacity"><TikTokIcon /></button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-16 flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10 lg:gap-16 flex-1">
             <div className="flex flex-col gap-3">
               <p className="text-[#1B2A6B]" style={{ fontFamily: "Roboto, sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "0.3px" }}>
                 Company
@@ -104,6 +122,27 @@ export function WinmartFooter() {
               </a>
               <a href="#faqs" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
                 FAQs
+              </a>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <p className="text-[#1B2A6B]" style={{ fontFamily: "Roboto, sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "0.3px" }}>
+                Contact
+              </p>
+              <a href="tel:+94777009697" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
+                077 700 9697
+              </a>
+              <a href="mailto:winmartfashion.social@gmail.com" className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed break-words" style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}>
+                winmartfashion.social@gmail.com
+              </a>
+              <a
+                href="https://maps.app.goo.gl/TxykJ1ChRMhNKGNo8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#4f5874] hover:text-[#D9043D] transition-colors leading-relaxed"
+                style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px" }}
+              >
+                No.109/4 Sumangala Mw, Ratnapura Road, Horana
               </a>
             </div>
 

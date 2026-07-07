@@ -16,7 +16,7 @@ export function WinmartNav() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="w-full bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+    <nav className="w-full bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-[84px] flex items-center justify-between gap-6">
 
         {/* Logo */}
