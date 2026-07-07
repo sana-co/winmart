@@ -1,7 +1,7 @@
 create table if not exists public.feedback (
   id uuid primary key default gen_random_uuid(),
   name text not null,
-  email text not null,
+  email text,
   subject text,
   topic text,
   message text not null,
@@ -9,6 +9,8 @@ create table if not exists public.feedback (
   status text not null default 'new',
   created_at timestamptz not null default now()
 );
+
+alter table if exists public.feedback alter column email drop not null;
 
 create table if not exists public.loyalty_card_requests (
   id uuid primary key default gen_random_uuid(),

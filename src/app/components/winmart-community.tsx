@@ -4,13 +4,12 @@ type Field = { label: string; type: string; placeholder: string; id: string };
 
 const fields: Field[] = [
   { id: "name",  label: "Full Name",     type: "text",  placeholder: "e.g. Amara Johnson" },
-  { id: "email", label: "Email Address", type: "email", placeholder: "you@example.com" },
 ];
 
-const topics = ["Product Quality", "Delivery & Shipping", "Website Experience", "Pricing", "Other"];
+const topics = ["Product Quality", "Pricing", "Customer Service", "Music", "Ambience", "Other"];
 
 export function WinmartCommunity() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", topic: "", message: "", rating: 0 });
+  const [form, setForm] = useState({ name: "", topic: "", message: "", rating: 0 });
   const [hover, setHover] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +20,7 @@ export function WinmartCommunity() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError("");
-    if (!form.name || !form.email || !form.message) return;
+    if (!form.name || !form.message) return;
 
     setIsSubmitting(true);
     try {
@@ -63,11 +62,10 @@ export function WinmartCommunity() {
             className="text-[#555] mb-8"
             style={{ fontFamily: "Poppins, sans-serif", fontSize: "17px" }}
           >
-            Your feedback has been received. We'll get back to you at{" "}
-            <span className="text-[#253A8F] font-semibold">{form.email}</span>.
+            Your feedback has been received. Thank you for helping us improve.
           </p>
           <button
-            onClick={() => { setSubmitted(false); setForm({ name: "", email: "", subject: "", topic: "", message: "", rating: 0 }); }}
+            onClick={() => { setSubmitted(false); setForm({ name: "", topic: "", message: "", rating: 0 }); }}
             className="bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[8px] px-8 py-3"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
@@ -109,8 +107,8 @@ export function WinmartCommunity() {
           onSubmit={handleSubmit}
           className="bg-white rounded-[24px] p-8 lg:p-10 shadow-md border border-gray-100"
         >
-          {/* Name + email */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+          {/* Name */}
+          <div className="mb-5">
             {fields.map(f => (
               <div key={f.id} className="flex flex-col gap-1.5">
                 <label
@@ -132,24 +130,8 @@ export function WinmartCommunity() {
             ))}
           </div>
 
-          {/* Subject + topic */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-            <div className="flex flex-col gap-1.5">
-              <label
-                className="text-[#191919]"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
-              >
-                Subject
-              </label>
-              <input
-                type="text"
-                placeholder="What is this about?"
-                value={form.subject}
-                onChange={e => set("subject", e.target.value)}
-                className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#253A8F] focus:bg-white transition-all"
-                style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
-              />
-            </div>
+          {/* Topic */}
+          <div className="mb-5">
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-[#191919]"
