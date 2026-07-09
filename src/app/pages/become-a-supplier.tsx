@@ -19,7 +19,7 @@ const steps = [
 
 type Form = { business: string; contact: string; email: string; phone: string; category: string; website: string; message: string };
 
-const categories = ["Women's Wear", "Men's Wear", "Kids' Wear", "Accessories", "Footwear", "Sportswear", "Luxury / Designer", "Other"];
+const categories = ["Ladies' Wear", "Gents' Wear", "Kids' Wear", "Accessories", "Footwear", "Sportswear", "Luxury / Designer", "Other"];
 
 export function BecomeASupplierPage() {
   const [form, setForm] = useState<Form>({ business: "", contact: "", email: "", phone: "", category: "", website: "", message: "" });

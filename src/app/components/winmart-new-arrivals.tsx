@@ -5,8 +5,8 @@ import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe065
 import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
 
 const categories = [
-  { img: imgTees, title: "Men", category: "Men" },
-  { img: imgCoats, title: "Women", category: "Women" },
+  { img: imgTees, title: "Gents", category: "Gents" },
+  { img: imgCoats, title: "Ladies", category: "Ladies" },
   { img: imgHoodies, title: "Accessories", category: "Accessories" },
 ];
 

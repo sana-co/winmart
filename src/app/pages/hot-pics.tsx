@@ -13,21 +13,21 @@ import imgProduct2 from "../../imports/ShoppingApp/07a2197ffea83241a255453a3cb8b
 import imgProduct3 from "../../imports/ShoppingApp/48808eb510ad5e1b50f1a6ccc453a45585230074.png";
 import imgProduct4 from "../../imports/ShoppingApp/f1a4be3a6330f9e5d839f54ed80f0c08fd07bf09.png";
 
-const filters = ["All", "Women", "Men", "Outerwear", "Casual", "Formal"];
+const filters = ["All", "Ladies", "Gents", "Outerwear", "Casual", "Formal"];
 
 const products = [
-  { img: imgHero,      name: "Luxury Faux Fur Coat",       price: "$95",  original: "$140", cat: ["All", "Women", "Outerwear"] },
-  { img: imgCoats,     name: "Premium Winter Coat",         price: "$120", original: "$160", cat: ["All", "Women", "Outerwear"] },
-  { img: imgTrending,  name: "Floral Wrap Dress",           price: "$52",  original: "$80",  cat: ["All", "Women", "Casual"] },
-  { img: imgProduct1,  name: "Polkadot Red Dress",          price: "$48",  original: null,   cat: ["All", "Women", "Casual", "Formal"] },
-  { img: imgProduct2,  name: "Striped Pink Dress",          price: "$44",  original: "$60",  cat: ["All", "Women", "Casual"] },
-  { img: imgHoodies,   name: "Classic Hoodie Set",          price: "$45",  original: "$65",  cat: ["All", "Men", "Casual"] },
-  { img: imgProduct3,  name: "Blue Polka Dot Dress",        price: "$42",  original: null,   cat: ["All", "Women", "Formal"] },
-  { img: imgUnder40,   name: "Summer Linen Co-ord Set",     price: "$38",  original: null,   cat: ["All", "Women", "Casual"] },
-  { img: imgModel,     name: "Streetwear Jumpsuit",         price: "$60",  original: "$85",  cat: ["All", "Women", "Casual", "Formal"] },
-  { img: imgTees,      name: "Essential Tee Pack (3-in-1)", price: "$28",  original: null,   cat: ["All", "Men", "Casual"] },
-  { img: imgProduct4,  name: "Green Skirt & Sweater Set",   price: "$46",  original: "$58",  cat: ["All", "Women", "Casual"] },
-  { img: imgCoats,     name: "Oversized Wool Blend Coat",   price: "$110", original: "$145", cat: ["All", "Men", "Outerwear"] },
+  { img: imgHero,      name: "Luxury Faux Fur Coat",       price: "$95",  original: "$140", cat: ["All", "Ladies", "Outerwear"] },
+  { img: imgCoats,     name: "Premium Winter Coat",         price: "$120", original: "$160", cat: ["All", "Ladies", "Outerwear"] },
+  { img: imgTrending,  name: "Floral Wrap Dress",           price: "$52",  original: "$80",  cat: ["All", "Ladies", "Casual"] },
+  { img: imgProduct1,  name: "Polkadot Red Dress",          price: "$48",  original: null,   cat: ["All", "Ladies", "Casual", "Formal"] },
+  { img: imgProduct2,  name: "Striped Pink Dress",          price: "$44",  original: "$60",  cat: ["All", "Ladies", "Casual"] },
+  { img: imgHoodies,   name: "Classic Hoodie Set",          price: "$45",  original: "$65",  cat: ["All", "Gents", "Casual"] },
+  { img: imgProduct3,  name: "Blue Polka Dot Dress",        price: "$42",  original: null,   cat: ["All", "Ladies", "Formal"] },
+  { img: imgUnder40,   name: "Summer Linen Co-ord Set",     price: "$38",  original: null,   cat: ["All", "Ladies", "Casual"] },
+  { img: imgModel,     name: "Streetwear Jumpsuit",         price: "$60",  original: "$85",  cat: ["All", "Ladies", "Casual", "Formal"] },
+  { img: imgTees,      name: "Essential Tee Pack (3-in-1)", price: "$28",  original: null,   cat: ["All", "Gents", "Casual"] },
+  { img: imgProduct4,  name: "Green Skirt & Sweater Set",   price: "$46",  original: "$58",  cat: ["All", "Ladies", "Casual"] },
+  { img: imgCoats,     name: "Oversized Wool Blend Coat",   price: "$110", original: "$145", cat: ["All", "Gents", "Outerwear"] },
 ];
 
 export function HotPicsPage() {
