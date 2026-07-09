@@ -1,23 +1,19 @@
 import { X } from "lucide-react";
+import { formatPrice } from "../lib/products";
+import type { Product } from "../lib/supabase";
 
 type ProductQuickViewProps = {
-  product: {
-    img: string;
-    name: string;
-    price: string;
-    original?: string | null;
-    tag?: string;
-    cat?: string[];
-  } | null;
+  product: Product | null;
+  tag?: string;
   onClose: () => void;
 };
 
-export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
+export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProps) {
   if (!product) {
     return null;
   }
 
-  const categories = product.cat?.filter((cat) => cat !== "All").slice(0, 3) ?? [];
+  const categories = product.category ? [product.category] : [];
 
   return (
     <div
@@ -43,16 +39,16 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_0.85fr]">
           <div className="relative min-h-[340px] bg-[#f2f4fb] md:min-h-[520px]">
             <img
-              src={product.img}
+              src={product.image_url}
               alt={product.name}
               className="absolute inset-0 h-full w-full object-cover"
             />
-            {product.tag && (
+            {tag && (
               <span
                 className="absolute left-4 top-4 rounded-full bg-[#D9043D] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                {product.tag}
+                {tag}
               </span>
             )}
           </div>
@@ -76,16 +72,8 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
                 className="text-[#253A8F]"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "28px" }}
               >
-                {product.price}
+                {formatPrice(product.price)}
               </span>
-              {product.original && (
-                <span
-                  className="text-gray-400 line-through"
-                  style={{ fontFamily: "Poppins, sans-serif", fontSize: "17px" }}
-                >
-                  {product.original}
-                </span>
-              )}
             </div>
 
             {categories.length > 0 && (
@@ -106,7 +94,7 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
               className="mt-6 text-[#606779]"
               style={{ fontFamily: "Roboto, sans-serif", fontSize: "15px", lineHeight: "1.7" }}
             >
-              A customer-ready Winmart pick with easy everyday styling, clean finishing, and a polished fit.
+              {product.description || "A customer-ready Winmart pick with easy everyday styling, clean finishing, and a polished fit."}
             </p>
 
             <div className="mt-7">

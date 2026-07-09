@@ -8,6 +8,8 @@ import { OurStoryPage } from "./pages/our-story";
 import { FeedbackPage } from "./pages/feedback";
 import { LoyaltyCardPage } from "./pages/loyalty-card";
 import { CareersPage } from "./pages/careers";
+import { AdminPage } from "./pages/admin";
+import { AdminInfoPage } from "./pages/admin-info";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ export const router = createBrowserRouter([
       { path: "our-story", Component: OurStoryPage },
       { path: "feedback", Component: FeedbackPage },
       { path: "careers", Component: CareersPage },
+      { path: "product-manager", Component: AdminPage },
+      { path: "admin", Component: AdminInfoPage },
     ],
   },
 ]);

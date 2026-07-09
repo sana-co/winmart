@@ -1,16 +1,40 @@
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
-import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
-import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
-
-const categories = [
-  { img: imgTees, title: "Gents", category: "Gents" },
-  { img: imgCoats, title: "Ladies", category: "Ladies" },
-  { img: imgHoodies, title: "Accessories", category: "Accessories" },
-];
+import { formatPrice, getProductsBySection } from "../lib/products";
+import type { Product } from "../lib/supabase";
 
 export function WinmartNewArrivals() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let mounted = true;
+
+    getProductsBySection("new-arrivals")
+      .then((items) => {
+        if (mounted) {
+          setProducts(items.slice(0, 3));
+          setError("");
+        }
+      })
+      .catch((err) => {
+        if (mounted) {
+          setError(err instanceof Error ? err.message : "Could not load new arrivals.");
+        }
+      })
+      .finally(() => {
+        if (mounted) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <section className="w-full bg-[#f7f7f7] py-10 sm:py-16">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
@@ -34,51 +58,62 @@ export function WinmartNewArrivals() {
           </h2>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {categories.map((cat) => (
-            <Link
-              key={cat.title}
-              to={`/new-arrivals?category=${encodeURIComponent(cat.category)}`}
-              className="group flex flex-col gap-5"
-            >
-              <div className="relative rounded-[16px] sm:rounded-[20px] overflow-hidden bg-gray-100 h-[320px] sm:h-[420px] lg:h-[520px]">
-                <img
-                  src={cat.img}
-                  alt={cat.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-[#253A8F] opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-[20px]" />
-                {/* Sale badge */}
-                <span
-                  className="absolute top-4 right-4 bg-[#D9043D] text-white rounded-full px-3 py-1 text-[12px] font-semibold tracking-wide"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  NEW
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p
-                    className="text-[#191919]"
-                    style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "22px", letterSpacing: "-0.9px" }}
+        {loading && (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="h-[420px] animate-pulse rounded-[8px] bg-gray-200 lg:h-[520px]" />
+            ))}
+          </div>
+        )}
+        {error && <p className="rounded-[8px] bg-red-50 p-4 text-sm text-red-700">{error}</p>}
+        {!loading && !error && products.length === 0 && (
+          <p className="rounded-[8px] bg-white p-6 text-center text-[#606779]">No new arrivals are available yet.</p>
+        )}
+        {!loading && !error && products.length > 0 && (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                to={`/new-arrivals${product.category ? `?category=${encodeURIComponent(product.category)}` : ""}`}
+                className="group flex flex-col gap-5"
+              >
+                <div className="relative h-[320px] overflow-hidden rounded-[8px] bg-gray-100 sm:h-[420px] lg:h-[520px]">
+                  <img
+                    src={product.image_url}
+                    alt={product.name}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#253A8F] opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                  <span
+                    className="absolute right-4 top-4 rounded-full bg-[#D9043D] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
                   >
-                    {cat.title}
-                  </p>
-                  <p
-                    className="text-[#7f7f7f] group-hover:text-[#D9043D] transition-colors"
-                    style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "16px", letterSpacing: "-0.6px" }}
-                  >
-                    Explore Now!
-                  </p>
+                    NEW
+                  </span>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-[#253A8F] flex items-center justify-center group-hover:bg-[#D9043D] transition-colors shrink-0">
-                  <ArrowRight size={16} color="white" />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p
+                      className="text-[#191919]"
+                      style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "22px" }}
+                    >
+                      {product.name}
+                    </p>
+                    <p
+                      className="text-[#7f7f7f] transition-colors group-hover:text-[#D9043D]"
+                      style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
+                    >
+                      {formatPrice(product.price)}
+                    </p>
+                  </div>
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#253A8F] transition-colors group-hover:bg-[#D9043D]">
+                    <ArrowRight size={16} color="white" />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

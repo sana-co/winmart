@@ -1,40 +1,45 @@
-import { useState } from "react";
-import { ArrowRight, SlidersHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
+import { SlidersHorizontal } from "lucide-react";
+import { ProductCard, ProductGridSkeleton } from "../components/product-card";
 import { ProductQuickView } from "../components/product-quick-view";
-import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
-import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
-import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
-import imgTrending from "../../imports/ShoppingApp/10bf3bec2c4f58be63e329813d793a3b46aed29a.png";
-import imgUnder40 from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429d39cb60775.png";
-import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7932e7e0.png";
-import imgModel from "../../imports/ShoppingApp/116cf92ffce852e6dcfea7d382714f1c60578ad2.png";
-import imgProduct1 from "../../imports/ShoppingApp/d116b77f94c47cb34085ecba93d7086e56c30f3f.png";
-import imgProduct2 from "../../imports/ShoppingApp/07a2197ffea83241a255453a3cb8b757720d1f55.png";
-import imgProduct3 from "../../imports/ShoppingApp/48808eb510ad5e1b50f1a6ccc453a45585230074.png";
-import imgProduct4 from "../../imports/ShoppingApp/f1a4be3a6330f9e5d839f54ed80f0c08fd07bf09.png";
-
-const filters = ["All", "Ladies", "Gents", "Outerwear", "Casual", "Formal"];
-
-const products = [
-  { img: imgHero,      name: "Luxury Faux Fur Coat",       price: "$95",  original: "$140", cat: ["All", "Ladies", "Outerwear"] },
-  { img: imgCoats,     name: "Premium Winter Coat",         price: "$120", original: "$160", cat: ["All", "Ladies", "Outerwear"] },
-  { img: imgTrending,  name: "Floral Wrap Dress",           price: "$52",  original: "$80",  cat: ["All", "Ladies", "Casual"] },
-  { img: imgProduct1,  name: "Polkadot Red Dress",          price: "$48",  original: null,   cat: ["All", "Ladies", "Casual", "Formal"] },
-  { img: imgProduct2,  name: "Striped Pink Dress",          price: "$44",  original: "$60",  cat: ["All", "Ladies", "Casual"] },
-  { img: imgHoodies,   name: "Classic Hoodie Set",          price: "$45",  original: "$65",  cat: ["All", "Gents", "Casual"] },
-  { img: imgProduct3,  name: "Blue Polka Dot Dress",        price: "$42",  original: null,   cat: ["All", "Ladies", "Formal"] },
-  { img: imgUnder40,   name: "Summer Linen Co-ord Set",     price: "$38",  original: null,   cat: ["All", "Ladies", "Casual"] },
-  { img: imgModel,     name: "Streetwear Jumpsuit",         price: "$60",  original: "$85",  cat: ["All", "Ladies", "Casual", "Formal"] },
-  { img: imgTees,      name: "Essential Tee Pack (3-in-1)", price: "$28",  original: null,   cat: ["All", "Gents", "Casual"] },
-  { img: imgProduct4,  name: "Green Skirt & Sweater Set",   price: "$46",  original: "$58",  cat: ["All", "Ladies", "Casual"] },
-  { img: imgCoats,     name: "Oversized Wool Blend Coat",   price: "$110", original: "$145", cat: ["All", "Gents", "Outerwear"] },
-];
+import { productFilters } from "../lib/product-categories";
+import { getProductsBySection } from "../lib/products";
+import type { Product } from "../lib/supabase";
 
 export function HotPicsPage() {
   const [active, setActive] = useState("All");
-  const [selectedProduct, setSelectedProduct] = useState<(typeof products)[number] | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const visible = products.filter(p => p.cat.includes(active));
+  const visible = active === "All" ? products : products.filter(p => p.category === active);
+
+  useEffect(() => {
+    let mounted = true;
+
+    getProductsBySection("top-picks")
+      .then((items) => {
+        if (mounted) {
+          setProducts(items);
+          setError("");
+        }
+      })
+      .catch((err) => {
+        if (mounted) {
+          setError(err instanceof Error ? err.message : "Could not load products.");
+        }
+      })
+      .finally(() => {
+        if (mounted) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <div className="bg-[#f7f7f7]">
@@ -70,7 +75,7 @@ export function HotPicsPage() {
       <section className="w-full bg-white border-b border-gray-100 sticky top-[84px] z-40">
         <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center gap-3 overflow-x-auto">
           <SlidersHorizontal size={16} className="text-[#7f7f7f] shrink-0" />
-          {filters.map(f => (
+          {productFilters.map(f => (
             <button
               key={f}
               onClick={() => setActive(f)}
@@ -93,57 +98,25 @@ export function HotPicsPage() {
       {/* Products grid */}
       <section className="w-full py-12 px-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-[#7f7f7f] mb-8" style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}>
+          <p className="mb-8 text-[#7f7f7f]" style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}>
             {visible.length} items
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {visible.map((p, i) => (
-              <div
-                key={i}
-                className="group bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100"
-              >
-                <button
-                  type="button"
-                  onClick={() => setSelectedProduct(p)}
-                  className="relative block h-[300px] w-full overflow-hidden text-left"
-                  aria-label={`View ${p.name}`}
-                >
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </button>
-                <div className="p-4">
-                  <p className="text-[#191919] mb-1" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}>
-                    {p.name}
-                  </p>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[#253A8F]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "16px" }}>
-                      {p.price}
-                    </span>
-                    {p.original && (
-                      <span className="text-gray-400 line-through" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
-                        {p.original}
-                      </span>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProduct(p)}
-                    className="w-full flex items-center justify-center gap-2 bg-[#f7f7f7] group-hover:bg-[#253A8F] group-hover:text-white text-[#253A8F] rounded-[8px] py-2.5 transition-all"
-                    style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
-                  >
-                    View Item <ArrowRight size={14} />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          {loading && <ProductGridSkeleton />}
+          {error && <p className="rounded-[8px] bg-red-50 p-4 text-sm text-red-700">{error}</p>}
+          {!loading && !error && visible.length === 0 && (
+            <p className="rounded-[8px] bg-white p-6 text-center text-[#606779]">No top picks are available yet.</p>
+          )}
+          {!loading && !error && visible.length > 0 && (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {visible.map((product) => (
+                <ProductCard key={product.id} product={product} badge="TOP" onView={setSelectedProduct} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      <ProductQuickView product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+      <ProductQuickView product={selectedProduct} tag="TOP PICK" onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }
