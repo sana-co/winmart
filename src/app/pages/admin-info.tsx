@@ -285,6 +285,11 @@ export function AdminInfoPage() {
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Topic</TableHead>
+                <TableHead>Quality</TableHead>
+                <TableHead>Service</TableHead>
+                <TableHead>Music</TableHead>
+                <TableHead>Ambience</TableHead>
+                <TableHead>Price</TableHead>
                 <TableHead>Rating</TableHead>
                 <TableHead>Message</TableHead>
                 <TableHead>Submitted</TableHead>
@@ -296,6 +301,11 @@ export function AdminInfoPage() {
                 <TableRow key={item.id}>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.topic || item.subject || "General"}</TableCell>
+                  <TableCell>{item.quality ?? 0}/5</TableCell>
+                  <TableCell>{item.service ?? 0}/5</TableCell>
+                  <TableCell>{item.music ?? 0}/5</TableCell>
+                  <TableCell>{item.ambience ?? 0}/5</TableCell>
+                  <TableCell>{item.price ?? 0}/5</TableCell>
                   <TableCell>{item.rating}/5</TableCell>
                   <TableCell className="max-w-[420px] whitespace-normal">{item.message}</TableCell>
                   <TableCell>{formatDateTime(item.created_at)}</TableCell>
@@ -420,7 +430,7 @@ function StatLine({ label, value }: { label: string; value: string }) {
 function EmptyRow({ label }: { label: string }) {
   return (
     <TableRow>
-      <TableCell colSpan={7} className="py-8 text-center text-[#606779]">
+      <TableCell colSpan={11} className="py-8 text-center text-[#606779]">
         {label}
       </TableCell>
     </TableRow>

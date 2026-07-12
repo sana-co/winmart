@@ -6,28 +6,43 @@ const fields: Field[] = [
   { id: "name",  label: "Full Name",     type: "text",  placeholder: "e.g. Amara Johnson" },
 ];
 
-const topics = ["Product Quality", "Pricing", "Customer Service", "Music", "Ambience", "Other"];
+const ratingKeys = ["quality", "service", "music", "ambience", "price"] as const;
 
 export function WinmartCommunity() {
-  const [form, setForm] = useState({ name: "", topic: "", message: "", rating: 0 });
-  const [hover, setHover] = useState(0);
+  const [form, setForm] = useState<any>({ name: "", message: "", rating: 0, quality: 0, service: 0, music: 0, ambience: 0, price: 0 });
+  const [hover, setHover] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const set = (k: string, v: string | number) => setForm(f => ({ ...f, [k]: v }));
+  const set = (k: string, v: string | number) => setForm((f: any) => ({ ...f, [k]: v }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError("");
-    if (!form.name || !form.message) return;
+    if (!form.name || !form.message) {
+      setSubmitError("Name and message are required.");
+      return;
+    }
+
+    // ensure all category ratings are provided
+    const missing = ratingKeys.find(k => !(form[k] > 0));
+    if (missing) {
+      setSubmitError("Please rate all categories before submitting.");
+      return;
+    }
+
+    // compute overall rating as rounded average
+    const total = ratingKeys.reduce((s, k) => s + Number(form[k] || 0), 0);
+    const overall = Math.round(total / ratingKeys.length);
+    setForm((f: any) => ({ ...f, rating: overall }));
 
     setIsSubmitting(true);
     try {
       const response = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, rating: Math.round((form.quality + form.service + form.music + form.ambience + form.price) / 5) }),
       });
 
       if (!response.ok) {
@@ -65,7 +80,7 @@ export function WinmartCommunity() {
             Your feedback has been received. Thank you for helping us improve.
           </p>
           <button
-            onClick={() => { setSubmitted(false); setForm({ name: "", topic: "", message: "", rating: 0 }); }}
+            onClick={() => { setSubmitted(false); setForm({ name: "", message: "", rating: 0, quality: 0, service: 0, music: 0, ambience: 0, price: 0 }); }}
             className="bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[8px] px-8 py-3"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
@@ -130,58 +145,45 @@ export function WinmartCommunity() {
             ))}
           </div>
 
-          {/* Topic */}
-          <div className="mb-5">
-            <div className="flex flex-col gap-1.5">
-              <label
-                className="text-[#191919]"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
-              >
-                Topic
-              </label>
-              <select
-                value={form.topic}
-                onChange={e => set("topic", e.target.value)}
-                className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] outline-none focus:border-[#253A8F] focus:bg-white transition-all appearance-none cursor-pointer"
-                style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
-              >
-                <option value="" disabled>Select a topic…</option>
-                {topics.map(t => <option key={t} value={t}>{t}</option>)}
-              </select>
-            </div>
-          </div>
-
-          {/* Star rating */}
-          <div className="mb-5">
-            <label
-              className="text-[#191919] block mb-2"
-              style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
-            >
-              Overall Rating
-            </label>
-            <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5].map(star => (
-                <button
-                  key={star}
-                  type="button"
-                  onClick={() => set("rating", star)}
-                  onMouseEnter={() => setHover(star)}
-                  onMouseLeave={() => setHover(0)}
-                  className="transition-transform hover:scale-110"
-                  style={{ fontSize: "30px", color: star <= (hover || form.rating) ? "#D9043D" : "#d1d5db" }}
+          {/* Ratings for categories */}
+          <div className="mb-5 grid gap-4">
+            {([
+              ["quality", "Quality"],
+              ["service", "Service"],
+              ["music", "Music"],
+              ["ambience", "Ambience"],
+              ["price", "Price"],
+            ] as [string, string][]).map(([key, label]) => (
+              <div key={key} className="flex flex-col gap-1.5">
+                <label
+                  className="text-[#191919]"
+                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
                 >
-                  ★
-                </button>
-              ))}
-              {form.rating > 0 && (
-                <span
-                  className="text-[#7f7f7f] ml-3"
-                  style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}
-                >
-                  {["", "Poor", "Fair", "Good", "Very Good", "Excellent"][form.rating]}
-                </span>
-              )}
-            </div>
+                  {label} <span className="text-[#D9043D]">*</span>
+                </label>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => set(key, star)}
+                      onMouseEnter={() => setHover(h => ({ ...h, [key]: star }))}
+                      onMouseLeave={() => setHover(h => ({ ...h, [key]: 0 }))}
+                      className="transition-transform hover:scale-110"
+                      style={{ fontSize: "26px", color: star <= ((hover[key] as number) || form[key]) ? "#D9043D" : "#d1d5db" }}
+                    >
+                      ★
+                    </button>
+                  ))}
+                  <span
+                    className="text-[#7f7f7f] ml-3"
+                    style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}
+                  >
+                    {form[key] > 0 ? ["", "Poor", "Fair", "Good", "Very Good", "Excellent"][form[key]] : "Not rated"}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Message */}

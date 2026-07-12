@@ -8,6 +8,11 @@ export type FeedbackEntry = {
   topic: string | null;
   message: string;
   rating: number;
+  quality?: number;
+  service?: number;
+  music?: number;
+  ambience?: number;
+  price?: number;
   status: string;
   created_at: string;
 };

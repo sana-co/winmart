@@ -6,6 +6,11 @@ create table if not exists public.feedback (
   topic text,
   message text not null,
   rating integer not null default 0 check (rating between 0 and 5),
+  quality integer not null default 0 check (quality between 0 and 5),
+  service integer not null default 0 check (service between 0 and 5),
+  music integer not null default 0 check (music between 0 and 5),
+  ambience integer not null default 0 check (ambience between 0 and 5),
+  price integer not null default 0 check (price between 0 and 5),
   status text not null default 'new',
   created_at timestamptz not null default now()
 );
