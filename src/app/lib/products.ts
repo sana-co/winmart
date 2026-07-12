@@ -45,65 +45,143 @@ export async function getAllProducts() {
 
 export async function addProduct(payload: ProductPayload) {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase
-    .from("products")
-    .insert(payload)
-    .select(productColumns)
-    .single();
+  const { data, error: sessionError } = await supabase.auth.getSession();
 
-  if (error) {
-    throw error;
+  if (sessionError) {
+    throw sessionError;
   }
 
-  return data as Product;
+  const token = data.session?.access_token;
+
+  if (!token) {
+    throw new Error("Sign in before adding products.");
+  }
+
+  const response = await fetch("/api/products", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(typeof result.error === "string" ? result.error : "Could not add product.");
+  }
+
+  return result.product as Product;
 }
 
 export async function updateProduct(id: string, payload: Partial<ProductPayload>) {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase
-    .from("products")
-    .update(payload)
-    .eq("id", id)
-    .select(productColumns)
-    .single();
+  const { data, error: sessionError } = await supabase.auth.getSession();
 
-  if (error) {
-    throw error;
+  if (sessionError) {
+    throw sessionError;
   }
 
-  return data as Product;
+  const token = data.session?.access_token;
+
+  if (!token) {
+    throw new Error("Sign in before updating products.");
+  }
+
+  const response = await fetch("/api/products", {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id, product: payload }),
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(typeof result.error === "string" ? result.error : "Could not update product.");
+  }
+
+  return result.product as Product;
 }
 
 export async function deleteProduct(id: string) {
   const supabase = getSupabaseClient();
-  const { error } = await supabase.from("products").delete().eq("id", id);
+  const { data, error: sessionError } = await supabase.auth.getSession();
 
-  if (error) {
-    throw error;
+  if (sessionError) {
+    throw sessionError;
+  }
+
+  const token = data.session?.access_token;
+
+  if (!token) {
+    throw new Error("Sign in before deleting products.");
+  }
+
+  const response = await fetch("/api/products", {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(typeof result.error === "string" ? result.error : "Could not delete product.");
   }
 }
 
 export async function uploadProductImage(file: File) {
   const supabase = getSupabaseClient();
-  const extension = file.name.split(".").pop() || "jpg";
-  const safeName = file.name
-    .replace(/\.[^/.]+$/, "")
-    .replace(/[^a-z0-9-]+/gi, "-")
-    .replace(/^-+|-+$/g, "")
-    .toLowerCase();
-  const path = `products/${crypto.randomUUID()}-${safeName || "item"}.${extension}`;
+  const { data, error: sessionError } = await supabase.auth.getSession();
 
-  const { error } = await supabase.storage.from("product-images").upload(path, file, {
+  if (sessionError) {
+    throw sessionError;
+  }
+
+  const token = data.session?.access_token;
+
+  if (!token) {
+    throw new Error("Sign in before uploading product images.");
+  }
+
+  const response = await fetch("/api/products", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ action: "create-image-upload", fileName: file.name }),
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(typeof result.error === "string" ? result.error : "Could not prepare image upload.");
+  }
+
+  const upload = result.upload as { path: string; token: string; publicUrl: string } | undefined;
+
+  if (!upload?.path || !upload.token || !upload.publicUrl) {
+    throw new Error("Could not prepare image upload.");
+  }
+
+  const { error } = await supabase.storage.from("product-images").uploadToSignedUrl(upload.path, upload.token, file, {
     cacheControl: "3600",
-    upsert: false,
+    contentType: file.type || undefined,
   });
 
   if (error) {
     throw error;
   }
 
-  const { data } = supabase.storage.from("product-images").getPublicUrl(path);
-  return data.publicUrl;
+  return upload.publicUrl;
 }
 
 export async function isCurrentUserProductManager(userId: string) {

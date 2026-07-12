@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react'
 const localApiRoutes = {
   '/api/feedback': './api/feedback.js',
   '/api/loyalty-card': './api/loyalty-card.js',
+  '/api/products': './api/products.js',
   '/api/send-loyalty-email': './api/send-loyalty-email.js',
   '/api/supplier-applications': './api/supplier-applications.js',
 }
@@ -61,7 +62,7 @@ function localApiServer() {
             },
           }
 
-          await handler({ method: req.method, body }, response)
+          await handler({ method: req.method, body, headers: req.headers }, response)
         } catch (error) {
           res.statusCode = 500
           res.setHeader('Content-Type', 'application/json')

@@ -5,7 +5,7 @@ import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7
 
 const milestones = [
   { year: "2021", label: "Grand Opening" },
-  { year: "2024", label: "First Escalators" },
+  { year: "2024", label: "Excellence Award" },
   { year: "2025", label: "Major Expansion" },
   { year: "2025", label: "Saree Corner" },
 ];
