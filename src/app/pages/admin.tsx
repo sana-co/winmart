@@ -452,7 +452,23 @@ export function AdminPage() {
                         aria-label={`Toggle top pick for ${product.name}`}
                       />
                     </TableCell>
-                    <TableCell>{product.category || "Uncategorized"}</TableCell>
+                    <TableCell>
+                      <Select
+                        value={product.category || undefined}
+                        onValueChange={(category: ProductCategory) => handleUpdate(product.id, { category }, "Category updated successfully.")}
+                      >
+                        <SelectTrigger className="min-w-[150px]" aria-label={`Category for ${product.name}`}>
+                          <SelectValue placeholder="Choose category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {productCategories.map((category) => (
+                            <SelectItem key={category} value={category}>
+                              {category}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </TableCell>
                     <TableCell className="text-right">
                       <Button type="button" variant="destructive" size="sm" onClick={() => handleDelete(product)}>
                         <Trash2 /> Delete
