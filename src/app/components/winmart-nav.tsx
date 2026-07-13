@@ -17,19 +17,19 @@ export function WinmartNav() {
 
   return (
     <nav className="w-full bg-white shadow-sm border-b border-gray-100">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-[70px] sm:h-[84px] flex items-center justify-between gap-4 sm:gap-6">
+      <div className="mx-auto flex h-[64px] max-w-[1400px] items-center justify-between gap-3 px-4 sm:h-[84px] sm:gap-6 sm:px-6 lg:px-12">
 
         {/* Logo */}
         <Link to="/" className="shrink-0">
           <img
             src={imgLogo}
             alt="Winmart Fashion"
-            className="h-[54px] w-auto sm:h-[68px]"
+            className="h-[48px] w-auto sm:h-[68px]"
           />
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden items-center gap-8 xl:flex">
           {navLinks.map(item => {
             const active = pathname === item.to;
             return (
@@ -67,8 +67,11 @@ export function WinmartNav() {
             FEEDBACK
           </Link>
           <button
-            className="lg:hidden text-[#253A8F]"
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-[8px] text-[#253A8F] xl:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -77,7 +80,7 @@ export function WinmartNav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-4 py-4 flex max-h-[calc(100vh-94px)] flex-col gap-1 overflow-y-auto sm:px-6 sm:max-h-[calc(100vh-112px)]">
+        <div className="flex max-h-[calc(100dvh-88px)] flex-col gap-1 overflow-y-auto border-t border-gray-100 bg-white px-4 py-4 sm:max-h-[calc(100dvh-124px)] sm:px-6 xl:hidden">
           {navLinks.map(item => {
             const active = pathname === item.to;
             return (

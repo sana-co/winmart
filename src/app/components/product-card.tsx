@@ -10,11 +10,11 @@ type ProductCardProps = {
 
 export function ProductCard({ product, badge, onView }: ProductCardProps) {
   return (
-    <div className="group overflow-hidden rounded-[8px] border border-gray-100 bg-white shadow-sm transition-all hover:shadow-lg">
+    <div className="group mx-auto w-full max-w-[420px] overflow-hidden rounded-[8px] border border-gray-100 bg-white shadow-sm transition-all hover:shadow-lg sm:max-w-none">
       <button
         type="button"
         onClick={() => onView(product)}
-        className="relative block h-[300px] w-full overflow-hidden text-left"
+        className="relative block h-[260px] w-full overflow-hidden text-left min-[430px]:h-[300px]"
         aria-label={`View ${product.name}`}
       >
         <img
@@ -58,7 +58,7 @@ export function ProductGridSkeleton() {
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {Array.from({ length: 8 }).map((_, index) => (
         <div key={index} className="overflow-hidden rounded-[8px] border border-gray-100 bg-white">
-          <div className="h-[300px] animate-pulse bg-gray-200" />
+          <div className="h-[260px] animate-pulse bg-gray-200 min-[430px]:h-[300px]" />
           <div className="space-y-3 p-4">
             <div className="h-4 w-2/3 animate-pulse rounded bg-gray-200" />
             <div className="h-4 w-1/4 animate-pulse rounded bg-gray-200" />

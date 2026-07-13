@@ -185,7 +185,7 @@ export function LoyaltyCardPage() {
     <div className="min-h-screen" style={{ backgroundColor: "#fafaf8" }}>
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden px-4 py-12 md:py-20 lg:py-28"
+        className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-20 lg:py-28"
         style={{
           background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)",
         }}
@@ -193,7 +193,7 @@ export function LoyaltyCardPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2 lg:items-center">
             {/* Content */}
-            <div className="flex flex-col justify-center space-y-6">
+            <div className="flex flex-col justify-center space-y-5 text-center sm:space-y-6 lg:text-left">
               <div>
                 <span
                 className="text-[#F4C542] uppercase tracking-widest"
@@ -205,7 +205,7 @@ export function LoyaltyCardPage() {
                   style={{
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 800,
-                    fontSize: "clamp(36px, 8vw, 64px)",
+                    fontSize: "clamp(30px, 8vw, 64px)",
                     lineHeight: "1.15",
                     color: "#ffffff",
                     textShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
@@ -251,7 +251,7 @@ export function LoyaltyCardPage() {
                     backgroundColor: "#D9043D",
                     color: "#ffffff",
                   }}
-                  className="inline-block rounded-full px-8 py-3 font-bold tracking-wider transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+                  className="inline-flex min-h-11 items-center justify-center rounded-[8px] px-6 py-3 font-bold tracking-wider transition-all duration-300 hover:shadow-lg active:scale-95 sm:rounded-full sm:px-8"
                 >
                   Get Your Loyalty Card
                 </button>
@@ -261,7 +261,7 @@ export function LoyaltyCardPage() {
             {/* Card Visual */}
             <div className="flex items-center justify-center">
               <div
-                className="relative w-full max-w-2xl"
+                className="relative w-full max-w-[560px] lg:max-w-2xl"
                 style={{
                   perspective: "1000px",
                 }}
@@ -269,7 +269,7 @@ export function LoyaltyCardPage() {
                 <img
                   src={loyaltyCardImg}
                   alt="Win Mart Loyalty Card"
-                  className="h-auto w-full rounded-[24px] shadow-2xl"
+                  className="h-auto w-full rounded-[10px] shadow-2xl sm:rounded-[24px]"
                   style={{
                     transform: "rotateY(-5deg) rotateX(2deg)",
                     transition: "transform 0.3s ease",
@@ -282,14 +282,14 @@ export function LoyaltyCardPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="px-4 py-16 md:py-24">
+      <section className="px-4 py-10 sm:px-6 sm:py-16 md:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
+          <div className="mb-8 text-center sm:mb-12">
             <h2
               style={{
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(32px, 6vw, 48px)",
+                fontSize: "clamp(26px, 6vw, 48px)",
                 color: "#1a1a1a",
                 marginBottom: "16px",
               }}
@@ -312,7 +312,7 @@ export function LoyaltyCardPage() {
               return (
                 <div
                   key={index}
-                  className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-lg sm:max-w-none sm:rounded-xl sm:p-6"
                 >
                   <div
                     className="mb-4 inline-block rounded-lg p-3 transition-colors group-hover:bg-opacity-80"
@@ -353,18 +353,18 @@ export function LoyaltyCardPage() {
       {/* Form Section */}
       <section
         id="form-section"
-        className="px-4 py-16 md:py-24"
+        className="px-4 py-10 sm:px-6 sm:py-16 md:py-24"
         style={{
           backgroundColor: "#f7f7f7",
         }}
       >
         <div className="mx-auto max-w-2xl">
-          <div className="mb-12 text-center">
+          <div className="mb-8 text-center sm:mb-12">
             <h2
               style={{
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(32px, 6vw, 48px)",
+                fontSize: "clamp(26px, 6vw, 48px)",
                 color: "#1a1a1a",
                 marginBottom: "16px",
               }}
@@ -385,7 +385,7 @@ export function LoyaltyCardPage() {
 
           {isSubmitted ? (
             <div
-              className="rounded-xl border border-green-200 bg-green-50 p-8 text-center"
+              className="rounded-[10px] border border-green-200 bg-green-50 p-5 text-center sm:rounded-xl sm:p-8"
             >
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: "#253A8F" }}>
                 <Check size={32} color="#ffffff" />
@@ -414,7 +414,7 @@ export function LoyaltyCardPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6 rounded-xl bg-white p-8 shadow-md">
+            <form onSubmit={handleSubmit} className="space-y-5 rounded-[10px] bg-white p-5 shadow-md sm:space-y-6 sm:rounded-xl sm:p-8">
               {/* Full Name */}
               <div>
                 <label

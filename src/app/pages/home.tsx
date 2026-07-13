@@ -1,6 +1,7 @@
 import { WinmartHero } from "../components/winmart-hero";
 import { WinmartBrands } from "../components/winmart-brands";
 import { WinmartNewArrivals } from "../components/winmart-new-arrivals";
+import { WinmartTopPicks } from "../components/winmart-top-picks";
 import { WinmartBanner } from "../components/winmart-banner";
 import { WinmartYoungsFavourite } from "../components/winmart-youngs-favourite";
 import { WinmartVouchers } from "../components/winmart-vouchers";
@@ -12,6 +13,7 @@ export function HomePage() {
       <WinmartHero />
       <WinmartBrands />
       <WinmartNewArrivals />
+      <WinmartTopPicks />
       <WinmartBanner />
       <WinmartYoungsFavourite />
       <WinmartVouchers />

@@ -50,13 +50,13 @@ export function WinmartHero() {
   }, [emblaApi]);
 
   return (
-    <section className="w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, i) => (
             <div
               key={i}
-              className="relative w-full shrink-0 min-h-[520px] sm:min-h-[600px] lg:min-h-[720px] flex items-center overflow-hidden"
+              className="relative flex min-h-[500px] w-full shrink-0 items-center overflow-hidden sm:min-h-[600px] lg:min-h-[720px]"
               style={{ background: slide.bg }}
             >
               {/* Decorative stars */}
@@ -65,9 +65,9 @@ export function WinmartHero() {
               <div className="absolute top-1/3 left-[28%] opacity-10 text-white text-5xl select-none pointer-events-none">★</div>
 
               {/* Text block */}
-              <div className="relative z-10 max-w-[600px] px-5 py-10 sm:px-8 sm:py-14 lg:px-20">
+              <div className="relative z-10 w-full max-w-[600px] px-4 py-8 sm:px-8 sm:py-14 lg:px-20">
                 <span
-                  className="inline-block bg-[#D9043D] text-white rounded-full px-4 py-1 mb-5"
+                  className="mb-3 inline-block rounded-full bg-[#D9043D] px-3 py-1 text-white sm:mb-5 sm:px-4"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px", letterSpacing: "1.5px" }}
                 >
                   {slide.tag.toUpperCase()}
@@ -91,10 +91,9 @@ export function WinmartHero() {
                     style={{
                       fontFamily: "Poppins, sans-serif",
                       fontWeight: 900,
-                      fontSize: "clamp(38px, 13vw, 80px)",
-                      lineHeight: "1.1",
+                      fontSize: "clamp(35px, 11.5vw, 80px)",
+                      lineHeight: "1.04",
                       color: "white",
-                      letterSpacing: "-1px",
                     }}
                   >
                     {slide.headline.map((line, li) => (
@@ -104,12 +103,11 @@ export function WinmartHero() {
                 </div>
 
                 <p
-                  className="text-white/80 mt-6 mb-8"
+                  className="mb-5 mt-4 max-w-[340px] text-white/85 sm:mb-8 sm:mt-6 sm:max-w-none"
                   style={{
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 400,
                     fontSize: "clamp(15px, 1.5vw, 20px)",
-                    letterSpacing: "-0.3px",
                   }}
                 >
                   {slide.sub}
@@ -117,15 +115,15 @@ export function WinmartHero() {
 
                 <Link
                   to={slide.cta.to}
-                  className="inline-block bg-[#D9043D] hover:bg-[#b8032f] transition-all duration-200 text-white rounded-[10px] px-10 py-4 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
-                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 4vw, 20px)", letterSpacing: "-0.5px" }}
+                  className="inline-flex min-h-11 items-center rounded-[8px] bg-[#D9043D] px-7 py-3 text-white shadow-lg transition-all duration-200 hover:bg-[#b8032f] hover:shadow-xl active:scale-95 sm:rounded-[10px] sm:px-10 sm:py-4"
+                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "clamp(15px, 4vw, 20px)" }}
                 >
                   {slide.cta.label}
                 </Link>
               </div>
 
               {/* Model image */}
-              <div className="absolute bottom-0 right-[-35%] h-[72%] w-[95%] opacity-35 pointer-events-none sm:right-[-15%] sm:h-[82%] sm:w-[70%] md:right-0 md:h-full md:w-[50%] md:opacity-100 lg:w-[55%]">
+              <div className="pointer-events-none absolute bottom-0 right-[-42%] h-[66%] w-full opacity-30 sm:right-[-15%] sm:h-[82%] sm:w-[70%] md:right-0 md:h-full md:w-[50%] md:opacity-100 lg:w-[55%]">
                 <img
                   src={slide.img}
                   alt={slide.tag}
@@ -139,21 +137,23 @@ export function WinmartHero() {
       </div>
 
       {/* Dot indicators */}
-      <div
-        className="flex justify-center gap-2 py-4 absolute w-full"
-        style={{ marginTop: "-52px" }}
-      >
+      <div className="absolute bottom-4 left-0 z-20 flex w-full justify-center py-1 sm:bottom-6">
         {slides.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => scrollTo(i)}
-            className="rounded-full transition-all duration-300"
-            style={{
-              width: i === selected ? "28px" : "8px",
-              height: "8px",
-              background: i === selected ? "#D9043D" : "rgba(255,255,255,0.5)",
-            }}
-          />
+            className="flex h-11 w-10 items-center justify-center"
+            aria-label={`Go to slide ${i + 1}`}
+          >
+            <span
+              className="h-2 rounded-full transition-all duration-300"
+              style={{
+                width: i === selected ? "28px" : "8px",
+                background: i === selected ? "#D9043D" : "rgba(255,255,255,0.5)",
+              }}
+            />
+          </button>
         ))}
       </div>
     </section>

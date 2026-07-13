@@ -187,8 +187,8 @@ export function AdminInfoPage() {
 
   if (!sessionUserId) {
     return (
-      <section className="min-h-[60vh] bg-[#f7f7f7] px-6 py-16">
-        <form onSubmit={handleLogin} className="mx-auto max-w-[420px] rounded-[8px] border border-gray-100 bg-white p-6 shadow-sm">
+      <section className="min-h-[60vh] bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
+        <form onSubmit={handleLogin} className="mx-auto max-w-[420px] rounded-[8px] border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
           <h1 className="mb-2 text-2xl font-bold text-[#191919]">Admin Login</h1>
           <p className="mb-6 text-sm text-[#606779]">Sign in with your Supabase admin account.</p>
           <div className="space-y-4">
@@ -229,21 +229,21 @@ export function AdminInfoPage() {
   ];
 
   return (
-    <section className="min-h-screen bg-[#f7f7f7] px-4 py-10 sm:px-6 lg:px-10">
+    <section className="min-h-screen bg-[#f7f7f7] px-3 py-8 sm:px-6 sm:py-10 lg:px-10">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
+        <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 lg:flex-row lg:items-center">
+          <div className="text-center sm:text-left">
             <Button asChild variant="outline" size="sm" className="mb-4">
               <Link to="/product-manager"><ArrowLeft /> Product Manager Login</Link>
             </Button>
             <p className="text-sm font-semibold uppercase tracking-wide text-[#D9043D]">Admin Information</p>
-            <h1 className="text-3xl font-black text-[#191919]">Requests & Login Stats</h1>
+            <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Requests & Login Stats</h1>
           </div>
-          <div className="flex gap-2">
-            <Button type="button" variant="outline" onClick={loadData} disabled={loading}>
+          <div className="grid grid-cols-2 gap-2">
+            <Button type="button" variant="outline" className="w-full" onClick={loadData} disabled={loading}>
               <RefreshCw /> {loading ? "Loading..." : "Refresh"}
             </Button>
-            <Button type="button" variant="outline" onClick={handleSignOut}>
+            <Button type="button" variant="outline" className="w-full" onClick={handleSignOut}>
               <LogOut /> Sign Out
             </Button>
           </div>
@@ -267,7 +267,7 @@ export function AdminInfoPage() {
           })}
         </div>
 
-        <div className="mb-6 rounded-[8px] border border-gray-100 bg-white p-5 shadow-sm">
+        <div className="mb-6 min-w-0 rounded-[8px] border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex items-center gap-2">
             <Users className="text-[#253A8F]" size={20} />
             <h2 className="text-xl font-bold text-[#191919]">Admin Login Stats</h2>
@@ -397,8 +397,8 @@ export function AdminInfoPage() {
 
 function AdminShell({ message, children }: { message: string; children?: React.ReactNode }) {
   return (
-    <section className="min-h-[60vh] bg-[#f7f7f7] px-6 py-16">
-      <div className="mx-auto max-w-[700px] rounded-[8px] border border-gray-100 bg-white p-8 text-[#253A8F] shadow-sm">
+    <section className="min-h-[60vh] bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-[700px] rounded-[8px] border border-gray-100 bg-white p-5 text-center text-[#253A8F] shadow-sm sm:p-8">
         <p>{message}</p>
         {children}
       </div>
@@ -408,10 +408,10 @@ function AdminShell({ message, children }: { message: string; children?: React.R
 
 function InfoSection({ title, icon: Icon, children }: { title: string; icon: LucideIcon; children: React.ReactNode }) {
   return (
-    <div className="mb-6 rounded-[8px] border border-gray-100 bg-white p-5 shadow-sm">
+    <div className="mb-6 min-w-0 max-w-full overflow-hidden rounded-[8px] border border-gray-100 bg-white p-3 shadow-sm sm:p-5">
       <div className="mb-4 flex items-center gap-2">
         <Icon className="text-[#253A8F]" size={20} />
-        <h2 className="text-xl font-bold text-[#191919]">{title}</h2>
+        <h2 className="min-w-0 text-lg font-bold text-[#191919] sm:text-xl">{title}</h2>
       </div>
       {children}
     </div>

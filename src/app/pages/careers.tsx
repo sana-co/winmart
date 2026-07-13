@@ -47,11 +47,11 @@ export function CareersPage() {
 
       {/* Hero */}
       <section
-        className="w-full py-20 px-6"
+        className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:py-20"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
       >
-        <div className="max-w-[1100px] mx-auto flex flex-col lg:flex-row items-center gap-12">
-          <div className="flex-1">
+        <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-8 text-center sm:gap-12 lg:flex-row lg:text-left">
+          <div className="min-w-0 flex-1">
             <span
               className="inline-block bg-[#D9043D] text-white rounded-full px-4 py-1 mb-5 uppercase tracking-widest"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px" }}
@@ -62,25 +62,25 @@ export function CareersPage() {
               className="text-white mb-5"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(32px, 5vw, 60px)", lineHeight: "1.1", letterSpacing: "-0.5px" }}
             >
-              Join the Winmart<br />Fashion Family
+              Join the Winmart<span className="block">Fashion Family</span>
             </h1>
             <p
-              className="text-white/75 max-w-[500px] mb-8"
+              className="mx-auto mb-7 max-w-[500px] text-white/75 lg:mx-0 lg:mb-8"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 400, fontSize: "clamp(15px, 1.6vw, 18px)", lineHeight: "1.7" }}
             >
               Be part of a fast-growing fashion brand that values people, style, and ambition. We're looking for passionate individuals to join our team.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="grid gap-3 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:justify-center lg:justify-start">
               <a
                 href="#apply"
-                className="bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[10px] px-8 py-3.5"
+                className="inline-flex min-h-11 items-center justify-center rounded-[8px] bg-[#D9043D] px-6 py-3 text-white transition-colors hover:bg-[#b8032f] sm:rounded-[10px] sm:px-8 sm:py-3.5"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
               >
                 Apply Now →
               </a>
               <a
                 href="tel:0777009697"
-                className="bg-white/15 hover:bg-white/25 border border-white/30 transition-colors text-white rounded-[10px] px-8 py-3.5 flex items-center gap-2"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[8px] border border-white/30 bg-white/15 px-6 py-3 text-white transition-colors hover:bg-white/25 sm:rounded-[10px] sm:px-8 sm:py-3.5"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
               >
                 <Phone size={18} /> Call Us
@@ -89,7 +89,7 @@ export function CareersPage() {
           </div>
 
           {/* Flyer image */}
-          <div className="shrink-0 lg:w-[300px]">
+          <div className="w-full max-w-[260px] shrink-0 sm:max-w-[300px] lg:w-[300px]">
             <img
               src={imgFlyer}
               alt="Winmart Fashion is Hiring"
@@ -100,19 +100,19 @@ export function CareersPage() {
       </section>
 
       {/* Open positions */}
-      <section className="w-full py-16 px-6 bg-white">
+      <section className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[900px] mx-auto">
           <h2
-            className="text-[#191919] text-center mb-10"
+            className="mb-7 text-center text-[#191919] sm:mb-10"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 38px)", letterSpacing: "1px" }}
           >
             Open Positions
           </h2>
 
           {openRoles.map(role => (
-            <div key={role.title} className="bg-[#f7f7f7] rounded-[24px] border border-gray-100 overflow-hidden shadow-sm">
+            <div key={role.title} className="overflow-hidden rounded-[10px] border border-gray-100 bg-[#f7f7f7] shadow-sm sm:rounded-[24px]">
               {/* Role header */}
-              <div className="bg-[#253A8F] px-8 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex flex-col justify-between gap-4 bg-[#253A8F] px-5 py-5 text-center sm:flex-row sm:items-center sm:px-8 sm:py-6 sm:text-left">
                 <div>
                   <h3 className="text-white" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "22px" }}>
                     {role.title}
@@ -131,7 +131,7 @@ export function CareersPage() {
                 </div>
                 <a
                   href="#apply"
-                  className="shrink-0 bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[8px] px-6 py-2.5"
+                  className="min-h-11 shrink-0 rounded-[8px] bg-[#D9043D] px-6 py-2.5 text-center text-white transition-colors hover:bg-[#b8032f]"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
                 >
                   Apply →
@@ -139,7 +139,7 @@ export function CareersPage() {
               </div>
 
               {/* Requirements & Perks */}
-              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-7 p-5 sm:p-8 md:grid-cols-2 md:gap-8">
                 <div>
                   <p className="text-[#191919] mb-4" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "16px" }}>
                     Requirements
@@ -177,17 +177,17 @@ export function CareersPage() {
       </section>
 
       {/* Why join us */}
-      <section className="w-full py-16 px-6 bg-[#f7f7f7]">
+      <section className="w-full bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1100px] mx-auto">
           <h2
-            className="text-[#191919] text-center mb-10"
+            className="mb-7 text-center text-[#191919] sm:mb-10"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 38px)", letterSpacing: "1px" }}
           >
             Why Work With Us?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {whyJoin.map(w => (
-              <div key={w.title} className="bg-white rounded-[20px] p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+              <div key={w.title} className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:max-w-none sm:rounded-[20px] sm:p-7">
                 <div className="w-12 h-12 rounded-full bg-[#253A8F]/10 group-hover:bg-[#253A8F] flex items-center justify-center mb-4 transition-colors text-[#253A8F] group-hover:text-white">
                   {w.icon}
                 </div>
@@ -200,9 +200,9 @@ export function CareersPage() {
       </section>
 
       {/* Contact + Application form */}
-      <section id="apply" className="w-full py-16 px-6 bg-white">
+      <section id="apply" className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[860px] mx-auto">
-          <div className="text-center mb-10">
+          <div className="mb-7 text-center sm:mb-10">
             <h2
               className="text-[#191919]"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 36px)" }}
@@ -214,12 +214,12 @@ export function CareersPage() {
             </p>
 
             {/* Direct contact */}
-            <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <div className="mt-6 grid gap-3 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:justify-center">
               {["077 700 9697", "034 226 1926"].map(num => (
                 <a
                   key={num}
                   href={`tel:${num.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2 bg-[#253A8F] hover:bg-[#1B2A6B] transition-colors text-white rounded-[10px] px-6 py-3"
+                  className="flex min-h-11 items-center justify-center gap-2 rounded-[8px] bg-[#253A8F] px-5 py-3 text-white transition-colors hover:bg-[#1B2A6B] sm:rounded-[10px] sm:px-6"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
                 >
                   <Phone size={18} /> {num}
@@ -229,7 +229,7 @@ export function CareersPage() {
           </div>
 
           {submitted ? (
-            <div className="bg-[#f7f7f7] rounded-[24px] p-12 text-center border border-gray-100">
+            <div className="rounded-[10px] border border-gray-100 bg-[#f7f7f7] p-6 text-center sm:rounded-[24px] sm:p-12">
               <CheckCircle size={52} className="text-[#253A8F] mx-auto mb-4" />
               <h3 className="text-[#191919] mb-2" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "24px" }}>
                 Application Sent!
@@ -239,7 +239,7 @@ export function CareersPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-[#f7f7f7] rounded-[24px] p-8 lg:p-10 border border-gray-100">
+            <form onSubmit={handleSubmit} className="rounded-[10px] border border-gray-100 bg-[#f7f7f7] p-5 sm:rounded-[24px] sm:p-8 lg:p-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                 {[
                   { id: "name",  label: "Full Name",    placeholder: "Your full name",     required: true },
@@ -288,11 +288,11 @@ export function CareersPage() {
                   style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                 />
               </div>
-              <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex flex-col items-stretch gap-4 min-[430px]:flex-row min-[430px]:items-center min-[430px]:justify-between">
                 <p className="text-gray-400" style={{ fontFamily: "Poppins, sans-serif", fontSize: "12px" }}>* Required fields</p>
                 <button
                   type="submit"
-                  className="bg-[#D9043D] hover:bg-[#b8032f] active:scale-95 transition-all text-white rounded-[10px] px-10 py-3.5 shadow-md"
+                  className="min-h-11 rounded-[8px] bg-[#D9043D] px-6 py-3.5 text-white shadow-md transition-all hover:bg-[#b8032f] active:scale-95 sm:rounded-[10px] sm:px-10"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
                 >
                   Submit Application →

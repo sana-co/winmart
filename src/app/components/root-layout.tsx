@@ -6,13 +6,13 @@ import { WinmartFooter } from "./winmart-footer";
 
 export function RootLayout() {
   return (
-    <div className="min-h-screen bg-[#f7f7f7]" style={{ fontFamily: "Poppins, sans-serif" }}>
+    <div className="min-h-screen overflow-x-hidden bg-[#f7f7f7]" style={{ fontFamily: "Poppins, sans-serif" }}>
       <ScrollToTop />
       <header className="sticky top-0 z-50 w-full">
         <AnnouncementBar />
         <WinmartNav />
       </header>
-      <main>
+      <main className="w-full min-w-0">
         <Outlet />
       </main>
       <WinmartFooter />

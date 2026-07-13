@@ -28,10 +28,10 @@ export function OurStoryPage() {
 
       {/* Hero */}
       <section
-        className="relative w-full min-h-[500px] flex items-center overflow-hidden"
+        className="relative flex min-h-[440px] w-full items-center overflow-hidden sm:min-h-[500px]"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
       >
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-20 py-24 w-full flex flex-col lg:flex-row items-center gap-12">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 px-4 py-12 text-center sm:px-6 sm:py-16 lg:flex-row lg:gap-12 lg:px-20 lg:py-24 lg:text-left">
           <div className="flex-1">
             <span
               className="text-[#F4C542] uppercase tracking-widest"
@@ -46,7 +46,7 @@ export function OurStoryPage() {
               Fashion Your Life,<br />Define Your World.
             </h1>
             <p
-              className="text-white/75 max-w-[500px]"
+              className="mx-auto max-w-[500px] text-white/75 lg:mx-0"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 400, fontSize: "clamp(15px, 1.6vw, 18px)", lineHeight: "1.7" }}
             >
               Winmart Fashion was born from a simple belief - that great style should be accessible to everyone. Since 2010, we've stayed true to our mission: clothes that make you feel confident, seen, and unstoppable.
@@ -63,7 +63,7 @@ export function OurStoryPage() {
       </section>
 
       {/* Timeline */}
-      <section className="w-full py-16 px-6 bg-white">
+      <section className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[800px] mx-auto">
           <h2
             className="text-[#191919] text-center mb-12"
@@ -73,19 +73,19 @@ export function OurStoryPage() {
           </h2>
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-[28px] lg:left-1/2 top-0 bottom-0 w-[2px] bg-[#253A8F]/15 lg:-translate-x-px" />
+            <div className="absolute bottom-0 left-[20px] top-0 w-[2px] bg-[#253A8F]/15 sm:left-[28px] lg:left-1/2 lg:-translate-x-px" />
             <div className="flex flex-col gap-10">
               {milestones.map((m, i) => (
                 <div
                   key={m.year}
-                  className={`relative flex items-start gap-6 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} flex-row`}
+                  className={`relative flex flex-row items-start gap-3 sm:gap-6 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
                 >
                   {/* Dot */}
                   <div className="absolute left-[20px] lg:left-1/2 lg:-translate-x-1/2 w-4 h-4 rounded-full bg-[#D9043D] border-2 border-white shadow-md mt-1" />
                   {/* Spacer for desktop alternating */}
                   <div className="hidden lg:block flex-1" />
                   {/* Card */}
-                  <div className="ml-14 lg:ml-0 flex-1 bg-[#f7f7f7] rounded-[16px] p-6 border border-gray-100 hover:shadow-md transition-shadow">
+                  <div className="ml-8 min-w-0 flex-1 rounded-[10px] border border-gray-100 bg-[#f7f7f7] p-4 transition-shadow hover:shadow-md sm:ml-14 sm:rounded-[16px] sm:p-6 lg:ml-0">
                     <span
                       className="text-[#D9043D] block mb-1"
                       style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "22px" }}
@@ -113,7 +113,7 @@ export function OurStoryPage() {
       </section>
 
       {/* Values */}
-      <section className="w-full py-16 px-6 bg-[#f7f7f7]">
+      <section className="w-full bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1100px] mx-auto">
           <h2
             className="text-[#191919] text-center mb-10"
@@ -125,7 +125,7 @@ export function OurStoryPage() {
             {values.map(v => (
               <div
                 key={v.title}
-                className="bg-white rounded-[20px] p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow group text-center"
+                className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md sm:max-w-none sm:rounded-[20px] sm:p-7"
               >
                 <div
                   className="w-14 h-14 rounded-full bg-[#253A8F]/10 group-hover:bg-[#253A8F] flex items-center justify-center mx-auto mb-4 transition-colors"
@@ -152,7 +152,7 @@ export function OurStoryPage() {
       </section>
 
       {/* Award recognition */}
-      <section className="w-full py-16 px-6 bg-white">
+      <section className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1100px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-center">
             <div>
@@ -234,7 +234,7 @@ export function OurStoryPage() {
       </section>
 
       {/* Children's art competition */}
-      <section className="w-full py-16 px-6 bg-[#f7f7f7]">
+      <section className="w-full bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-10">
             <span
@@ -262,7 +262,7 @@ export function OurStoryPage() {
               <img
                 src={artCompetitionOne}
                 alt="Children gathered at Winmart Fashion for the in-store art competition"
-                className="w-full h-[320px] sm:h-[430px] lg:h-full object-cover object-center"
+                className="h-[240px] w-full object-cover object-center sm:h-[430px] lg:h-full"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
@@ -270,14 +270,14 @@ export function OurStoryPage() {
                 <img
                   src={artCompetitionTwo}
                   alt="Families and children participating in the art competition event"
-                  className="w-full h-[260px] object-cover object-center"
+                  className="h-[220px] w-full object-cover object-center sm:h-[260px]"
                 />
               </div>
               <div className="relative overflow-hidden rounded-[18px] shadow-xl bg-white">
                 <img
                   src={artCompetitionThree}
                   alt="Award presentation during the children's art competition"
-                  className="w-full h-[260px] object-cover object-center"
+                  className="h-[220px] w-full object-cover object-center sm:h-[260px]"
                 />
               </div>
             </div>
@@ -286,7 +286,7 @@ export function OurStoryPage() {
       </section>
 
       {/* Dansal giving */}
-      <section className="w-full py-16 px-6 bg-white">
+      <section className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1100px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-10 items-center">
             <div>
@@ -345,21 +345,21 @@ export function OurStoryPage() {
                 <img
                   src={noodlesDansalOne}
                   alt="Winmart Fashion team serving noodles dansal outside the store"
-                  className="w-full h-[420px] sm:h-full object-cover object-center"
+                  className="h-[300px] w-full object-cover object-center sm:h-full"
                 />
               </div>
               <div className="relative overflow-hidden rounded-[18px] shadow-xl bg-[#f7f7f7]">
                 <img
                   src={noodlesDansalTwo}
                   alt="Noodles dansal cups prepared for free giving"
-                  className="w-full h-[250px] object-cover object-center"
+                  className="h-[220px] w-full object-cover object-center sm:h-[250px]"
                 />
               </div>
               <div className="relative overflow-hidden rounded-[18px] shadow-xl bg-[#f7f7f7]">
                 <img
                   src={noodlesDansalThree}
                   alt="Child receiving noodles dansal at Winmart Fashion"
-                  className="w-full h-[250px] object-cover object-center"
+                  className="h-[220px] w-full object-cover object-center sm:h-[250px]"
                 />
               </div>
             </div>
@@ -369,7 +369,7 @@ export function OurStoryPage() {
 
       {/* CTA */}
       <section
-        className="w-full py-20 px-6 text-center"
+        className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #1B2A6B 100%)" }}
       >
         <h2
@@ -387,14 +387,14 @@ export function OurStoryPage() {
         <div className="flex flex-wrap gap-4 justify-center">
           <a
             href="/new-arrivals"
-            className="inline-flex h-[58px] w-full max-w-[220px] sm:w-[190px] items-center justify-center bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[10px] px-8"
+            className="inline-flex h-12 w-full max-w-[220px] items-center justify-center rounded-[8px] bg-[#D9043D] px-6 text-white transition-colors hover:bg-[#b8032f] sm:h-[58px] sm:w-[190px] sm:rounded-[10px] sm:px-8"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             New Arrivals
           </a>
           <a
             href="/become-a-supplier"
-            className="inline-flex h-[58px] w-full max-w-[220px] sm:w-[190px] items-center justify-center bg-white/10 hover:bg-white/20 border border-white/30 transition-colors text-white rounded-[10px] px-8"
+            className="inline-flex h-12 w-full max-w-[220px] items-center justify-center rounded-[8px] border border-white/30 bg-white/10 px-6 text-white transition-colors hover:bg-white/20 sm:h-[58px] sm:w-[190px] sm:rounded-[10px] sm:px-8"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             Supplier

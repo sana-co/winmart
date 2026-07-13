@@ -72,9 +72,9 @@ function TikTokIcon() {
 export function WinmartFooter() {
   return (
     <footer className="w-full bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-14">
-        <div className="flex flex-col lg:flex-row gap-12 justify-between">
-          <div className="flex flex-col gap-6 max-w-[320px]">
+      <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-6 sm:py-14 lg:px-12">
+        <div className="flex flex-col justify-between gap-10 lg:flex-row lg:gap-12">
+          <div className="mx-auto flex max-w-[320px] flex-col items-center gap-6 text-center sm:mx-0 sm:items-start sm:text-left">
             <img
               src={imgLogo}
               alt="Winmart Fashion"
@@ -91,7 +91,7 @@ export function WinmartFooter() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10 lg:gap-16 flex-1">
+          <div className="grid flex-1 grid-cols-1 gap-x-6 gap-y-8 text-center min-[430px]:grid-cols-2 min-[430px]:text-left lg:gap-10 xl:grid-cols-4 xl:gap-16">
             <div className="flex flex-col gap-3">
               <p className="text-[#1B2A6B]" style={{ fontFamily: "Roboto, sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "0.3px" }}>
                 Company
@@ -159,7 +159,7 @@ export function WinmartFooter() {
           </div>
         </div>
 
-        <div className="border-t border-[#1B2A6B]/15 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-[#1B2A6B]/15 pt-6 sm:flex-row sm:items-center">
           <p className="text-[#4f5874]" style={{ fontFamily: "Roboto, sans-serif", fontSize: "14px" }}>
             &copy; 2026 Winmart Fashion. All rights reserved.
           </p>

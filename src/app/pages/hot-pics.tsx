@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SlidersHorizontal } from "lucide-react";
+import { useSearchParams } from "react-router";
 import { ProductCard, ProductGridSkeleton } from "../components/product-card";
 import { ProductQuickView } from "../components/product-quick-view";
 import { productFilters } from "../lib/product-categories";
@@ -7,11 +7,13 @@ import { getProductsBySection } from "../lib/products";
 import type { Product } from "../lib/supabase";
 
 export function HotPicsPage() {
-  const [active, setActive] = useState("All");
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedCategory = searchParams.get("category") || "All";
+  const active = productFilters.includes(requestedCategory as (typeof productFilters)[number]) ? requestedCategory : "All";
 
   const visible = active === "All" ? products : products.filter(p => p.category === active);
 
@@ -46,7 +48,7 @@ export function HotPicsPage() {
 
       {/* Hero */}
       <section
-        className="w-full py-20 px-6"
+        className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[700px] mx-auto text-center">
@@ -72,21 +74,30 @@ export function HotPicsPage() {
       </section>
 
       {/* Filter bar */}
-      <section className="w-full bg-white border-b border-gray-100 sticky top-[84px] z-40">
-        <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center gap-3 overflow-x-auto">
-          <SlidersHorizontal size={16} className="text-[#7f7f7f] shrink-0" />
+      <section className="sticky top-[88px] z-40 w-full border-b border-gray-100 bg-white sm:top-[124px]">
+        <div className="mx-auto flex max-w-[1200px] items-center justify-start gap-3 overflow-x-auto px-4 py-4 sm:justify-center sm:gap-4 sm:px-6 sm:py-5">
           {productFilters.map(f => (
             <button
               key={f}
-              onClick={() => setActive(f)}
-              className="shrink-0 rounded-full px-5 py-2 transition-all"
+              onClick={() => {
+                if (f === "All") {
+                  setSearchParams({});
+                  return;
+                }
+
+                setSearchParams({ category: f });
+              }}
+              className="min-h-12 shrink-0 rounded-[8px] px-6 py-3 text-center shadow-sm transition-all hover:-translate-y-0.5 sm:min-w-[100px] sm:px-7"
               style={{
                 fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "13px",
-                background: active === f ? "#253A8F" : "#f7f7f7",
-                color: active === f ? "white" : "#555",
-                border: active === f ? "1.5px solid #253A8F" : "1.5px solid #e5e7eb",
+                fontWeight: 700,
+                fontSize: "15px",
+                background: active === f ? "#253A8F" : "white",
+                color: active === f ? "white" : "#253A8F",
+                border: active === f ? "1px solid #253A8F" : "1px solid #eef0f5",
+                boxShadow: active === f
+                  ? "0 4px 10px rgba(37, 58, 143, 0.22)"
+                  : "0 1px 4px rgba(15, 23, 42, 0.04)",
               }}
             >
               {f}
@@ -96,9 +107,9 @@ export function HotPicsPage() {
       </section>
 
       {/* Products grid */}
-      <section className="w-full py-12 px-6">
+      <section className="w-full px-4 py-8 sm:px-6 sm:py-12">
         <div className="max-w-[1200px] mx-auto">
-          <p className="mb-8 text-[#7f7f7f]" style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}>
+          <p className="mb-5 text-center text-[#7f7f7f] sm:mb-8 sm:text-left" style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}>
             {visible.length} items
           </p>
           {loading && <ProductGridSkeleton />}

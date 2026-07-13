@@ -58,7 +58,7 @@ export function NewArrivalsPage() {
 
       {/* Hero */}
       <section
-        className="w-full py-20 px-6"
+        className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[700px] mx-auto text-center">
@@ -84,9 +84,9 @@ export function NewArrivalsPage() {
       </section>
 
       {/* Products grid */}
-      <section className="w-full py-12 px-6">
+      <section className="w-full px-4 py-8 sm:px-6 sm:py-12">
         <div className="max-w-[1200px] mx-auto">
-          <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mb-6 flex max-w-full flex-nowrap items-center gap-2 overflow-x-auto pb-2 sm:mb-8 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0">
             {productFilters.map(filter => {
               const active = selectedCategory === filter;
 
@@ -95,7 +95,7 @@ export function NewArrivalsPage() {
                   key={filter}
                   type="button"
                   onClick={() => selectCategory(filter)}
-                  className={`rounded-[8px] px-5 py-2.5 transition-all ${
+                  className={`min-h-10 shrink-0 rounded-[8px] px-4 py-2 transition-all sm:px-5 sm:py-2.5 ${
                     active
                       ? "bg-[#253A8F] text-white shadow-md"
                       : "bg-white text-[#253A8F] hover:bg-[#eef1ff] border border-gray-100"

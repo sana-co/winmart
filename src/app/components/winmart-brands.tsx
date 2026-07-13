@@ -208,13 +208,13 @@ const svgBrands = [
 export function WinmartBrands() {
   return (
     <section className="w-full bg-[#253A8F]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-7">
-        <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
+      <div className="mx-auto max-w-[1400px] px-0 py-4 sm:px-6 sm:py-7 lg:px-12">
+        <div className="flex snap-x items-center gap-8 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center sm:gap-8 sm:overflow-visible sm:px-0 lg:gap-12">
           {svgBrands.map((b) => (
             <div
               key={b.id}
-              className="h-[36px] opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
-              style={{ width: b.w }}
+              className="h-[30px] shrink-0 snap-center cursor-pointer opacity-70 transition-opacity hover:opacity-100 sm:h-[36px]"
+              style={{ width: `${b.w}px` }}
             >
               {b.el}
             </div>

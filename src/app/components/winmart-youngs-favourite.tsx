@@ -12,11 +12,11 @@ const milestones = [
 
 export function WinmartYoungsFavourite() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-10 sm:py-16">
+    <section className="w-full bg-[#f7f7f7] py-8 sm:py-16">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 
         {/* Section heading */}
-        <div className="relative mb-12 inline-block">
+        <div className="relative mb-7 inline-block sm:mb-12">
           <div
             className="absolute bottom-0 left-0 h-[10px] bg-[#D9043D] opacity-30 rounded"
             style={{ width: "70%", transform: "rotate(-1deg)" }}
@@ -36,7 +36,7 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Hero banner - image left, text right */}
-        <div className="relative rounded-[18px] overflow-hidden mb-10 min-h-[360px] flex sm:rounded-[24px] lg:min-h-[460px] lg:mb-12">
+        <div className="relative mb-8 flex min-h-[360px] overflow-hidden rounded-[12px] sm:mb-10 sm:rounded-[24px] lg:mb-12 lg:min-h-[460px]">
           <div
             className="absolute inset-0"
             style={{ background: "linear-gradient(120deg, #1B2A6B 0%, #253A8F 60%, #3a52b8 100%)" }}
@@ -51,7 +51,7 @@ export function WinmartYoungsFavourite() {
             />
           </div>
 
-          <div className="relative z-10 flex flex-col justify-center px-5 py-9 sm:px-8 lg:px-16 lg:py-12 max-w-[640px]">
+          <div className="relative z-10 flex max-w-[640px] flex-col justify-center px-5 py-8 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
             <span
               className="text-[#D9043D] uppercase tracking-widest mb-3"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "13px" }}
@@ -68,7 +68,7 @@ export function WinmartYoungsFavourite() {
                 letterSpacing: "-0.5px",
               }}
             >
-              Fashion Your Life,<br />Define Your World.
+              Fashion Your Life,<span className="block">Define Your World.</span>
             </h3>
             <p
               className="text-white/75 mb-8 leading-relaxed"
@@ -89,11 +89,11 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Milestone timeline */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 lg:mb-12">
+        <div className="mb-8 grid grid-cols-2 gap-3 sm:mb-10 sm:gap-4 lg:mb-12 lg:grid-cols-4">
           {milestones.map((m) => (
             <div
-              key={m.year}
-              className="bg-white rounded-[14px] p-4 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow sm:rounded-[16px] sm:p-6"
+              key={`${m.year}-${m.label}`}
+              className="min-w-0 rounded-[8px] border border-gray-100 bg-white p-3 text-center shadow-sm transition-shadow hover:shadow-md sm:rounded-[16px] sm:p-6"
             >
               <p
                 className="text-[#D9043D] mb-1"
@@ -102,8 +102,8 @@ export function WinmartYoungsFavourite() {
                 {m.year}
               </p>
               <p
-                className="text-[#555]"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "15px" }}
+                className="break-words text-xs text-[#555] sm:text-[15px]"
+                style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500 }}
               >
                 {m.label}
               </p>
@@ -112,12 +112,12 @@ export function WinmartYoungsFavourite() {
         </div>
 
         {/* Careers redirect banner */}
-        <div className="relative overflow-hidden rounded-[18px] bg-white shadow-sm border border-gray-100 sm:rounded-[24px]">
+        <div className="relative overflow-hidden rounded-[12px] border border-gray-100 bg-white shadow-sm sm:rounded-[24px]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(120deg, #253A8F 0%, #3049ad 54%, #f5f7ff 100%)" }}
+            style={{ background: "linear-gradient(135deg, #253A8F 0%, #3049ad 100%)" }}
           />
-          <div className="relative grid grid-cols-1 items-center gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_320px] lg:px-12 lg:py-10">
+          <div className="relative grid grid-cols-1 items-center gap-7 px-5 py-7 sm:px-8 sm:py-8 lg:grid-cols-[1fr_320px] lg:px-12 lg:py-10">
             <div className="max-w-[720px]">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white">
                 <Briefcase size={24} />
@@ -145,17 +145,17 @@ export function WinmartYoungsFavourite() {
               >
                 We are hiring energetic team members for in-store roles. Explore open positions, benefits, and application details on our careers page.
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="mt-7 grid gap-3 min-[390px]:flex min-[390px]:flex-wrap">
                 <Link
                   to="/careers"
-                  className="inline-flex items-center gap-2 rounded-[10px] bg-[#D9043D] px-7 py-3 text-white transition-all duration-200 hover:bg-[#b8032f] hover:scale-105 active:scale-95"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[8px] bg-[#D9043D] px-5 py-3 text-white transition-all duration-200 hover:bg-[#b8032f] active:scale-95 sm:px-7"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "15px" }}
                 >
                   View Careers <ArrowRight size={18} />
                 </Link>
                 <a
                   href="tel:0777009697"
-                  className="inline-flex items-center gap-2 rounded-[10px] border border-white/30 bg-white/10 px-7 py-3 text-white transition-colors hover:bg-white/20"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[8px] border border-white/30 bg-white/10 px-5 py-3 text-white transition-colors hover:bg-white/20 sm:px-7"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "15px" }}
                 >
                   <Phone size={18} /> Call HR

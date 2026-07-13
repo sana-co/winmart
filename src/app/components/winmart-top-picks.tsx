@@ -1,24 +1,23 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import imgLadies from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429d39cb60775.png";
+import imgLadies from "../../imports/ShoppingApp/10bf3bec2c4f58be63e329813d793a3b46aed29a.png";
 import imgGents from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgAccessories from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
 
 const categoryCards = [
-  { category: "Ladies", image: imgLadies, alt: "Ladies fashion" },
-  { category: "Gents", image: imgGents, alt: "Gents fashion" },
-  { category: "Accessories", image: imgAccessories, alt: "Fashion accessories" },
+  { category: "Ladies", image: imgLadies, alt: "Ladies top picks" },
+  { category: "Gents", image: imgGents, alt: "Gents top picks" },
+  { category: "Accessories", image: imgAccessories, alt: "Fashion accessories top picks" },
 ];
 
-export function WinmartNewArrivals() {
+export function WinmartTopPicks() {
   return (
     <section className="w-full bg-[#f7f7f7] py-8 sm:py-16">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Section heading */}
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-12">
         <div className="relative mb-7 inline-block sm:mb-10">
           <div
-            className="absolute bottom-0 left-0 h-[10px] bg-[#253A8F] opacity-30 rounded"
-            style={{ width: "85%", transform: "rotate(-1deg)" }}
+            className="absolute bottom-0 left-0 h-[10px] rounded bg-[#D9043D] opacity-30"
+            style={{ width: "75%", transform: "rotate(-1deg)" }}
           />
           <h2
             className="relative leading-tight"
@@ -30,7 +29,7 @@ export function WinmartNewArrivals() {
               letterSpacing: "2px",
             }}
           >
-            NEW ARRIVALS
+            TOP PICKS
           </h2>
         </div>
 
@@ -38,7 +37,7 @@ export function WinmartNewArrivals() {
           {categoryCards.map(({ category, image, alt }) => (
             <Link
               key={category}
-              to={`/new-arrivals?category=${encodeURIComponent(category)}`}
+              to={`/hot-pics?category=${encodeURIComponent(category)}`}
               className="group flex flex-col gap-5"
             >
               <div className="relative h-[320px] overflow-hidden rounded-[8px] bg-gray-100 sm:h-[420px] lg:h-[520px]">
@@ -52,7 +51,7 @@ export function WinmartNewArrivals() {
                   className="absolute right-4 top-4 rounded-full bg-[#D9043D] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                  NEW
+                  TOP
                 </span>
               </div>
               <div className="flex items-center justify-between">

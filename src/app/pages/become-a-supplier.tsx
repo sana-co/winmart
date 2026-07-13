@@ -59,7 +59,7 @@ export function BecomeASupplierPage() {
 
       {/* Hero */}
       <section
-        className="w-full py-24 px-6"
+        className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:py-24"
         style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[860px] mx-auto text-center">
@@ -73,7 +73,7 @@ export function BecomeASupplierPage() {
             className="text-white mt-3 mb-5"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(32px, 5vw, 60px)", lineHeight: "1.1", letterSpacing: "-0.5px" }}
           >
-            Become a Winmart<br />Fashion Supplier
+            Become a Winmart<span className="block">Fashion Supplier</span>
           </h1>
           <p
             className="text-white/75 max-w-[580px] mx-auto"
@@ -85,17 +85,17 @@ export function BecomeASupplierPage() {
       </section>
 
       {/* Benefits */}
-      <section className="w-full py-16 px-6">
+      <section className="w-full px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1200px] mx-auto">
           <h2
-            className="text-[#191919] text-center mb-10"
+            className="mb-7 text-center text-[#191919] sm:mb-10"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 38px)", letterSpacing: "1px" }}
           >
             Why Sell on Winmart Fashion?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map(b => (
-              <div key={b.title} className="bg-white rounded-[20px] p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+              <div key={b.title} className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:max-w-none sm:rounded-[20px] sm:p-7">
                 <div className="w-12 h-12 rounded-full bg-[#253A8F]/10 group-hover:bg-[#253A8F] flex items-center justify-center mb-5 transition-colors text-[#253A8F] group-hover:text-white">
                   {b.icon}
                 </div>
@@ -108,15 +108,15 @@ export function BecomeASupplierPage() {
       </section>
 
       {/* How it works */}
-      <section className="w-full py-16 px-6 bg-white">
+      <section className="w-full bg-white px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[1000px] mx-auto">
           <h2
-            className="text-[#191919] text-center mb-12"
+            className="mb-8 text-center text-[#191919] sm:mb-12"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 38px)", letterSpacing: "1px" }}
           >
             How It Works
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
             {steps.map((s, i) => (
               <div key={s.num} className="flex flex-col items-center text-center relative">
                 {i < steps.length - 1 && (
@@ -137,9 +137,9 @@ export function BecomeASupplierPage() {
       </section>
 
       {/* Application form */}
-      <section className="w-full py-16 px-6 bg-[#f7f7f7]">
+      <section className="w-full bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
         <div className="max-w-[780px] mx-auto">
-          <div className="text-center mb-10">
+          <div className="mb-7 text-center sm:mb-10">
             <h2
               className="text-[#191919]"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(24px, 3vw, 36px)" }}
@@ -152,7 +152,7 @@ export function BecomeASupplierPage() {
           </div>
 
           {submitted ? (
-            <div className="bg-white rounded-[24px] p-12 text-center shadow-md border border-gray-100">
+            <div className="rounded-[10px] border border-gray-100 bg-white p-6 text-center shadow-md sm:rounded-[24px] sm:p-12">
               <CheckCircle size={56} className="text-[#253A8F] mx-auto mb-5" />
               <h3 className="text-[#191919] mb-3" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "26px" }}>
                 Application Received!
@@ -162,7 +162,7 @@ export function BecomeASupplierPage() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-white rounded-[24px] p-8 lg:p-10 shadow-md border border-gray-100">
+            <form onSubmit={handleSubmit} className="rounded-[10px] border border-gray-100 bg-white p-5 shadow-md sm:rounded-[24px] sm:p-8 lg:p-10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                 {[
                   { id: "business", label: "Business Name", placeholder: "Your brand or company name", required: true },
@@ -220,12 +220,12 @@ export function BecomeASupplierPage() {
                   {submitError}
                 </p>
               )}
-              <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex flex-col items-stretch gap-4 min-[430px]:flex-row min-[430px]:items-center min-[430px]:justify-between">
                 <p className="text-gray-400" style={{ fontFamily: "Poppins, sans-serif", fontSize: "12px" }}>* Required fields</p>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#253A8F] hover:bg-[#1B2A6B] active:scale-95 transition-all text-white rounded-[10px] px-10 py-3.5 shadow-md"
+                  className="min-h-11 rounded-[8px] bg-[#253A8F] px-6 py-3.5 text-white shadow-md transition-all hover:bg-[#1B2A6B] active:scale-95 sm:rounded-[10px] sm:px-10"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
                 >
                   Submit Application →
