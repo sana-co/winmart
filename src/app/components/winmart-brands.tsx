@@ -1,10 +1,3 @@
-import imgBrand1 from "../../imports/ShoppingApp/6727a8858d00a02b0b4bec9702fa68ec3b56d7b7.png";
-import imgBrand2 from "../../imports/ShoppingApp/e60611b9ac42f4afaa9949d0868567342538febe.png";
-import imgBrand3 from "../../imports/ShoppingApp/7719abf7afb7449512b1ea7f0bd90831a9212f2d.png";
-import imgBrand4 from "../../imports/ShoppingApp/4c0ee1df851e97e4b211f11887041fc17feb317e.png";
-import imgBrand5 from "../../imports/ShoppingApp/b86b86f1690142716d2184aa647b069962af25a4.png";
-import imgBrand6 from "../../imports/ShoppingApp/7fc5fb3a0f757f418de48ab8c3a5e1583f56a769.png";
-
 /* SVG wordmark logos for well-known brands */
 function AmazonLogo() {
   return (
@@ -205,15 +198,41 @@ const svgBrands = [
   { id: "versace", el: <VersaceLogo />, w: 120 },
 ];
 
+function BrandTrack({ hidden = false }: { hidden?: boolean }) {
+  return (
+    <div
+      className="flex shrink-0 items-center gap-10 pr-10"
+      aria-hidden={hidden ? "true" : undefined}
+    >
+      {svgBrands.map((b) => (
+        <div
+          key={b.id}
+          className="h-[30px] shrink-0 opacity-75"
+          style={{ width: `${b.w}px` }}
+        >
+          {b.el}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function WinmartBrands() {
   return (
     <section className="w-full bg-[#253A8F]">
-      <div className="mx-auto max-w-[1400px] px-0 py-4 sm:px-6 sm:py-7 lg:px-12">
-        <div className="flex snap-x items-center gap-8 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center sm:gap-8 sm:overflow-visible sm:px-0 lg:gap-12">
+      <div className="mx-auto max-w-[1400px] py-4 sm:px-6 sm:py-7 lg:px-12">
+        <div className="overflow-hidden sm:hidden">
+          <div className="flex w-max animate-winmart-marquee items-center">
+            <BrandTrack />
+            <BrandTrack hidden />
+          </div>
+        </div>
+
+        <div className="hidden items-center gap-8 sm:flex sm:flex-wrap sm:justify-center lg:gap-12">
           {svgBrands.map((b) => (
             <div
               key={b.id}
-              className="h-[30px] shrink-0 snap-center cursor-pointer opacity-70 transition-opacity hover:opacity-100 sm:h-[36px]"
+              className="h-[36px] shrink-0 cursor-pointer opacity-70 transition-opacity hover:opacity-100"
               style={{ width: `${b.w}px` }}
             >
               {b.el}
