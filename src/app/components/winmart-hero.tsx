@@ -8,15 +8,15 @@ import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe065
 
 const slides = [
   {
-    bg: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)",
+    bg: "radial-gradient(circle at 72% 38%, rgba(255,255,255,0.12) 0 18%, transparent 19%), linear-gradient(112deg, #201d78 0%, #352078 34%, #7b2b83 63%, #e01865 100%)",
     tag: "New Season",
-    headline: ["FASHION", "THAT", "DEFINES", "YOU."],
-    sub: "Live for Influential and Innovative fashion!",
+    headline: ["STYLE THAT", "SPEAKS", "CONFIDENCE."],
+    sub: "Timeless looks. Modern vibes. Built to inspire, made for you.",
     cta: { label: "EXPLORE", to: "/hot-pics" },
     img: imgHero,
   },
   {
-    bg: "linear-gradient(135deg, #1B2A6B 0%, #253A8F 40%, #4a6ac8 100%)",
+    bg: "linear-gradient(112deg, #1e1b72 0%, #3f247f 42%, #d80f58 100%)",
     tag: "Payday Sale",
     headline: ["UP TO", "30% OFF", "YOUR NEXT", "ORDER."],
     sub: "Spend $100 and get a voucher code for your next purchase.",
@@ -24,7 +24,7 @@ const slides = [
     img: imgModel,
   },
   {
-    bg: "linear-gradient(135deg, #0f1d4d 0%, #1B2A6B 30%, #253A8F 70%, #7a95d4 100%)",
+    bg: "linear-gradient(112deg, #191967 0%, #2d2676 44%, #cf1b64 100%)",
     tag: "Top Picks",
     headline: ["STYLE", "LOVED BY", "THOUSANDS", "OF FANS."],
     sub: "Our highest-rated pieces chosen by our community.",
@@ -45,8 +45,11 @@ export function WinmartHero() {
   useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
+    onSelect();
     emblaApi.on("select", onSelect);
-    return () => { emblaApi.off("select", onSelect); };
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   return (
@@ -56,33 +59,53 @@ export function WinmartHero() {
           {slides.map((slide, i) => (
             <div
               key={i}
-              className="relative flex min-h-[500px] w-full shrink-0 items-center overflow-hidden sm:min-h-[600px] lg:min-h-[720px]"
+              className="relative flex min-h-[560px] w-full shrink-0 items-center overflow-hidden sm:min-h-[640px] lg:min-h-[720px]"
               style={{ background: slide.bg }}
             >
-              {/* Decorative stars */}
-              <div className="absolute top-8 right-[38%] opacity-20 text-white text-4xl select-none pointer-events-none">★</div>
-              <div className="absolute bottom-16 left-[38%] opacity-15 text-white text-3xl select-none pointer-events-none">★</div>
-              <div className="absolute top-1/3 left-[28%] opacity-10 text-white text-5xl select-none pointer-events-none">★</div>
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute -bottom-16 -left-16 h-44 w-44 rounded-full border-[42px] border-white/10 sm:h-64 sm:w-64" />
+                <div
+                  className="absolute right-[7%] top-[13%] h-16 w-28 opacity-30 sm:h-20 sm:w-36"
+                  style={{
+                    backgroundImage: "radial-gradient(rgba(255,255,255,0.75) 2px, transparent 2px)",
+                    backgroundSize: "18px 18px",
+                  }}
+                />
+                <div
+                  className="absolute bottom-[16%] left-[35%] hidden h-20 w-36 opacity-25 md:block"
+                  style={{
+                    backgroundImage: "radial-gradient(rgba(255,255,255,0.7) 2px, transparent 2px)",
+                    backgroundSize: "17px 17px",
+                  }}
+                />
+                <div className="absolute left-[42%] top-[17%] hidden h-8 w-8 rounded-full border-4 border-white/25 md:block" />
+                <div className="absolute right-[6%] bottom-[28%] h-8 w-8 rounded-full border-4 border-white/25" />
+                <div className="absolute left-[50%] top-[24%] hidden text-5xl font-bold leading-none text-white/25 md:block">+</div>
+                <div className="absolute right-[10%] bottom-[12%] text-6xl font-bold leading-none text-white/25">+</div>
+              </div>
 
-              {/* Text block */}
-              <div className="relative z-10 w-full max-w-[600px] px-4 py-8 sm:px-8 sm:py-14 lg:px-20">
+              <div className="relative z-10 w-full max-w-[720px] px-5 py-10 sm:px-10 sm:py-16 lg:px-20">
                 <span
-                  className="mb-3 inline-block rounded-full bg-[#D9043D] px-3 py-1 text-white sm:mb-5 sm:px-4"
-                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "12px", letterSpacing: "1.5px" }}
+                  className="mb-6 inline-flex min-h-8 items-center rounded-full bg-[#ff0052] px-5 py-2 text-white shadow-[0_10px_24px_rgba(255,0,82,0.28)] sm:mb-9 sm:px-6"
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 800,
+                    fontSize: "12px",
+                    letterSpacing: "2.6px",
+                  }}
                 >
                   {slide.tag.toUpperCase()}
                 </span>
 
                 <div className="relative mb-4">
                   <div
-                    className="absolute"
+                    className="absolute hidden sm:block"
                     style={{
-                      background: "#1B2A6B",
-                      height: "clamp(34px, 7vw, 52px)",
-                      width: "clamp(210px, 55vw, 320px)",
-                      transform: "rotate(-1.5deg)",
-                      top: "clamp(44px, 8vw, 52px)",
-                      left: "-4px",
+                      background: "rgba(20, 22, 92, 0.7)",
+                      height: "clamp(44px, 5vw, 64px)",
+                      width: "clamp(330px, 44vw, 650px)",
+                      top: "clamp(48px, 6vw, 76px)",
+                      left: "-10px",
                       borderRadius: "4px",
                     }}
                   />
@@ -91,23 +114,28 @@ export function WinmartHero() {
                     style={{
                       fontFamily: "Poppins, sans-serif",
                       fontWeight: 900,
-                      fontSize: "clamp(35px, 11.5vw, 80px)",
-                      lineHeight: "1.04",
+                      fontSize: "clamp(44px, 9.2vw, 88px)",
+                      lineHeight: "1.12",
                       color: "white",
+                      letterSpacing: "0",
+                      textShadow: "0 7px 0 rgba(13, 17, 84, 0.18)",
                     }}
                   >
                     {slide.headline.map((line, li) => (
-                      <span key={li} className={`block ${li === 1 ? "relative z-10" : ""}`}>{line}</span>
+                      <span key={li} className="block">
+                        {line}
+                      </span>
                     ))}
                   </h1>
                 </div>
 
                 <p
-                  className="mb-5 mt-4 max-w-[340px] text-white/85 sm:mb-8 sm:mt-6 sm:max-w-none"
+                  className="mb-7 mt-6 max-w-[420px] text-white/90 sm:mb-10 sm:mt-7"
                   style={{
                     fontFamily: "Poppins, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "clamp(15px, 1.5vw, 20px)",
+                    fontWeight: 500,
+                    fontSize: "clamp(16px, 1.7vw, 25px)",
+                    lineHeight: "1.35",
                   }}
                 >
                   {slide.sub}
@@ -115,19 +143,22 @@ export function WinmartHero() {
 
                 <Link
                   to={slide.cta.to}
-                  className="inline-flex min-h-11 items-center rounded-[8px] bg-[#D9043D] px-7 py-3 text-white shadow-lg transition-all duration-200 hover:bg-[#b8032f] hover:shadow-xl active:scale-95 sm:rounded-[10px] sm:px-10 sm:py-4"
-                  style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "clamp(15px, 4vw, 20px)" }}
+                  className="inline-flex min-h-14 items-center rounded-[8px] bg-[#ff0052] px-10 py-4 text-white shadow-[0_14px_30px_rgba(255,0,82,0.32)] transition-all duration-200 hover:bg-[#e10049] hover:shadow-[0_18px_34px_rgba(255,0,82,0.38)] active:scale-95 sm:min-h-[72px] sm:px-14"
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 800,
+                    fontSize: "clamp(16px, 2vw, 22px)",
+                  }}
                 >
                   {slide.cta.label}
                 </Link>
               </div>
 
-              {/* Model image */}
-              <div className="pointer-events-none absolute bottom-0 right-[-42%] h-[66%] w-full opacity-30 sm:right-[-15%] sm:h-[82%] sm:w-[70%] md:right-0 md:h-full md:w-[50%] md:opacity-100 lg:w-[55%]">
+              <div className="pointer-events-none absolute bottom-0 right-[-38%] h-[58%] w-full opacity-35 sm:right-[-26%] sm:h-[72%] sm:w-[78%] md:right-[-8%] md:h-[92%] md:w-[55%] md:opacity-100 lg:right-[2%] lg:h-[94%] lg:w-[48%]">
                 <img
                   src={slide.img}
                   alt={slide.tag}
-                  className="absolute bottom-0 right-0 h-full object-contain object-bottom"
+                  className="absolute bottom-0 right-0 h-full w-full object-contain object-bottom"
                   style={{ maxWidth: "none" }}
                 />
               </div>
@@ -136,7 +167,6 @@ export function WinmartHero() {
         </div>
       </div>
 
-      {/* Dot indicators */}
       <div className="absolute bottom-4 left-0 z-20 flex w-full justify-center py-1 sm:bottom-6">
         {slides.map((_, i) => (
           <button
@@ -150,7 +180,7 @@ export function WinmartHero() {
               className="h-2 rounded-full transition-all duration-300"
               style={{
                 width: i === selected ? "28px" : "8px",
-                background: i === selected ? "#D9043D" : "rgba(255,255,255,0.5)",
+                background: i === selected ? "#ff0052" : "rgba(255,255,255,0.5)",
               }}
             />
           </button>
