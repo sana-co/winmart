@@ -4,6 +4,13 @@ function createCardNumber(id) {
   return `WM-${id.replace(/-/g, "").slice(0, 10).toUpperCase()}`;
 }
 
+function isDuplicateContactNumberError(error) {
+  if (error?.code !== "23505") return false;
+
+  const text = `${error.message ?? ""} ${error.details ?? ""} ${error.hint ?? ""}`.toLowerCase();
+  return text.includes("contact_number") || text.includes("loyalty_card_requests");
+}
+
 export default async function handler(request, response) {
   if (!requirePost(request, response)) return;
 
@@ -30,7 +37,14 @@ export default async function handler(request, response) {
 
   if (error) {
     console.error("Failed to insert loyalty card request:", error);
-    sendJson(response, 500, { error: error.message });
+    if (isDuplicateContactNumberError(error)) {
+      sendJson(response, 409, {
+        error: "This contact number is already registered for a loyalty card. Please use another number or contact us if you need help.",
+      });
+      return;
+    }
+
+    sendJson(response, 500, { error: "Could not submit your loyalty card request. Please try again shortly." });
     return;
   }
 
