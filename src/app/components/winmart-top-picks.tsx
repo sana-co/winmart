@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import imgLadies from "../../imports/ShoppingApp/10bf3bec2c4f58be63e329813d793a3b46aed29a.png";
+import imgLadies from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429d39cb60775.png";
 import imgGents from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
 import imgAccessories from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
 
@@ -33,14 +33,14 @@ export function WinmartTopPicks() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-8">
           {categoryCards.map(({ category, image, alt }) => (
             <Link
               key={category}
               to={`/hot-pics?category=${encodeURIComponent(category)}`}
-              className="group flex flex-col gap-5"
+              className="group flex w-[44vw] min-w-[150px] max-w-[190px] shrink-0 snap-start flex-col gap-3 sm:w-auto sm:max-w-none sm:gap-5"
             >
-              <div className="relative h-[320px] overflow-hidden rounded-[8px] bg-gray-100 sm:h-[420px] lg:h-[520px]">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[2px] bg-gray-100 sm:aspect-auto sm:h-[420px] sm:rounded-[8px] lg:h-[520px]">
                 <img
                   src={image}
                   alt={alt}
@@ -48,7 +48,7 @@ export function WinmartTopPicks() {
                 />
                 <div className="absolute inset-0 bg-[#253A8F] opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
                 <span
-                  className="absolute right-4 top-4 rounded-full bg-[#D9043D] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
+                  className="absolute right-2 top-2 rounded-full bg-[#D9043D] px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white sm:right-4 sm:top-4 sm:px-3 sm:text-[12px]"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   TOP
@@ -56,13 +56,13 @@ export function WinmartTopPicks() {
               </div>
               <div className="flex items-center justify-between">
                 <p
-                  className="break-words text-lg text-[#191919] sm:text-[22px]"
+                  className="break-words text-sm text-[#191919] sm:text-[22px]"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700 }}
                 >
                   {category}
                 </p>
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#253A8F] transition-colors group-hover:bg-[#D9043D]">
-                  <ArrowRight size={16} color="white" />
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#253A8F] transition-colors group-hover:bg-[#D9043D] sm:h-9 sm:w-9">
+                  <ArrowRight size={15} color="white" />
                 </div>
               </div>
             </Link>
