@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 
 const localApiRoutes = {
   '/api/feedback': './api/feedback.js',
+  '/api/career-applications': './api/career-applications.js',
   '/api/loyalty-card': './api/loyalty-card.js',
   '/api/products': './api/products.js',
   '/api/send-loyalty-email': './api/send-loyalty-email.js',

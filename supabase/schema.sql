@@ -40,6 +40,19 @@ create table if not exists public.supplier_applications (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.career_applications (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  phone text not null,
+  email text,
+  role text not null check (role in ('Cashier', 'Sales Representative', 'Accounting Assistant')),
+  message text,
+  cv_file_name text not null,
+  cv_path text not null,
+  status text not null default 'new',
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.admin_users (
   user_id uuid primary key references auth.users(id) on delete cascade,
   created_at timestamptz not null default now()
@@ -83,9 +96,28 @@ insert into storage.buckets (id, name, public)
 values ('product-images', 'product-images', true)
 on conflict (id) do update set public = excluded.public;
 
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'career-cvs',
+  'career-cvs',
+  false,
+  8388608,
+  array[
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ]
+)
+on conflict (id) do update
+set
+  public = excluded.public,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
+
 alter table public.feedback enable row level security;
 alter table public.loyalty_card_requests enable row level security;
 alter table public.supplier_applications enable row level security;
+alter table public.career_applications enable row level security;
 alter table public.admin_users enable row level security;
 alter table public.product_managers enable row level security;
 alter table public.products enable row level security;
@@ -104,6 +136,13 @@ with check (auth.role() = 'service_role');
 
 create policy "Only service role can manage supplier applications"
 on public.supplier_applications
+for all
+using (auth.role() = 'service_role')
+with check (auth.role() = 'service_role');
+
+drop policy if exists "Only service role can manage career applications" on public.career_applications;
+create policy "Only service role can manage career applications"
+on public.career_applications
 for all
 using (auth.role() = 'service_role')
 with check (auth.role() = 'service_role');
@@ -133,6 +172,17 @@ using (
 drop policy if exists "Admins can read supplier applications" on public.supplier_applications;
 create policy "Admins can read supplier applications"
 on public.supplier_applications
+for select
+using (
+  exists (
+    select 1 from public.admin_users
+    where admin_users.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "Admins can read career applications" on public.career_applications;
+create policy "Admins can read career applications"
+on public.career_applications
 for select
 using (
   exists (
@@ -289,6 +339,41 @@ on public.supplier_applications
 for delete
 using (
   exists (
+    select 1 from public.admin_users
+    where admin_users.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "Admins can delete career applications" on public.career_applications;
+create policy "Admins can delete career applications"
+on public.career_applications
+for delete
+using (
+  exists (
+    select 1 from public.admin_users
+    where admin_users.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "Admins can read career CVs" on storage.objects;
+create policy "Admins can read career CVs"
+on storage.objects
+for select
+using (
+  bucket_id = 'career-cvs'
+  and exists (
+    select 1 from public.admin_users
+    where admin_users.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "Admins can delete career CVs" on storage.objects;
+create policy "Admins can delete career CVs"
+on storage.objects
+for delete
+using (
+  bucket_id = 'career-cvs'
+  and exists (
     select 1 from public.admin_users
     where admin_users.user_id = auth.uid()
   )

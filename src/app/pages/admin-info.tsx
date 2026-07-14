@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router";
 import type { User } from "@supabase/supabase-js";
 import type { LucideIcon } from "lucide-react";
-import { ArrowLeft, ClipboardList, LogOut, MessageSquare, RefreshCw, ShieldCheck, Star, Trash2, Truck, Users } from "lucide-react";
+import { ArrowLeft, Briefcase, ClipboardList, ExternalLink, LogOut, MessageSquare, RefreshCw, Star, Trash2, Truck, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -16,10 +16,12 @@ import {
 } from "../components/ui/table";
 import {
   deleteFeedbackEntry,
+  deleteCareerApplication,
   deleteLoyaltyRequest,
   deleteSupplierApplication,
   formatDateTime,
   getAdminInfoData,
+  type CareerApplication,
   type FeedbackEntry,
   type LoyaltyRequest,
   type SupplierApplication,
@@ -28,9 +30,12 @@ import { getErrorMessage } from "../lib/error-message";
 import { isCurrentUserAdmin } from "../lib/products";
 import { getSupabaseClient } from "../lib/supabase";
 
+const careerRoleOptions = ["Cashier", "Sales Representative", "Accounting Assistant"];
+
 type AdminInfoState = {
   feedback: FeedbackEntry[];
   suppliers: SupplierApplication[];
+  careers: CareerApplication[];
   loyalty: LoyaltyRequest[];
   user: User | null;
 };
@@ -38,6 +43,7 @@ type AdminInfoState = {
 const emptyState: AdminInfoState = {
   feedback: [],
   suppliers: [],
+  careers: [],
   loyalty: [],
   user: null,
 };
@@ -52,6 +58,7 @@ export function AdminInfoPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [careerRoleFilter, setCareerRoleFilter] = useState("all");
 
   const loadData = async () => {
     setLoading(true);
@@ -155,7 +162,7 @@ export function AdminInfoPage() {
     setMessage("Signed out.");
   };
 
-  const handleDelete = async (kind: "feedback" | "supplier" | "loyalty", id: string) => {
+  const handleDelete = async (kind: "feedback" | "supplier" | "career" | "loyalty", id: string) => {
     setError("");
     setMessage("");
 
@@ -168,6 +175,11 @@ export function AdminInfoPage() {
       if (kind === "supplier") {
         await deleteSupplierApplication(id);
         setData((current) => ({ ...current, suppliers: current.suppliers.filter((item) => item.id !== id) }));
+      }
+
+      if (kind === "career") {
+        await deleteCareerApplication(id);
+        setData((current) => ({ ...current, careers: current.careers.filter((item) => item.id !== id) }));
       }
 
       if (kind === "loyalty") {
@@ -224,9 +236,12 @@ export function AdminInfoPage() {
   const stats = [
     { label: "Feedback", value: data.feedback.length, icon: MessageSquare },
     { label: "Suppliers", value: data.suppliers.length, icon: Truck },
+    { label: "Careers", value: data.careers.length, icon: Briefcase },
     { label: "Loyalty Requests", value: data.loyalty.length, icon: Star },
-    { label: "Admin Email", value: data.user?.email ?? "Unknown", icon: ShieldCheck },
   ];
+  const filteredCareers = careerRoleFilter === "all"
+    ? data.careers
+    : data.careers.filter((item) => item.role === careerRoleFilter);
 
   return (
     <section className="min-h-screen bg-[#f7f7f7] px-3 py-8 sm:px-6 sm:py-10 lg:px-10">
@@ -353,6 +368,70 @@ export function AdminInfoPage() {
                 </TableRow>
               ))}
               {data.suppliers.length === 0 && <EmptyRow label="No supplier applications have been submitted yet." />}
+            </TableBody>
+          </Table>
+        </InfoSection>
+
+        <InfoSection title="Career Applications" icon={Briefcase}>
+          <div className="mb-4 grid gap-2 sm:max-w-[320px]">
+            <Label htmlFor="career-role-filter">Filter by career</Label>
+            <select
+              id="career-role-filter"
+              value={careerRoleFilter}
+              onChange={(event) => setCareerRoleFilter(event.target.value)}
+              className="h-10 rounded-[8px] border border-gray-200 bg-white px-3 text-sm text-[#191919] outline-none transition-colors focus:border-[#253A8F]"
+            >
+              <option value="all">All careers</option>
+              {careerRoleOptions.map((role) => (
+                <option key={role} value={role}>
+                  {role}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Message</TableHead>
+                <TableHead>CV</TableHead>
+                <TableHead>Submitted</TableHead>
+                <TableHead className="text-right">Delete</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredCareers.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.phone}</TableCell>
+                  <TableCell>{item.email || "Not provided"}</TableCell>
+                  <TableCell>{item.role}</TableCell>
+                  <TableCell className="max-w-[360px] whitespace-normal">{item.message || "No message"}</TableCell>
+                  <TableCell>
+                    {item.cv_url ? (
+                      <Button asChild variant="outline" size="sm">
+                        <a href={item.cv_url} target="_blank" rel="noreferrer">
+                          <ExternalLink /> Open CV
+                        </a>
+                      </Button>
+                    ) : (
+                      "Unavailable"
+                    )}
+                  </TableCell>
+                  <TableCell>{formatDateTime(item.created_at)}</TableCell>
+                  <TableCell className="text-right">
+                    <Button type="button" variant="destructive" size="sm" onClick={() => handleDelete("career", item.id)}>
+                      <Trash2 /> Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {filteredCareers.length === 0 && (
+                <EmptyRow label={data.careers.length === 0 ? "No career applications have been submitted yet." : "No applications match this career filter."} />
+              )}
             </TableBody>
           </Table>
         </InfoSection>
