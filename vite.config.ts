@@ -8,6 +8,7 @@ const localApiRoutes = {
   '/api/feedback': './api/feedback.js',
   '/api/career-applications': './api/career-applications.js',
   '/api/loyalty-card': './api/loyalty-card.js',
+  '/api/admin-product-managers': './api/admin-product-managers.js',
   '/api/products': './api/products.js',
   '/api/send-loyalty-email': './api/send-loyalty-email.js',
   '/api/supplier-applications': './api/supplier-applications.js',

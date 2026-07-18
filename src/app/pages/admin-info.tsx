@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import type { LucideIcon } from "lucide-react";
-import { Briefcase, ClipboardList, ExternalLink, LogOut, MessageSquare, RefreshCw, Star, Trash2, Truck, Users } from "lucide-react";
+import { Briefcase, ClipboardList, ExternalLink, LogOut, MessageSquare, RefreshCw, ShieldCheck, Star, Trash2, Truck, UserPlus, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -28,6 +28,12 @@ import {
 import { getErrorMessage } from "../lib/error-message";
 import { isCurrentUserAdmin } from "../lib/products";
 import { getSupabaseClient } from "../lib/supabase";
+import {
+  addManagedProductManager,
+  getManagedProductManagers,
+  removeManagedProductManager,
+  type ManagedProductManager,
+} from "../lib/product-manager-admin";
 
 const careerRoleOptions = ["Cashier", "Sales Representative", "Accounting Assistant"];
 
@@ -54,7 +60,11 @@ export function AdminInfoPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [sessionUserId, setSessionUserId] = useState<string | null>(null);
   const [data, setData] = useState<AdminInfoState>(emptyState);
+  const [productManagers, setProductManagers] = useState<ManagedProductManager[]>([]);
+  const [managerEmail, setManagerEmail] = useState("");
+  const [managerPassword, setManagerPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [managerLoading, setManagerLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [careerRoleFilter, setCareerRoleFilter] = useState("all");
@@ -69,6 +79,19 @@ export function AdminInfoPage() {
       setError(getErrorMessage(err, "Could not load admin information."));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadProductManagers = async () => {
+    setManagerLoading(true);
+    setError("");
+
+    try {
+      setProductManagers(await getManagedProductManagers());
+    } catch (err) {
+      setError(getErrorMessage(err, "Could not load product managers."));
+    } finally {
+      setManagerLoading(false);
     }
   };
 
@@ -103,7 +126,7 @@ export function AdminInfoPage() {
 
         setIsAdmin(allowed);
         if (allowed) {
-          await loadData();
+          await Promise.all([loadData(), loadProductManagers()]);
         }
       } catch (err) {
         setError(getErrorMessage(err, "Could not verify admin access."));
@@ -142,7 +165,7 @@ export function AdminInfoPage() {
       setIsAdmin(allowed);
 
       if (allowed) {
-        await loadData();
+        await Promise.all([loadData(), loadProductManagers()]);
         setMessage("Signed in successfully.");
       }
     } catch (err) {
@@ -158,7 +181,41 @@ export function AdminInfoPage() {
     setSessionUserId(null);
     setIsAdmin(false);
     setData(emptyState);
+    setProductManagers([]);
     setMessage("Signed out.");
+  };
+
+  const handleAddProductManager = async (event: FormEvent) => {
+    event.preventDefault();
+    setManagerLoading(true);
+    setError("");
+    setMessage("");
+
+    try {
+      setProductManagers(await addManagedProductManager(managerEmail, managerPassword));
+      setManagerEmail("");
+      setManagerPassword("");
+      setMessage("Product manager user and access updated.");
+    } catch (err) {
+      setError(getErrorMessage(err, "Could not add product manager."));
+    } finally {
+      setManagerLoading(false);
+    }
+  };
+
+  const handleRemoveProductManager = async (userId: string) => {
+    setManagerLoading(true);
+    setError("");
+    setMessage("");
+
+    try {
+      setProductManagers(await removeManagedProductManager(userId));
+      setMessage("Product manager access removed.");
+    } catch (err) {
+      setError(getErrorMessage(err, "Could not remove product manager."));
+    } finally {
+      setManagerLoading(false);
+    }
   };
 
   const handleDelete = async (kind: "feedback" | "supplier" | "career" | "loyalty", id: string) => {
@@ -251,8 +308,8 @@ export function AdminInfoPage() {
             <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Requests & Login Stats</h1>
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <Button type="button" variant="outline" className="w-full" onClick={loadData} disabled={loading}>
-              <RefreshCw /> {loading ? "Loading..." : "Refresh"}
+            <Button type="button" variant="outline" className="w-full" onClick={() => Promise.all([loadData(), loadProductManagers()])} disabled={loading || managerLoading}>
+              <RefreshCw /> {loading || managerLoading ? "Loading..." : "Refresh"}
             </Button>
             <Button type="button" variant="outline" className="w-full" onClick={handleSignOut}>
               <LogOut /> Sign Out
@@ -289,6 +346,64 @@ export function AdminInfoPage() {
             <StatLine label="Account created" value={formatDateTime(data.user?.created_at)} />
           </div>
         </div>
+
+        <InfoSection title="Product Manager Access" icon={ShieldCheck}>
+          <form onSubmit={handleAddProductManager} className="mb-5 grid gap-3 rounded-[8px] bg-[#f7f7f7] p-3 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+            <div className="space-y-2">
+              <Label htmlFor="product-manager-email">Product manager email</Label>
+              <Input
+                id="product-manager-email"
+                type="email"
+                value={managerEmail}
+                onChange={(event) => setManagerEmail(event.target.value)}
+                placeholder="manager@example.com"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="product-manager-password">Temporary password</Label>
+              <Input
+                id="product-manager-password"
+                type="password"
+                value={managerPassword}
+                onChange={(event) => setManagerPassword(event.target.value)}
+                placeholder="Required for new users"
+                minLength={6}
+              />
+            </div>
+            <Button type="submit" className="bg-[#253A8F] hover:bg-[#1d2f75]" disabled={managerLoading}>
+              <UserPlus /> Create / Add
+            </Button>
+          </form>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Email</TableHead>
+                <TableHead>User ID</TableHead>
+                <TableHead>Last Login</TableHead>
+                <TableHead>Added</TableHead>
+                <TableHead className="text-right">Remove</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {productManagers.map((manager) => (
+                <TableRow key={manager.user_id}>
+                  <TableCell>{manager.user?.email || "Unknown email"}</TableCell>
+                  <TableCell className="max-w-[260px] truncate">{manager.user_id}</TableCell>
+                  <TableCell>{formatDateTime(manager.user?.last_sign_in_at)}</TableCell>
+                  <TableCell>{formatDateTime(manager.created_at)}</TableCell>
+                  <TableCell className="text-right">
+                    <Button type="button" variant="destructive" size="sm" onClick={() => handleRemoveProductManager(manager.user_id)} disabled={managerLoading}>
+                      <Trash2 /> Remove
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {productManagers.length === 0 && <EmptyRow label="No product managers have been added yet." />}
+            </TableBody>
+          </Table>
+        </InfoSection>
 
         <InfoSection title="Feedback Information" icon={MessageSquare}>
           <Table>
