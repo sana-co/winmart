@@ -1,4 +1,4 @@
-const announcementText = "SIGN UP AND GET 10% OFF ON YOUR FIRST ORDER";
+const announcementText = "Get Your Free Loyalty Card";
 const announcementItems = Array.from({ length: 8 }, (_, index) => index);
 
 function AnnouncementTrack({ hidden = false }: { hidden?: boolean }) {

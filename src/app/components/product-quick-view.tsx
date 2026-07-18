@@ -1,9 +1,8 @@
 import { Check, Heart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { formatPrice } from "../lib/products";
+import { isProductSaved, toggleSavedProduct } from "../lib/saved-items";
 import type { Product } from "../lib/supabase";
-
-const savedItemsKey = "winmart-saved-items";
 
 type ProductQuickViewProps = {
   product: Product | null;
@@ -22,12 +21,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
       return;
     }
 
-    try {
-      const savedProducts = JSON.parse(localStorage.getItem(savedItemsKey) || "[]") as Product[];
-      setIsSaved(savedProducts.some((item) => item.id === product.id));
-    } catch {
-      setIsSaved(false);
-    }
+    setIsSaved(isProductSaved(product.id));
   }, [product]);
 
   useEffect(() => {
@@ -45,15 +39,9 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
 
   const toggleSavedItem = () => {
     try {
-      const savedProducts = JSON.parse(localStorage.getItem(savedItemsKey) || "[]") as Product[];
-      const alreadySaved = savedProducts.some((item) => item.id === product.id);
-      const nextSavedProducts = alreadySaved
-        ? savedProducts.filter((item) => item.id !== product.id)
-        : [{ ...product }, ...savedProducts];
-
-      localStorage.setItem(savedItemsKey, JSON.stringify(nextSavedProducts));
-      setIsSaved(!alreadySaved);
-      setStatusMessage(alreadySaved ? "Removed from saved items" : "Saved to your items");
+      const nextIsSaved = toggleSavedProduct(product);
+      setIsSaved(nextIsSaved);
+      setStatusMessage(nextIsSaved ? "Saved to your items" : "Removed from saved items");
     } catch {
       setStatusMessage("Could not save this item");
     }

@@ -10,6 +10,7 @@ import { LoyaltyCardPage } from "./pages/loyalty-card";
 import { CareersPage } from "./pages/careers";
 import { AdminPage } from "./pages/admin";
 import { AdminInfoPage } from "./pages/admin-info";
+import { SavedItemsPage } from "./pages/saved-items";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "hot-pics", Component: HotPicsPage },
       { path: "our-story", Component: OurStoryPage },
       { path: "feedback", Component: FeedbackPage },
+      { path: "saved-items", Component: SavedItemsPage },
       { path: "careers", Component: CareersPage },
       { path: "product-manager", Component: AdminPage },
       { path: "admin", Component: AdminInfoPage },

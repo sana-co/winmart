@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Search, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Heart, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import imgLogo from "../../imports/image-5.png";
+import { getSavedProducts, savedItemsChangedEvent } from "../lib/saved-items";
 
 const navLinks = [
   { label: "NEW ARRIVALS", to: "/new-arrivals" },
@@ -13,7 +14,21 @@ const navLinks = [
 
 export function WinmartNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [savedCount, setSavedCount] = useState(0);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const updateSavedCount = () => setSavedCount(getSavedProducts().length);
+
+    updateSavedCount();
+    window.addEventListener(savedItemsChangedEvent, updateSavedCount);
+    window.addEventListener("storage", updateSavedCount);
+
+    return () => {
+      window.removeEventListener(savedItemsChangedEvent, updateSavedCount);
+      window.removeEventListener("storage", updateSavedCount);
+    };
+  }, []);
 
   return (
     <nav className="w-full bg-white shadow-sm border-b border-gray-100">
@@ -56,15 +71,24 @@ export function WinmartNav() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <button className="hidden md:flex items-center gap-2 text-gray-400 hover:text-[#253A8F] transition-colors">
-            <Search size={20} />
-          </button>
           <Link
             to="/feedback"
             className="hidden md:block bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[7px] px-5 py-2.5 whitespace-nowrap"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "14px" }}
           >
             FEEDBACK
+          </Link>
+          <Link
+            to="/saved-items"
+            className="relative hidden h-11 w-11 items-center justify-center rounded-[8px] border border-[#D9043D]/15 bg-[#D9043D]/5 text-[#D9043D] transition-colors hover:bg-[#D9043D] hover:text-white md:flex"
+            aria-label={`Saved items${savedCount > 0 ? `, ${savedCount} saved` : ""}`}
+          >
+            <Heart size={20} fill={savedCount > 0 ? "currentColor" : "none"} />
+            {savedCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#253A8F] px-1 text-[11px] font-bold text-white">
+                {savedCount}
+              </span>
+            )}
           </Link>
           <button
             type="button"
@@ -107,6 +131,15 @@ export function WinmartNav() {
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "15px" }}
           >
             FEEDBACK
+          </Link>
+          <Link
+            to="/saved-items"
+            onClick={() => setMobileOpen(false)}
+            className="mt-2 flex w-fit items-center gap-2 rounded-[7px] border border-[#D9043D]/15 bg-[#D9043D]/5 px-5 py-2.5 text-[#D9043D]"
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
+          >
+            <Heart size={18} fill={savedCount > 0 ? "currentColor" : "none"} />
+            SAVED ITEMS{savedCount > 0 ? ` (${savedCount})` : ""}
           </Link>
         </div>
       )}
