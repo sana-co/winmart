@@ -215,9 +215,9 @@ export async function isCurrentUserAdmin(userId: string) {
 }
 
 export function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
+  const formattedPrice = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: Number.isInteger(price) ? 0 : 2,
   }).format(price);
+
+  return `LKR ${formattedPrice}`;
 }
