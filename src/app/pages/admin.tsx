@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Link } from "react-router";
 import { LogOut, Plus, RefreshCw, Trash2, Upload } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -301,10 +300,7 @@ export function AdminPage() {
             <p className="text-sm font-semibold uppercase tracking-wide text-[#D9043D]">Shop Coordinator</p>
             <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Product Manager Portal</h1>
           </div>
-          <div className="grid grid-cols-1 gap-2 min-[430px]:grid-cols-3">
-            <Button asChild variant="outline" className="w-full">
-              <Link to="/admin">Admin Info Login</Link>
-            </Button>
+          <div className="grid grid-cols-1 gap-2 min-[430px]:grid-cols-2">
             <Button type="button" variant="outline" className="w-full" onClick={loadProducts} disabled={loadingProducts}>
               <RefreshCw /> Refresh
             </Button>

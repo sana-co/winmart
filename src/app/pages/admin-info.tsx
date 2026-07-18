@@ -1,8 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Link } from "react-router";
 import type { User } from "@supabase/supabase-js";
 import type { LucideIcon } from "lucide-react";
-import { ArrowLeft, Briefcase, ClipboardList, ExternalLink, LogOut, MessageSquare, RefreshCw, Star, Trash2, Truck, Users } from "lucide-react";
+import { Briefcase, ClipboardList, ExternalLink, LogOut, MessageSquare, RefreshCw, Star, Trash2, Truck, Users } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -248,9 +247,6 @@ export function AdminInfoPage() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 lg:flex-row lg:items-center">
           <div className="text-center sm:text-left">
-            <Button asChild variant="outline" size="sm" className="mb-4">
-              <Link to="/product-manager"><ArrowLeft /> Product Manager Login</Link>
-            </Button>
             <p className="text-sm font-semibold uppercase tracking-wide text-[#D9043D]">Admin Information</p>
             <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Requests & Login Stats</h1>
           </div>
