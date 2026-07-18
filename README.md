@@ -1,7 +1,7 @@
 
-  # Redesign Fashion Landing Page
+  # WinMart Fashion
 
-  This is a code bundle for Redesign Fashion Landing Page. The original project is available at https://www.figma.com/design/aYmPG8wkVNBI4bZysDCkRo/Redesign-Fashion-Landing-Page.
+  This is a code bundle for WinMart Fashion. The original project is available at https://www.figma.com/design/aYmPG8wkVNBI4bZysDCkRo/Redesign-Fashion-Landing-Page.
 
   ## Running the code
 
