@@ -1,6 +1,9 @@
-import { X } from "lucide-react";
+import { Check, Heart, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { formatPrice } from "../lib/products";
 import type { Product } from "../lib/supabase";
+
+const savedItemsKey = "winmart-saved-items";
 
 type ProductQuickViewProps = {
   product: Product | null;
@@ -9,11 +12,52 @@ type ProductQuickViewProps = {
 };
 
 export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProps) {
+  const [isSaved, setIsSaved] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+
+  useEffect(() => {
+    if (!product) {
+      setIsSaved(false);
+      setStatusMessage("");
+      return;
+    }
+
+    try {
+      const savedProducts = JSON.parse(localStorage.getItem(savedItemsKey) || "[]") as Product[];
+      setIsSaved(savedProducts.some((item) => item.id === product.id));
+    } catch {
+      setIsSaved(false);
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (!statusMessage) return;
+
+    const timeout = window.setTimeout(() => setStatusMessage(""), 2400);
+    return () => window.clearTimeout(timeout);
+  }, [statusMessage]);
+
   if (!product) {
     return null;
   }
 
   const categories = product.category ? [product.category] : [];
+
+  const toggleSavedItem = () => {
+    try {
+      const savedProducts = JSON.parse(localStorage.getItem(savedItemsKey) || "[]") as Product[];
+      const alreadySaved = savedProducts.some((item) => item.id === product.id);
+      const nextSavedProducts = alreadySaved
+        ? savedProducts.filter((item) => item.id !== product.id)
+        : [{ ...product }, ...savedProducts];
+
+      localStorage.setItem(savedItemsKey, JSON.stringify(nextSavedProducts));
+      setIsSaved(!alreadySaved);
+      setStatusMessage(alreadySaved ? "Removed from saved items" : "Saved to your items");
+    } catch {
+      setStatusMessage("Could not save this item");
+    }
+  };
 
   return (
     <div
@@ -100,11 +144,27 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
             <div className="mt-5 sm:mt-7">
               <button
                 type="button"
-                className="w-full rounded-[8px] border border-[#D9043D] px-5 py-3 text-[#D9043D] transition-colors hover:bg-[#D9043D] hover:text-white"
+                onClick={toggleSavedItem}
+                className={`flex w-full items-center justify-center gap-2 rounded-[8px] border px-5 py-3 transition-colors ${
+                  isSaved
+                    ? "border-[#253A8F] bg-[#253A8F] text-white hover:bg-[#1f3179]"
+                    : "border-[#D9043D] text-[#D9043D] hover:bg-[#D9043D] hover:text-white"
+                }`}
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
+                aria-pressed={isSaved}
               >
-                Save Item
+                {isSaved ? <Check size={17} /> : <Heart size={17} />}
+                {isSaved ? "Saved" : "Save Item"}
               </button>
+              {statusMessage && (
+                <p
+                  className="mt-3 text-center text-[#606779]"
+                  style={{ fontFamily: "Roboto, sans-serif", fontSize: "13px" }}
+                  role="status"
+                >
+                  {statusMessage}
+                </p>
+              )}
             </div>
           </div>
         </div>
