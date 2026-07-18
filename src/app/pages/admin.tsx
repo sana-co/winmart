@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { LogOut, Plus, RefreshCw, Trash2, Upload } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -51,6 +51,20 @@ const initialForm: FormState = {
   is_top_pick: false,
 };
 
+type ImageCrop = {
+  zoom: number;
+  x: number;
+  y: number;
+};
+
+const initialCrop: ImageCrop = {
+  zoom: 1,
+  x: 0,
+  y: 0,
+};
+
+const cropOutputSize = 1200;
+
 export function AdminPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +74,8 @@ export function AdminPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<FormState>(initialForm);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [imageCrop, setImageCrop] = useState<ImageCrop>(initialCrop);
   const [priceDrafts, setPriceDrafts] = useState<Record<string, string>>({});
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -136,6 +152,18 @@ export function AdminPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreviewUrl("");
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(imageFile);
+    setImagePreviewUrl(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [imageFile]);
+
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     setAuthLoading(true);
@@ -164,6 +192,11 @@ export function AdminPage() {
     setMessage("Signed out.");
   };
 
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setImageFile(event.target.files?.[0] ?? null);
+    setImageCrop(initialCrop);
+  };
+
   const handleAddProduct = async (event: FormEvent) => {
     event.preventDefault();
     setSaving(true);
@@ -180,7 +213,8 @@ export function AdminPage() {
         throw new Error("Enter a valid product price.");
       }
 
-      const imageUrl = await uploadProductImage(imageFile);
+      const croppedImageFile = await createCroppedImageFile(imageFile, imageCrop);
+      const imageUrl = await uploadProductImage(croppedImageFile);
       const product = await addProduct({
         name: form.name.trim(),
         description: form.description.trim(),
@@ -195,6 +229,7 @@ export function AdminPage() {
       setPriceDrafts((current) => ({ ...current, [product.id]: String(product.price) }));
       setForm(initialForm);
       setImageFile(null);
+      setImageCrop(initialCrop);
       setMessage("Product added successfully.");
     } catch (err) {
       setError(getErrorMessage(err, "Could not add product."));
@@ -368,7 +403,66 @@ export function AdminPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="product-image">Image upload</Label>
-                <Input id="product-image" type="file" accept="image/*" onChange={(event) => setImageFile(event.target.files?.[0] ?? null)} required />
+                <Input id="product-image" type="file" accept="image/*" onChange={handleImageChange} required />
+                {imagePreviewUrl && (
+                  <div className="space-y-3 rounded-[8px] border border-gray-100 bg-[#f7f7f7] p-3">
+                    <div
+                      className="relative aspect-square w-full overflow-hidden rounded-[8px] border border-white bg-white shadow-inner"
+                      aria-label="Product image crop preview"
+                      role="img"
+                      style={{
+                        backgroundImage: `url(${imagePreviewUrl})`,
+                        backgroundPosition: `${50 + imageCrop.x}% ${50 + imageCrop.y}%`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: `${imageCrop.zoom * 100}%`,
+                      }}
+                    >
+                      <span className="absolute inset-0 border-2 border-white/80" />
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between gap-3">
+                        <Label htmlFor="image-zoom">Zoom</Label>
+                        <span className="text-xs text-[#606779]">{imageCrop.zoom.toFixed(1)}x</span>
+                      </div>
+                      <Input
+                        id="image-zoom"
+                        type="range"
+                        min="1"
+                        max="3"
+                        step="0.05"
+                        value={imageCrop.zoom}
+                        onChange={(event) => setImageCrop({ ...imageCrop, zoom: Number(event.target.value) })}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="image-x">Move left / right</Label>
+                      <Input
+                        id="image-x"
+                        type="range"
+                        min="-50"
+                        max="50"
+                        step="1"
+                        value={imageCrop.x}
+                        onChange={(event) => setImageCrop({ ...imageCrop, x: Number(event.target.value) })}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="image-y">Move up / down</Label>
+                      <Input
+                        id="image-y"
+                        type="range"
+                        min="-50"
+                        max="50"
+                        step="1"
+                        value={imageCrop.y}
+                        onChange={(event) => setImageCrop({ ...imageCrop, y: Number(event.target.value) })}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="grid grid-cols-1 gap-3 rounded-[8px] bg-[#f7f7f7] p-3 min-[430px]:grid-cols-2">
                 <Label className="justify-between">
@@ -486,4 +580,55 @@ export function AdminPage() {
       </div>
     </section>
   );
+}
+
+async function createCroppedImageFile(file: File, crop: ImageCrop) {
+  const image = await loadImage(file);
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("Could not prepare image crop.");
+  }
+
+  const cropSide = Math.min(image.naturalWidth, image.naturalHeight) / crop.zoom;
+  const maxOffsetX = Math.max(0, (image.naturalWidth - cropSide) / 2);
+  const maxOffsetY = Math.max(0, (image.naturalHeight - cropSide) / 2);
+  const sourceX = clamp((image.naturalWidth - cropSide) / 2 + (crop.x / 50) * maxOffsetX, 0, image.naturalWidth - cropSide);
+  const sourceY = clamp((image.naturalHeight - cropSide) / 2 + (crop.y / 50) * maxOffsetY, 0, image.naturalHeight - cropSide);
+
+  canvas.width = cropOutputSize;
+  canvas.height = cropOutputSize;
+  context.imageSmoothingQuality = "high";
+  context.drawImage(image, sourceX, sourceY, cropSide, cropSide, 0, 0, cropOutputSize, cropOutputSize);
+
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.92));
+
+  if (!blob) {
+    throw new Error("Could not crop image.");
+  }
+
+  const fileName = file.name.replace(/\.[^.]+$/, "") || "product-image";
+  return new File([blob], `${fileName}-cropped.jpg`, { type: "image/jpeg" });
+}
+
+function loadImage(file: File) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image();
+    const imageUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(imageUrl);
+      resolve(image);
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(imageUrl);
+      reject(new Error("Could not load product image."));
+    };
+    image.src = imageUrl;
+  });
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
 }
