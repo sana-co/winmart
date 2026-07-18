@@ -168,7 +168,7 @@ export function BecomeASupplierPage() {
                   { id: "business", label: "Business Name", placeholder: "Your brand or company name", required: true },
                   { id: "contact",  label: "Contact Person",  placeholder: "Your full name", required: true },
                   { id: "email",    label: "Email Address",   placeholder: "business@example.com", required: true },
-                  { id: "phone",    label: "Phone Number",    placeholder: "+234 800 000 0000", required: false },
+                  { id: "phone",    label: "Phone Number",    placeholder: "071 959 8255", required: false },
                   { id: "website",  label: "Website / Social", placeholder: "instagram.com/yourbrand", required: false },
                 ].map(f => (
                   <div key={f.id} className="flex flex-col gap-1.5">
