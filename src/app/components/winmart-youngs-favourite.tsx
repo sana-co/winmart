@@ -18,7 +18,7 @@ export function WinmartYoungsFavourite() {
         {/* Section heading */}
         <div className="relative mb-7 inline-block sm:mb-12">
           <div
-            className="absolute bottom-0 left-0 h-[10px] bg-[#D9043D] opacity-30 rounded"
+            className="absolute bottom-0 left-0 h-[10px] bg-[#e30b43] opacity-30 rounded"
             style={{ width: "70%", transform: "rotate(-1deg)" }}
           />
           <h2
@@ -39,7 +39,7 @@ export function WinmartYoungsFavourite() {
         <div className="relative mb-8 flex min-h-[360px] overflow-hidden rounded-[12px] sm:mb-10 sm:rounded-[24px] lg:mb-12 lg:min-h-[460px]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(120deg, #1B2A6B 0%, #253A8F 60%, #3a52b8 100%)" }}
+            style={{ background: "linear-gradient(120deg, #1d285f 0%, #273777 60%, #405397 100%)" }}
           />
 
           <div className="absolute right-0 bottom-0 h-full w-[45%] pointer-events-none hidden md:block">
@@ -53,7 +53,7 @@ export function WinmartYoungsFavourite() {
 
           <div className="relative z-10 flex max-w-[640px] flex-col justify-center px-5 py-8 sm:px-8 sm:py-9 lg:px-16 lg:py-12">
             <span
-              className="text-[#D9043D] uppercase tracking-widest mb-3"
+              className="text-[#e30b43] uppercase tracking-widest mb-3"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "13px" }}
             >
               Who We Are
@@ -80,7 +80,7 @@ export function WinmartYoungsFavourite() {
             </p>
             <Link
               to="/our-story"
-              className="w-fit inline-block bg-[#D9043D] hover:bg-[#b8032f] transition-all duration-200 text-white rounded-[10px] px-8 py-3 hover:scale-105 active:scale-95"
+              className="w-fit inline-block bg-[#e30b43] hover:bg-[#c90839] transition-all duration-200 text-white rounded-[10px] px-8 py-3 hover:scale-105 active:scale-95"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px" }}
             >
               Learn More
@@ -96,7 +96,7 @@ export function WinmartYoungsFavourite() {
               className="min-w-0 rounded-[8px] border border-gray-100 bg-white p-3 text-center shadow-sm transition-shadow hover:shadow-md sm:rounded-[16px] sm:p-6"
             >
               <p
-                className="text-[#D9043D] mb-1"
+                className="text-[#e30b43] mb-1"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "clamp(28px, 3vw, 38px)" }}
               >
                 {m.year}
@@ -115,7 +115,7 @@ export function WinmartYoungsFavourite() {
         <div className="relative overflow-hidden rounded-[12px] border border-gray-100 bg-white shadow-sm sm:rounded-[24px]">
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #253A8F 0%, #3049ad 100%)" }}
+            style={{ background: "linear-gradient(135deg, #273777 0%, #3049ad 100%)" }}
           />
           <div className="relative grid grid-cols-1 items-center gap-7 px-5 py-7 sm:px-8 sm:py-8 lg:grid-cols-[1fr_320px] lg:px-12 lg:py-10">
             <div className="max-w-[720px]">
@@ -148,7 +148,7 @@ export function WinmartYoungsFavourite() {
               <div className="mt-7 grid gap-3 min-[390px]:flex min-[390px]:flex-wrap">
                 <Link
                   to="/careers"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[8px] bg-[#D9043D] px-5 py-3 text-white transition-all duration-200 hover:bg-[#b8032f] active:scale-95 sm:px-7"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[8px] bg-[#e30b43] px-5 py-3 text-white transition-all duration-200 hover:bg-[#c90839] active:scale-95 sm:px-7"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "15px" }}
                 >
                   View Careers <ArrowRight size={18} />

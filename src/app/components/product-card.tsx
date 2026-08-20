@@ -24,7 +24,7 @@ export function ProductCard({ product, badge, onView }: ProductCardProps) {
         />
         {badge && (
           <span
-            className="absolute left-3 top-3 rounded-full bg-[#253A8F] px-3 py-1 text-white"
+            className="absolute left-3 top-3 rounded-full bg-[#273777] px-3 py-1 text-white"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "11px", letterSpacing: "1px" }}
           >
             {badge}
@@ -36,14 +36,14 @@ export function ProductCard({ product, badge, onView }: ProductCardProps) {
           {product.name}
         </p>
         <div className="mb-3 flex items-center gap-2">
-          <span className="text-[#253A8F]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "16px" }}>
+          <span className="text-[#273777]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "16px" }}>
             {formatPrice(product.price)}
           </span>
         </div>
         <button
           type="button"
           onClick={() => onView(product)}
-          className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#f7f7f7] py-2.5 text-[#253A8F] transition-all group-hover:bg-[#253A8F] group-hover:text-white"
+          className="flex w-full items-center justify-center gap-2 rounded-[8px] bg-[#f7f7f7] py-2.5 text-[#273777] transition-all group-hover:bg-[#273777] group-hover:text-white"
           style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
         >
           View Item <ArrowRight size={14} />

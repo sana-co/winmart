@@ -29,7 +29,7 @@ export function OurStoryPage() {
       {/* Hero */}
       <section
         className="relative flex min-h-[440px] w-full items-center overflow-hidden sm:min-h-[500px]"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)" }}
       >
         <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 px-4 py-12 text-center sm:px-6 sm:py-16 lg:flex-row lg:gap-12 lg:px-20 lg:py-24 lg:text-left">
           <div className="flex-1">
@@ -73,7 +73,7 @@ export function OurStoryPage() {
           </h2>
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute bottom-0 left-[20px] top-0 w-[2px] bg-[#253A8F]/15 sm:left-[28px] lg:left-1/2 lg:-translate-x-px" />
+            <div className="absolute bottom-0 left-[20px] top-0 w-[2px] bg-[#273777]/15 sm:left-[28px] lg:left-1/2 lg:-translate-x-px" />
             <div className="flex flex-col gap-10">
               {milestones.map((m, i) => (
                 <div
@@ -81,13 +81,13 @@ export function OurStoryPage() {
                   className={`relative flex flex-row items-start gap-3 sm:gap-6 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
                 >
                   {/* Dot */}
-                  <div className="absolute left-[20px] lg:left-1/2 lg:-translate-x-1/2 w-4 h-4 rounded-full bg-[#D9043D] border-2 border-white shadow-md mt-1" />
+                  <div className="absolute left-[20px] lg:left-1/2 lg:-translate-x-1/2 w-4 h-4 rounded-full bg-[#e30b43] border-2 border-white shadow-md mt-1" />
                   {/* Spacer for desktop alternating */}
                   <div className="hidden lg:block flex-1" />
                   {/* Card */}
                   <div className="ml-8 min-w-0 flex-1 rounded-[10px] border border-gray-100 bg-[#f7f7f7] p-4 transition-shadow hover:shadow-md sm:ml-14 sm:rounded-[16px] sm:p-6 lg:ml-0">
                     <span
-                      className="text-[#D9043D] block mb-1"
+                      className="text-[#e30b43] block mb-1"
                       style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "22px" }}
                     >
                       {m.year}
@@ -128,7 +128,7 @@ export function OurStoryPage() {
                 className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md sm:max-w-none sm:rounded-[20px] sm:p-7"
               >
                 <div
-                  className="w-14 h-14 rounded-full bg-[#253A8F]/10 group-hover:bg-[#253A8F] flex items-center justify-center mx-auto mb-4 transition-colors"
+                  className="w-14 h-14 rounded-full bg-[#273777]/10 group-hover:bg-[#273777] flex items-center justify-center mx-auto mb-4 transition-colors"
                   style={{ fontSize: "24px" }}
                 >
                   {v.icon}
@@ -157,7 +157,7 @@ export function OurStoryPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-center">
             <div>
               <span
-                className="text-[#D9043D] uppercase tracking-widest"
+                className="text-[#e30b43] uppercase tracking-widest"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "13px" }}
               >
                 Award Recognition
@@ -177,7 +177,7 @@ export function OurStoryPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[620px]">
                 <div className="bg-[#f7f7f7] border border-gray-100 rounded-[12px] p-5">
                   <p
-                    className="text-[#253A8F]"
+                    className="text-[#273777]"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "28px" }}
                   >
                     2024
@@ -191,7 +191,7 @@ export function OurStoryPage() {
                 </div>
                 <div className="bg-[#f7f7f7] border border-gray-100 rounded-[12px] p-5">
                   <p
-                    className="text-[#253A8F]"
+                    className="text-[#273777]"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "28px" }}
                   >
                     Textile
@@ -205,7 +205,7 @@ export function OurStoryPage() {
                 </div>
                 <div className="bg-[#f7f7f7] border border-gray-100 rounded-[12px] p-5">
                   <p
-                    className="text-[#253A8F]"
+                    className="text-[#273777]"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "28px" }}
                   >
                     Medium
@@ -238,7 +238,7 @@ export function OurStoryPage() {
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-10">
             <span
-              className="text-[#D9043D] uppercase tracking-widest"
+              className="text-[#e30b43] uppercase tracking-widest"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "13px" }}
             >
               Community Event
@@ -291,7 +291,7 @@ export function OurStoryPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8 lg:gap-10 items-center">
             <div>
               <span
-                className="text-[#D9043D] uppercase tracking-widest"
+                className="text-[#e30b43] uppercase tracking-widest"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "13px" }}
               >
                 Community Giving
@@ -311,7 +311,7 @@ export function OurStoryPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-[#f7f7f7] border border-gray-100 rounded-[12px] p-5">
                   <p
-                    className="text-[#253A8F] mb-1"
+                    className="text-[#273777] mb-1"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "18px" }}
                   >
                     Incense Stick & Flower Dansal
@@ -325,7 +325,7 @@ export function OurStoryPage() {
                 </div>
                 <div className="bg-[#f7f7f7] border border-gray-100 rounded-[12px] p-5">
                   <p
-                    className="text-[#253A8F] mb-1"
+                    className="text-[#273777] mb-1"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "18px" }}
                   >
                     Noodles Dansal
@@ -370,7 +370,7 @@ export function OurStoryPage() {
       {/* CTA */}
       <section
         className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #1B2A6B 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #1d285f 100%)" }}
       >
         <h2
           className="text-white mb-4"
@@ -387,7 +387,7 @@ export function OurStoryPage() {
         <div className="flex flex-wrap gap-4 justify-center">
           <a
             href="/new-arrivals"
-            className="inline-flex h-12 w-full max-w-[220px] items-center justify-center rounded-[8px] bg-[#D9043D] px-6 text-white transition-colors hover:bg-[#b8032f] sm:h-[58px] sm:w-[190px] sm:rounded-[10px] sm:px-8"
+            className="inline-flex h-12 w-full max-w-[220px] items-center justify-center rounded-[8px] bg-[#e30b43] px-6 text-white transition-colors hover:bg-[#c90839] sm:h-[58px] sm:w-[190px] sm:rounded-[10px] sm:px-8"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             New Arrivals

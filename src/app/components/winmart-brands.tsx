@@ -219,7 +219,7 @@ function BrandTrack({ hidden = false }: { hidden?: boolean }) {
 
 export function WinmartBrands() {
   return (
-    <section className="w-full bg-[#253A8F]">
+    <section className="w-full bg-[#273777]">
       <div className="mx-auto max-w-[1400px] py-4 sm:px-6 sm:py-7 lg:px-12">
         <div className="overflow-hidden sm:hidden">
           <div className="flex w-max animate-winmart-marquee items-center">

@@ -33,7 +33,7 @@ export function SavedItemsPage() {
     <div className="bg-[#f7f7f7]">
       <section
         className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 22%, #3a52b8 62%, #dce4ff 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 22%, #405397 62%, #dce4ff 100%)" }}
       >
         <div className="mx-auto max-w-[700px] text-center">
           <span
@@ -72,7 +72,7 @@ export function SavedItemsPage() {
             </>
           ) : (
             <div className="mx-auto flex max-w-[520px] flex-col items-center rounded-[8px] bg-white px-6 py-12 text-center shadow-sm">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#D9043D]/10 text-[#D9043D]">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#e30b43]/10 text-[#e30b43]">
                 <Heart size={26} />
               </div>
               <h2 className="text-[#191919]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "24px" }}>
@@ -83,7 +83,7 @@ export function SavedItemsPage() {
               </p>
               <Link
                 to="/new-arrivals"
-                className="mt-6 rounded-[8px] bg-[#253A8F] px-5 py-3 text-white transition-colors hover:bg-[#1f3179]"
+                className="mt-6 rounded-[8px] bg-[#273777] px-5 py-3 text-white transition-colors hover:bg-[#202f69]"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
               >
                 Browse New Arrivals

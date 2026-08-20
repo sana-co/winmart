@@ -62,7 +62,7 @@ export function WinmartCommunity() {
     return (
       <section className="w-full bg-[#f7f7f7] py-12 sm:py-20">
         <div className="mx-auto max-w-[600px] px-4 text-center sm:px-6">
-          <div className="w-20 h-20 rounded-full bg-[#D9043D] flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <div className="w-20 h-20 rounded-full bg-[#e30b43] flex items-center justify-center mx-auto mb-6 shadow-lg">
             <svg width="36" height="36" fill="none" viewBox="0 0 24 24">
               <path d="M5 13l4 4L19 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -81,7 +81,7 @@ export function WinmartCommunity() {
           </p>
           <button
             onClick={() => { setSubmitted(false); setForm({ name: "", message: "", rating: 0, quality: 0, service: 0, music: 0, ambience: 0, price: 0 }); }}
-            className="bg-[#D9043D] hover:bg-[#b8032f] transition-colors text-white rounded-[8px] px-8 py-3"
+            className="bg-[#e30b43] hover:bg-[#c90839] transition-colors text-white rounded-[8px] px-8 py-3"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "15px" }}
           >
             Submit Another
@@ -98,7 +98,7 @@ export function WinmartCommunity() {
         {/* Heading */}
         <div className="mb-7 text-center sm:mb-10">
           <span
-            className="text-[#D9043D] uppercase tracking-widest"
+            className="text-[#e30b43] uppercase tracking-widest"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
           >
             We'd love to hear from you
@@ -130,7 +130,7 @@ export function WinmartCommunity() {
                   className="text-[#191919]"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
                 >
-                  {f.label} <span className="text-[#D9043D]">*</span>
+                  {f.label} <span className="text-[#e30b43]">*</span>
                 </label>
                 <input
                   type={f.type}
@@ -138,7 +138,7 @@ export function WinmartCommunity() {
                   value={form[f.id as keyof typeof form] as string}
                   onChange={e => set(f.id, e.target.value)}
                   required
-                  className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#253A8F] focus:bg-white transition-all"
+                  className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#273777] focus:bg-white transition-all"
                   style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                 />
               </div>
@@ -159,7 +159,7 @@ export function WinmartCommunity() {
                   className="text-[#191919]"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
                 >
-                  {label} <span className="text-[#D9043D]">*</span>
+                  {label} <span className="text-[#e30b43]">*</span>
                 </label>
                 <div className="flex min-w-0 flex-wrap items-center gap-1">
                   {[1, 2, 3, 4, 5].map(star => (
@@ -170,7 +170,7 @@ export function WinmartCommunity() {
                       onMouseEnter={() => setHover(h => ({ ...h, [key]: star }))}
                       onMouseLeave={() => setHover(h => ({ ...h, [key]: 0 }))}
                       className="flex h-9 w-9 shrink-0 items-center justify-center transition-transform hover:scale-110"
-                      style={{ fontSize: "24px", color: star <= ((hover[key] as number) || form[key]) ? "#D9043D" : "#d1d5db" }}
+                      style={{ fontSize: "24px", color: star <= ((hover[key] as number) || form[key]) ? "#e30b43" : "#d1d5db" }}
                     >
                       ★
                     </button>
@@ -192,7 +192,7 @@ export function WinmartCommunity() {
               className="text-[#191919]"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}
             >
-              Your Message <span className="text-[#D9043D]">*</span>
+              Your Message <span className="text-[#e30b43]">*</span>
             </label>
             <textarea
               rows={4}
@@ -200,14 +200,14 @@ export function WinmartCommunity() {
               value={form.message}
               onChange={e => set("message", e.target.value)}
               required
-              className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#253A8F] focus:bg-white transition-all resize-none"
+              className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#273777] focus:bg-white transition-all resize-none"
               style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
             />
           </div>
 
           {/* Submit row */}
           {submitError && (
-            <p className="text-[#D9043D] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
+            <p className="text-[#e30b43] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
               {submitError}
             </p>
           )}
@@ -221,7 +221,7 @@ export function WinmartCommunity() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="min-h-11 rounded-[8px] bg-[#D9043D] px-6 py-3.5 text-white shadow-md transition-all duration-200 hover:bg-[#b8032f] active:scale-95 sm:rounded-[10px] sm:px-10"
+              className="min-h-11 rounded-[8px] bg-[#e30b43] px-6 py-3.5 text-white shadow-md transition-all duration-200 hover:bg-[#c90839] active:scale-95 sm:rounded-[10px] sm:px-10"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", letterSpacing: "0.3px", opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
             >
               Send Feedback →

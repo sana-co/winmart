@@ -60,7 +60,7 @@ export function BecomeASupplierPage() {
       {/* Hero */}
       <section
         className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:py-24"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[860px] mx-auto text-center">
           <span
@@ -96,7 +96,7 @@ export function BecomeASupplierPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map(b => (
               <div key={b.title} className="group mx-auto w-full max-w-[500px] rounded-[10px] border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:max-w-none sm:rounded-[20px] sm:p-7">
-                <div className="w-12 h-12 rounded-full bg-[#253A8F]/10 group-hover:bg-[#253A8F] flex items-center justify-center mb-5 transition-colors text-[#253A8F] group-hover:text-white">
+                <div className="w-12 h-12 rounded-full bg-[#273777]/10 group-hover:bg-[#273777] flex items-center justify-center mb-5 transition-colors text-[#273777] group-hover:text-white">
                   {b.icon}
                 </div>
                 <p className="text-[#191919] mb-2" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "17px" }}>{b.title}</p>
@@ -120,11 +120,11 @@ export function BecomeASupplierPage() {
             {steps.map((s, i) => (
               <div key={s.num} className="flex flex-col items-center text-center relative">
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-7 left-[calc(50%+28px)] right-[-50%] h-[2px] bg-[#253A8F]/15" />
+                  <div className="hidden lg:block absolute top-7 left-[calc(50%+28px)] right-[-50%] h-[2px] bg-[#273777]/15" />
                 )}
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center mb-4 shrink-0"
-                  style={{ background: "linear-gradient(135deg, #253A8F, #3a52b8)" }}
+                  style={{ background: "linear-gradient(135deg, #273777, #405397)" }}
                 >
                   <span className="text-white" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "18px" }}>{s.num}</span>
                 </div>
@@ -153,7 +153,7 @@ export function BecomeASupplierPage() {
 
           {submitted ? (
             <div className="rounded-[10px] border border-gray-100 bg-white p-6 text-center shadow-md sm:rounded-[24px] sm:p-12">
-              <CheckCircle size={56} className="text-[#253A8F] mx-auto mb-5" />
+              <CheckCircle size={56} className="text-[#273777] mx-auto mb-5" />
               <h3 className="text-[#191919] mb-3" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 900, fontSize: "26px" }}>
                 Application Received!
               </h3>
@@ -173,7 +173,7 @@ export function BecomeASupplierPage() {
                 ].map(f => (
                   <div key={f.id} className="flex flex-col gap-1.5">
                     <label className="text-[#191919]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}>
-                      {f.label} {f.required && <span className="text-[#D9043D]">*</span>}
+                      {f.label} {f.required && <span className="text-[#e30b43]">*</span>}
                     </label>
                     <input
                       type="text"
@@ -181,20 +181,20 @@ export function BecomeASupplierPage() {
                       value={form[f.id as keyof Form]}
                       onChange={e => set(f.id as keyof Form, e.target.value)}
                       required={f.required}
-                      className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#253A8F] focus:bg-white transition-all"
+                      className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#273777] focus:bg-white transition-all"
                       style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                     />
                   </div>
                 ))}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[#191919]" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "13px" }}>
-                    Product Category <span className="text-[#D9043D]">*</span>
+                    Product Category <span className="text-[#e30b43]">*</span>
                   </label>
                   <select
                     value={form.category}
                     onChange={e => set("category", e.target.value)}
                     required
-                    className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] outline-none focus:border-[#253A8F] focus:bg-white transition-all appearance-none cursor-pointer"
+                    className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] outline-none focus:border-[#273777] focus:bg-white transition-all appearance-none cursor-pointer"
                     style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                   >
                     <option value="" disabled>Choose a category…</option>
@@ -211,12 +211,12 @@ export function BecomeASupplierPage() {
                   placeholder="Brief description of your products, production capacity, and why you'd like to partner with us…"
                   value={form.message}
                   onChange={e => set("message", e.target.value)}
-                  className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#253A8F] focus:bg-white transition-all resize-none"
+                  className="border border-gray-200 bg-[#f7f7f7] rounded-[10px] px-4 py-3 text-[#191919] placeholder-gray-400 outline-none focus:border-[#273777] focus:bg-white transition-all resize-none"
                   style={{ fontFamily: "Poppins, sans-serif", fontSize: "14px" }}
                 />
               </div>
               {submitError && (
-                <p className="text-[#D9043D] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
+                <p className="text-[#e30b43] mb-5" style={{ fontFamily: "Poppins, sans-serif", fontSize: "13px" }}>
                   {submitError}
                 </p>
               )}
@@ -225,7 +225,7 @@ export function BecomeASupplierPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="min-h-11 rounded-[8px] bg-[#253A8F] px-6 py-3.5 text-white shadow-md transition-all hover:bg-[#1B2A6B] active:scale-95 sm:rounded-[10px] sm:px-10"
+                  className="min-h-11 rounded-[8px] bg-[#273777] px-6 py-3.5 text-white shadow-md transition-all hover:bg-[#1d285f] active:scale-95 sm:rounded-[10px] sm:px-10"
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "16px", opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
                 >
                   Submit Application →

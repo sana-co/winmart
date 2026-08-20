@@ -270,7 +270,7 @@ export function AdminInfoPage() {
             </div>
             {error && <p className="rounded-[8px] bg-red-50 p-3 text-sm text-red-700">{error}</p>}
             {message && <p className="rounded-[8px] bg-green-50 p-3 text-sm text-green-700">{message}</p>}
-            <Button type="submit" className="w-full bg-[#253A8F] hover:bg-[#1d2f75]">
+            <Button type="submit" className="w-full bg-[#273777] hover:bg-[#202f69]">
               Sign In
             </Button>
           </div>
@@ -304,7 +304,7 @@ export function AdminInfoPage() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 lg:flex-row lg:items-center">
           <div className="text-center sm:text-left">
-            <p className="text-sm font-semibold uppercase tracking-wide text-[#D9043D]">Admin Information</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[#e30b43]">Admin Information</p>
             <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Requests & Login Stats</h1>
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -325,7 +325,7 @@ export function AdminInfoPage() {
             const Icon = stat.icon;
             return (
               <div key={stat.label} className="rounded-[8px] border border-gray-100 bg-white p-5 shadow-sm">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#253A8F]/10 text-[#253A8F]">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-[8px] bg-[#273777]/10 text-[#273777]">
                   <Icon size={20} />
                 </div>
                 <p className="text-sm text-[#606779]">{stat.label}</p>
@@ -337,7 +337,7 @@ export function AdminInfoPage() {
 
         <div className="mb-6 min-w-0 rounded-[8px] border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex items-center gap-2">
-            <Users className="text-[#253A8F]" size={20} />
+            <Users className="text-[#273777]" size={20} />
             <h2 className="text-xl font-bold text-[#191919]">Admin Login Stats</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -371,7 +371,7 @@ export function AdminInfoPage() {
                 minLength={6}
               />
             </div>
-            <Button type="submit" className="bg-[#253A8F] hover:bg-[#1d2f75]" disabled={managerLoading}>
+            <Button type="submit" className="bg-[#273777] hover:bg-[#202f69]" disabled={managerLoading}>
               <UserPlus /> Create / Add
             </Button>
           </form>
@@ -490,7 +490,7 @@ export function AdminInfoPage() {
               id="career-role-filter"
               value={careerRoleFilter}
               onChange={(event) => setCareerRoleFilter(event.target.value)}
-              className="h-10 rounded-[8px] border border-gray-200 bg-white px-3 text-sm text-[#191919] outline-none transition-colors focus:border-[#253A8F]"
+              className="h-10 rounded-[8px] border border-gray-200 bg-white px-3 text-sm text-[#191919] outline-none transition-colors focus:border-[#273777]"
             >
               <option value="all">All careers</option>
               {careerRoleOptions.map((role) => (
@@ -588,7 +588,7 @@ export function AdminInfoPage() {
 function AdminShell({ message, children }: { message: string; children?: React.ReactNode }) {
   return (
     <section className="min-h-[60vh] bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-[700px] rounded-[8px] border border-gray-100 bg-white p-5 text-center text-[#253A8F] shadow-sm sm:p-8">
+      <div className="mx-auto max-w-[700px] rounded-[8px] border border-gray-100 bg-white p-5 text-center text-[#273777] shadow-sm sm:p-8">
         <p>{message}</p>
         {children}
       </div>
@@ -600,7 +600,7 @@ function InfoSection({ title, icon: Icon, children }: { title: string; icon: Luc
   return (
     <div className="mb-6 min-w-0 max-w-full overflow-hidden rounded-[8px] border border-gray-100 bg-white p-3 shadow-sm sm:p-5">
       <div className="mb-4 flex items-center gap-2">
-        <Icon className="text-[#253A8F]" size={20} />
+        <Icon className="text-[#273777]" size={20} />
         <h2 className="min-w-0 text-lg font-bold text-[#191919] sm:text-xl">{title}</h2>
       </div>
       {children}

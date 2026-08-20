@@ -59,7 +59,7 @@ export function NewArrivalsPage() {
       {/* Hero */}
       <section
         className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[700px] mx-auto text-center">
           <span
@@ -97,8 +97,8 @@ export function NewArrivalsPage() {
                   onClick={() => selectCategory(filter)}
                   className={`min-h-10 shrink-0 rounded-[8px] px-4 py-2 transition-all sm:px-5 sm:py-2.5 ${
                     active
-                      ? "bg-[#253A8F] text-white shadow-md"
-                      : "bg-white text-[#253A8F] hover:bg-[#eef1ff] border border-gray-100"
+                      ? "bg-[#273777] text-white shadow-md"
+                      : "bg-white text-[#273777] hover:bg-[#eef1ff] border border-gray-100"
                   }`}
                   style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
                 >

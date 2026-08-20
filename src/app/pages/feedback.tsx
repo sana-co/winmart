@@ -5,7 +5,7 @@ export function FeedbackPage() {
     <div className="bg-[#f7f7f7]">
       <section
         className="w-full px-4 py-12 sm:px-6 sm:py-16"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[700px] mx-auto text-center">
           <span

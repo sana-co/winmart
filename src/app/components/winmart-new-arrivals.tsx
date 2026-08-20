@@ -17,7 +17,7 @@ export function WinmartNewArrivals() {
         {/* Section heading */}
         <div className="relative mb-7 inline-block sm:mb-10">
           <div
-            className="absolute bottom-0 left-0 h-[10px] bg-[#253A8F] opacity-30 rounded"
+            className="absolute bottom-0 left-0 h-[10px] bg-[#273777] opacity-30 rounded"
             style={{ width: "85%", transform: "rotate(-1deg)" }}
           />
           <h2
@@ -47,9 +47,9 @@ export function WinmartNewArrivals() {
                   alt={alt}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-[#253A8F] opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                <div className="absolute inset-0 bg-[#273777] opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
                 <span
-                  className="absolute right-2 top-2 rounded-full bg-[#D9043D] px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white sm:right-4 sm:top-4 sm:px-3 sm:text-[12px]"
+                  className="absolute right-2 top-2 rounded-full bg-[#e30b43] px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white sm:right-4 sm:top-4 sm:px-3 sm:text-[12px]"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   NEW
@@ -62,7 +62,7 @@ export function WinmartNewArrivals() {
                 >
                   {category}
                 </p>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#253A8F] transition-colors group-hover:bg-[#D9043D] sm:h-9 sm:w-9">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#273777] transition-colors group-hover:bg-[#e30b43] sm:h-9 sm:w-9">
                   <ArrowRight size={15} color="white" />
                 </div>
               </div>

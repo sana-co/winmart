@@ -49,7 +49,7 @@ export function HotPicsPage() {
       {/* Hero */}
       <section
         className="w-full px-4 py-12 text-center sm:px-6 sm:py-16 lg:py-20"
-        style={{ background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)" }}
       >
         <div className="max-w-[700px] mx-auto text-center">
           <span
@@ -92,9 +92,9 @@ export function HotPicsPage() {
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 700,
                 fontSize: "15px",
-                background: active === f ? "#253A8F" : "white",
-                color: active === f ? "white" : "#253A8F",
-                border: active === f ? "1px solid #253A8F" : "1px solid #eef0f5",
+                background: active === f ? "#273777" : "white",
+                color: active === f ? "white" : "#273777",
+                border: active === f ? "1px solid #273777" : "1px solid #eef0f5",
                 boxShadow: active === f
                   ? "0 4px 10px rgba(37, 58, 143, 0.22)"
                   : "0 1px 4px rgba(15, 23, 42, 0.04)",

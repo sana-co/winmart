@@ -8,17 +8,17 @@
   --card-foreground: #191919;
   --popover: #ffffff;
   --popover-foreground: #191919;
-  --primary: #253A8F;
+  --primary: #273777;
   --primary-foreground: #ffffff;
   --secondary: #f7f7f7;
-  --secondary-foreground: #253A8F;
+  --secondary-foreground: #273777;
   --muted: #ececf0;
   --muted-foreground: #717182;
-  --accent: #D9043D;
+  --accent: #e30b43;
   --accent-foreground: #ffffff;
-  --winmart-blue: #253A8F;
-  --winmart-blue-dark: #1B2A6B;
-  --winmart-red: #D9043D;
+  --winmart-blue: #273777;
+  --winmart-blue-dark: #1d285f;
+  --winmart-red: #e30b43;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
@@ -42,6 +42,115 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+.winmart-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(100deg, #273777 0%, #273777 48%, #f4f6fb 48.1%, #f4f6fb 100%);
+}
+
+.winmart-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, transparent 0 52%, rgba(227, 11, 67, 0.1) 52.2% 54%, transparent 54.2%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 82px);
+}
+
+.winmart-hero__highlight {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #e30b43;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.1em;
+}
+
+.winmart-hero__star {
+  position: absolute;
+  right: 10%;
+  top: 11%;
+  width: clamp(72px, 9vw, 132px);
+  aspect-ratio: 1;
+  opacity: 0.08;
+  transform: rotate(8deg);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 56%, 79% 91%, 50% 69%, 21% 91%, 32% 56%, 2% 35%, 39% 35%);
+  background: #ffffff;
+}
+
+.winmart-hero__slash {
+  position: absolute;
+  left: -42px;
+  top: -8%;
+  z-index: 2;
+  width: 84px;
+  height: 116%;
+  transform: skewX(-13deg);
+  background: #e30b43;
+  box-shadow: 14px 0 0 rgba(39, 55, 119, 0.16);
+}
+
+.hero-image-carousel {
+  position: relative;
+  overflow: hidden;
+  background: #f4f6fb;
+  border-left: 10px solid #ffffff;
+}
+
+.hero-image-carousel__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: hero-image-fade 16s infinite;
+}
+
+.hero-image-carousel__image:first-child {
+  opacity: 1;
+}
+
+@media (max-width: 1023px) {
+  .winmart-hero {
+    background: #273777;
+  }
+
+  .winmart-hero__slash {
+    left: 0;
+    top: -24px;
+    width: 100%;
+    height: 48px;
+    transform: skewY(-3deg);
+    box-shadow: 0 12px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .hero-image-carousel {
+    border-left: 0;
+    border-top: 8px solid #ffffff;
+  }
+}
+
+@keyframes hero-image-fade {
+  0%,
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  25%,
+  95% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .dark {

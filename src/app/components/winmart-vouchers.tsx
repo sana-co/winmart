@@ -1,34 +1,30 @@
-import imgHoodies from "../../imports/ShoppingApp/0a942bfb32d058cabd76d21b35a037c539dd1710.png";
-import imgCoats from "../../imports/ShoppingApp/3329758ce2776638d2390797575fe0652468591a.png";
-import imgTees from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15816859f3ea4e88.png";
-import imgTrending from "../../imports/ShoppingApp/10bf3bec2c4f58be63e329813d793a3b46aed29a.png";
-import imgUnder40 from "../../imports/ShoppingApp/1471526dcf6573c4c47ff0eec42429d39cb60775.png";
-import imgModel from "../../imports/ShoppingApp/116cf92ffce852e6dcfea7d382714f1c60578ad2.png";
-import imgHero from "../../imports/ShoppingApp/f8062e00ad23ffe6bfbbb9c47ff59e5f7932e7e0.png";
-
 const photos = [
-  { src: imgHero, alt: "Winmart fashion model" },
-  { src: imgCoats, alt: "Winmart coats collection" },
-  { src: imgHoodies, alt: "Winmart hoodies collection" },
-  { src: imgTees, alt: "Winmart t-shirts collection" },
-  { src: imgTrending, alt: "Winmart trending styles" },
-  { src: imgUnder40, alt: "Winmart budget picks" },
-  { src: imgModel, alt: "Winmart showroom model" },
+  { file: "DSC02726.webp", alt: "Winmart dress collection" },
+  { file: "DSC02733.webp", alt: "Winmart fashion racks" },
+  { file: "DSC02756.webp", alt: "Winmart menswear display" },
+  { file: "DSC02803.webp", alt: "Winmart denim corner" },
+  { file: "DSC02833.webp", alt: "Winmart saree corner" },
+  { file: "DSC02816.webp", alt: "Winmart footwear display" },
+  { file: "DSC02859.webp", alt: "Winmart bag collection" },
+  { file: "DSC02822.webp", alt: "Winmart accessories aisle" },
+  { file: "DSC02808.webp", alt: "Winmart baby fashion area" },
+  { file: "DSC02751.webp", alt: "Winmart fashion showroom floor" },
 ];
 
 function PhotoTrack({ hidden = false }: { hidden?: boolean }) {
   return (
     <div className="flex shrink-0 items-center gap-3 pr-3 sm:gap-5 sm:pr-5" aria-hidden={hidden ? "true" : undefined}>
-      {photos.map(photo => (
+      {photos.map((photo, index) => (
         <div
-          key={photo.src}
+          key={photo.file}
           className="relative h-[230px] w-[180px] shrink-0 overflow-hidden rounded-[10px] shadow-sm sm:h-[340px] sm:w-[270px] sm:rounded-[18px] lg:h-[420px] lg:w-[330px]"
         >
           <img
-            src={photo.src}
+            src={`/winmartpics/vouchers/${photo.file}`}
             alt={photo.alt}
             className="h-full w-full object-cover"
-            loading="lazy"
+            loading={index < 3 && !hidden ? "eager" : "lazy"}
+            decoding="async"
           />
         </div>
       ))}

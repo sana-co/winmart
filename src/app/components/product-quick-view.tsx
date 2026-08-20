@@ -62,7 +62,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#253A8F] shadow-md transition-colors hover:bg-[#253A8F] hover:text-white sm:right-4 sm:top-4"
+          className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#273777] shadow-md transition-colors hover:bg-[#273777] hover:text-white sm:right-4 sm:top-4"
           aria-label="Close item details"
         >
           <X size={20} />
@@ -77,7 +77,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
             />
             {tag && (
               <span
-                className="absolute left-4 top-4 rounded-full bg-[#D9043D] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
+                className="absolute left-4 top-4 rounded-full bg-[#e30b43] px-3 py-1 text-[12px] font-semibold tracking-wide text-white"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 {tag}
@@ -87,7 +87,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
 
           <div className="flex flex-col justify-center p-5 sm:p-6 md:p-8">
             <p
-              className="mb-3 text-[#D9043D]"
+              className="mb-3 text-[#e30b43]"
               style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "13px", letterSpacing: "1.2px" }}
             >
               QUICK VIEW
@@ -101,7 +101,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
 
             <div className="mt-5 flex items-center gap-3">
               <span
-                className="text-[#253A8F]"
+                className="text-[#273777]"
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(22px, 6vw, 28px)" }}
               >
                 {formatPrice(product.price)}
@@ -113,7 +113,7 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
                 {categories.map((cat) => (
                   <span
                     key={cat}
-                    className="rounded-full border border-[#253A8F]/15 bg-[#253A8F]/5 px-3 py-1 text-[#253A8F]"
+                    className="rounded-full border border-[#273777]/15 bg-[#273777]/5 px-3 py-1 text-[#273777]"
                     style={{ fontFamily: "Poppins, sans-serif", fontWeight: 500, fontSize: "12px" }}
                   >
                     {cat}
@@ -135,8 +135,8 @@ export function ProductQuickView({ product, tag, onClose }: ProductQuickViewProp
                 onClick={toggleSavedItem}
                 className={`flex w-full items-center justify-center gap-2 rounded-[8px] border px-5 py-3 transition-colors ${
                   isSaved
-                    ? "border-[#253A8F] bg-[#253A8F] text-white hover:bg-[#1f3179]"
-                    : "border-[#D9043D] text-[#D9043D] hover:bg-[#D9043D] hover:text-white"
+                    ? "border-[#273777] bg-[#273777] text-white hover:bg-[#202f69]"
+                    : "border-[#e30b43] text-[#e30b43] hover:bg-[#e30b43] hover:text-white"
                 }`}
                 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "14px" }}
                 aria-pressed={isSaved}

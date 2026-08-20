@@ -279,7 +279,7 @@ export function AdminPage() {
   if (authLoading) {
     return (
       <section className="min-h-[60vh] bg-[#f7f7f7] px-4 py-10 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-[1100px] rounded-[8px] bg-white p-5 text-center text-[#253A8F] shadow-sm sm:p-8">
+        <div className="mx-auto max-w-[1100px] rounded-[8px] bg-white p-5 text-center text-[#273777] shadow-sm sm:p-8">
           Checking product manager access...
         </div>
       </section>
@@ -303,7 +303,7 @@ export function AdminPage() {
             </div>
             {error && <p className="rounded-[8px] bg-red-50 p-3 text-sm text-red-700">{error}</p>}
             {message && <p className="rounded-[8px] bg-green-50 p-3 text-sm text-green-700">{message}</p>}
-            <Button type="submit" className="w-full bg-[#253A8F] hover:bg-[#1d2f75]">
+            <Button type="submit" className="w-full bg-[#273777] hover:bg-[#202f69]">
               Sign In
             </Button>
           </div>
@@ -332,7 +332,7 @@ export function AdminPage() {
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 xl:flex-row xl:items-center">
           <div className="text-center sm:text-left">
-            <p className="text-sm font-semibold uppercase tracking-wide text-[#D9043D]">Shop Coordinator</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[#e30b43]">Shop Coordinator</p>
             <h1 className="text-2xl font-black text-[#191919] sm:text-3xl">Product Manager Portal</h1>
           </div>
           <div className="grid grid-cols-1 gap-2 min-[430px]:grid-cols-2">
@@ -474,7 +474,7 @@ export function AdminPage() {
                   <Switch checked={form.is_top_pick} onCheckedChange={(checked) => setForm({ ...form, is_top_pick: checked })} />
                 </Label>
               </div>
-              <Button type="submit" className="w-full bg-[#253A8F] hover:bg-[#1d2f75]" disabled={saving}>
+              <Button type="submit" className="w-full bg-[#273777] hover:bg-[#202f69]" disabled={saving}>
                 {saving ? <Upload /> : <Plus />} {saving ? "Saving..." : "Add Product"}
               </Button>
             </div>
@@ -486,7 +486,7 @@ export function AdminPage() {
                 <h2 className="text-xl font-bold text-[#191919]">Existing Items</h2>
                 <p className="text-sm text-[#606779]">{products.length} products</p>
               </div>
-              {loadingProducts && <span className="text-sm text-[#253A8F]">Loading...</span>}
+              {loadingProducts && <span className="text-sm text-[#273777]">Loading...</span>}
             </div>
 
             <Table>

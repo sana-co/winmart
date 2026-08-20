@@ -187,7 +187,7 @@ export function LoyaltyCardPage() {
       <section
         className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-20 lg:py-28"
         style={{
-          background: "linear-gradient(135deg, #253A8F 0%, #253A8F 20%, #3a52b8 60%, #c8d3f5 100%)",
+          background: "linear-gradient(135deg, #273777 0%, #273777 20%, #405397 60%, #c8d3f5 100%)",
         }}
       >
         <div className="mx-auto max-w-7xl">
@@ -248,7 +248,7 @@ export function LoyaltyCardPage() {
                   }}
                   style={{
                     fontFamily: "Poppins, sans-serif",
-                    backgroundColor: "#D9043D",
+                    backgroundColor: "#e30b43",
                     color: "#ffffff",
                   }}
                   className="inline-flex min-h-11 items-center justify-center rounded-[8px] px-6 py-3 font-bold tracking-wider transition-all duration-300 hover:shadow-lg active:scale-95 sm:rounded-full sm:px-8"
@@ -300,7 +300,7 @@ export function LoyaltyCardPage() {
               style={{
                 width: "60px",
                 height: "3px",
-                backgroundColor: "#253A8F",
+                backgroundColor: "#273777",
                 margin: "0 auto",
               }}
             ></div>
@@ -320,7 +320,7 @@ export function LoyaltyCardPage() {
                       backgroundColor: "#f0e8f5",
                     }}
                   >
-                    <IconComponent size={28} color="#253A8F" />
+                    <IconComponent size={28} color="#273777" />
                   </div>
                   <h3
                     style={{
@@ -387,7 +387,7 @@ export function LoyaltyCardPage() {
             <div
               className="rounded-[10px] border border-green-200 bg-green-50 p-5 text-center sm:rounded-xl sm:p-8"
             >
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: "#253A8F" }}>
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: "#273777" }}>
                 <Check size={32} color="#ffffff" />
               </div>
               <h3
@@ -446,7 +446,7 @@ export function LoyaltyCardPage() {
                     color: "#1a1a1a",
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#253A8F";
+                    e.currentTarget.style.borderColor = "#273777";
                     e.currentTarget.style.boxShadow = "0 0 0 3px rgba(37, 58, 143, 0.1)";
                   }}
                   onBlur={(e) => {
@@ -491,7 +491,7 @@ export function LoyaltyCardPage() {
                   }}
                   className="w-full rounded-lg border px-4 py-3 transition-colors focus:border-transparent focus:outline-none focus:ring-2"
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#253A8F";
+                    e.currentTarget.style.borderColor = "#273777";
                     e.currentTarget.style.boxShadow = "0 0 0 3px rgba(37, 58, 143, 0.1)";
                   }}
                   onBlur={(e) => {
@@ -536,7 +536,7 @@ export function LoyaltyCardPage() {
                   }}
                   className="w-full rounded-lg border px-4 py-3 transition-colors focus:border-transparent focus:outline-none focus:ring-2"
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#253A8F";
+                    e.currentTarget.style.borderColor = "#273777";
                     e.currentTarget.style.boxShadow = "0 0 0 3px rgba(37, 58, 143, 0.1)";
                   }}
                   onBlur={(e) => {
@@ -581,7 +581,7 @@ export function LoyaltyCardPage() {
                   }}
                   className="w-full rounded-lg border px-4 py-3 transition-colors focus:border-transparent focus:outline-none focus:ring-2"
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#253A8F";
+                    e.currentTarget.style.borderColor = "#273777";
                     e.currentTarget.style.boxShadow = "0 0 0 3px rgba(37, 58, 143, 0.1)";
                   }}
                   onBlur={(e) => {
@@ -606,7 +606,7 @@ export function LoyaltyCardPage() {
                 disabled={isSubmitting}
                 style={{
                   fontFamily: "Poppins, sans-serif",
-                  backgroundColor: isSubmitting ? "#1B2A6B" : "#253A8F",
+                  backgroundColor: isSubmitting ? "#1d285f" : "#273777",
                   color: "#ffffff",
                   opacity: isSubmitting ? 0.7 : 1,
                   cursor: isSubmitting ? "not-allowed" : "pointer",
