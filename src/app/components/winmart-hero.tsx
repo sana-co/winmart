@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 const heroPhotos = [
@@ -8,6 +9,25 @@ const heroPhotos = [
 ];
 
 export function WinmartHero() {
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [previousPhotoIndex, setPreviousPhotoIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActivePhotoIndex((current) => {
+        setPreviousPhotoIndex(current);
+        return (current + 1) % heroPhotos.length;
+      });
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const visiblePhotoIndexes =
+    previousPhotoIndex === null || previousPhotoIndex === activePhotoIndex
+      ? [activePhotoIndex]
+      : [previousPhotoIndex, activePhotoIndex];
+
   return (
     <section className="winmart-hero w-full">
       <div className="relative mx-auto grid min-h-[540px] max-w-[1800px] grid-cols-1 overflow-hidden lg:min-h-[680px] lg:grid-cols-[52%_48%]">
@@ -69,17 +89,23 @@ export function WinmartHero() {
         <div className="relative min-h-[360px] overflow-hidden lg:min-h-[680px]">
           <div className="winmart-hero__slash" aria-hidden="true" />
           <div className="hero-image-carousel h-full min-h-[360px] lg:min-h-[680px]">
-            {heroPhotos.map((photo, index) => (
-              <img
-                key={photo.file}
-                src={`/winmartpics/hero/${photo.file}`}
-                alt={photo.alt}
-                className="hero-image-carousel__image"
-                style={{ animationDelay: `${index * 4}s` }}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            ))}
+            {visiblePhotoIndexes.map((photoIndex) => {
+              const photo = heroPhotos[photoIndex];
+              const isActive = photoIndex === activePhotoIndex;
+
+              return (
+                <img
+                  key={photo.file}
+                  src={`/winmartpics/hero/optimized/${photo.file}`}
+                  alt={photo.alt}
+                  className={`hero-image-carousel__image ${isActive ? "hero-image-carousel__image--active" : ""}`}
+                  loading={photoIndex === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={photoIndex === 0 ? "high" : "low"}
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                />
+              );
+            })}
           </div>
         </div>
       </div>

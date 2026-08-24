@@ -1,5 +1,4 @@
 import { WinmartHero } from "../components/winmart-hero";
-import { WinmartBrands } from "../components/winmart-brands";
 import { WinmartNewArrivals } from "../components/winmart-new-arrivals";
 import { WinmartTopPicks } from "../components/winmart-top-picks";
 import { WinmartBanner } from "../components/winmart-banner";
@@ -11,7 +10,6 @@ export function HomePage() {
   return (
     <>
       <WinmartHero />
-      <WinmartBrands />
       <WinmartNewArrivals />
       <WinmartTopPicks />
       <WinmartBanner />

@@ -7,6 +7,7 @@ import imgAccessories from "../../imports/ShoppingApp/4dfc8cb29eb86a3efe124ecd15
 const categoryCards = [
   { category: "Ladies", image: imgLadies, alt: "Ladies top picks" },
   { category: "Gents", image: imgGents, alt: "Gents top picks" },
+  { category: "Kids", image: "/winmartpics/hero/optimized/DSC02791.webp", alt: "Kids top picks" },
   { category: "Accessories", image: imgAccessories, alt: "Fashion accessories top picks" },
 ];
 
@@ -33,7 +34,7 @@ export function WinmartTopPicks() {
           </h2>
         </div>
 
-        <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-8">
+        <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-6 xl:gap-8">
           {categoryCards.map(({ category, image, alt }) => (
             <Link
               key={category}

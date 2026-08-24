@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Heart, Gift, Zap, Star, Clock, Check } from "lucide-react";
-import loyaltyCardImg from "../../imports/ShoppingApp/loyalty-card.png";
+import loyaltyCardImg from "../../imports/ShoppingApp/loyalty-card.webp";
 
 type FormData = {
   fullName: string;
@@ -270,6 +270,10 @@ export function LoyaltyCardPage() {
                   src={loyaltyCardImg}
                   alt="Win Mart Loyalty Card"
                   className="h-auto w-full rounded-[10px] shadow-2xl sm:rounded-[24px]"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   style={{
                     transform: "rotateY(-5deg) rotateX(2deg)",
                     transition: "transform 0.3s ease",

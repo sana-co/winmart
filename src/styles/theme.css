@@ -107,11 +107,15 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  animation: hero-image-fade 16s infinite;
+  transform: scale(1.02);
+  transition:
+    opacity 700ms ease,
+    transform 4200ms ease;
 }
 
-.hero-image-carousel__image:first-child {
+.hero-image-carousel__image--active {
   opacity: 1;
+  transform: scale(1);
 }
 
 @media (max-width: 1023px) {
@@ -131,25 +135,6 @@
   .hero-image-carousel {
     border-left: 0;
     border-top: 8px solid #ffffff;
-  }
-}
-
-@keyframes hero-image-fade {
-  0%,
-  20% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  25%,
-  95% {
-    opacity: 0;
-    transform: scale(1.035);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 
